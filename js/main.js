@@ -160,3 +160,132 @@ render();
 
 }
 
+// qr code generator
+
+
+
+let qrType="url";
+let qr;
+
+
+const sizeSlider=document.getElementById("qrSize");
+const sizeLabel=document.getElementById("sizeLabel");
+
+sizeSlider.oninput=()=>{
+    sizeLabel.innerText=sizeSlider.value;
+};
+
+
+function selectType(type,btn){
+
+    qrType=type;
+
+    document.querySelectorAll(".option-btn")
+    .forEach(b=>b.classList.remove("active"));
+
+    btn.classList.add("active");
+
+    hideAll();
+
+    if(type==="url"||type==="text"){
+
+        textBox.classList.remove("hidden");
+
+        mainLabel.innerText=
+        type==="url"?"Website URL":"Enter Text";
+
+    }
+
+    if(type==="wifi") wifiBox.classList.remove("hidden");
+    if(type==="email") emailBox.classList.remove("hidden");
+    if(type==="sms") smsBox.classList.remove("hidden");
+}
+
+
+function hideAll(){
+
+    textBox.classList.add("hidden");
+    wifiBox.classList.add("hidden");
+    emailBox.classList.add("hidden");
+    smsBox.classList.add("hidden");
+}
+
+
+function generateQR(){
+
+    let text="";
+
+
+    if(qrType==="url"||qrType==="text"){
+        text=mainInput.value;
+    }
+
+
+    if(qrType==="wifi"){
+        text=`WIFI:T:${wifiType.value};S:${wifiName.value};P:${wifiPass.value};;`;
+    }
+
+
+    if(qrType==="email"){
+        text=`mailto:${emailTo.value}?subject=${encodeURIComponent(emailSub.value)}&body=${encodeURIComponent(emailMsg.value)}`;
+    }
+
+
+    if(qrType==="sms"){
+        text=`sms:${smsNum.value}?body=${encodeURIComponent(smsMsg.value)}`;
+    }
+
+
+    if(text.trim()===""){
+        alert("Please fill details");
+        return;
+    }
+
+
+    qrcode.innerHTML="";
+
+
+    qr=new QRCode("qrcode",{
+
+        text:text,
+
+        width:qrSize.value,
+
+        height:qrSize.value,
+
+        colorDark:qrColor.value,
+
+        colorLight:bgColor.value,
+
+        correctLevel:QRCode.CorrectLevel.H
+    });
+}
+
+
+function downloadQR(){
+
+    const box = document.getElementById("qr"); // Full card
+
+    html2canvas(box,{
+        backgroundColor: null, // keep CSS bg
+        scale: 2 // HD quality
+    }).then(canvas=>{
+
+        const a = document.createElement("a");
+
+        a.href = canvas.toDataURL("image/png");
+        a.download = "qrcode.png";
+
+        a.click();
+    });
+}
+
+
+
+function clearQR(){
+
+    qrcode.innerHTML="";
+
+    document.querySelectorAll("input,textarea")
+    .forEach(i=>i.value="");
+}
