@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Payslip Generator</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+<style>
+    /* ===== FINAL PAYSLIP FORMAT ===== */
+
+#printView{
+ display:none;
+ background:#fff;
+ padding:30px;
+ max-width:800px;
+ margin:auto;
+ color:#000;
+}
+
+#printView h3{
+ text-align:center;
+ margin-bottom:5px;
+}
+
+#printView .line{
+ border-bottom:1px solid #000;
+ margin:15px 0;
+}
+
+#printView table{
+ width:100%;
+ border-collapse:collapse;
+}
+
+#printView th,#printView td{
+ border:1px solid #000;
+ padding:6px;
+ text-align:left;
+}
+
+#printView .sign{
+ margin-top:50px;
+ display:flex;
+ justify-content:space-between;
+}
+
+#printView .sign div{
+ width:45%;
+ text-align:center;
+}
+
+
+
+
+body{
+background:#edf2f6;
+font-family:system-ui,Arial;
+}
+
+.section-title{
+background:#6c8fa3;
+color:white;
+padding:10px 15px;
+font-weight:600;
+border-radius:5px;
+margin-top:15px;
+}
+
+.card-box{
+background:white;
+padding:15px;
+border-radius:8px;
+box-shadow:0 2px 6px rgba(0,0,0,0.1);
+margin-bottom:15px;
+}
+
+.form-control{
+border:none;
+border-bottom:1px solid #aaa;
+border-radius:0;
+padding-left:0;
+}
+
+.form-control:focus{
+box-shadow:none;
+border-color:#0d6efd;
+}
+
+.table input{
+width:100%;
+border:none;
+border-bottom:1px solid #ccc;
+}
+
+.btn{
+width:100%;
+margin-bottom:8px;
+}
+
+/* ===== PRINT / PDF FIX ===== */
+
+@media print{
+ body *{
+  visibility:hidden;
+ }
+
+ #printView, #printView *{
+  visibility:visible;
+ }
+
+ #printView{
+  position:absolute;
+  left:0;
+  top:0;
+  width:100%;
+ }
+}
+
+/* Prevent page break */
+.card-box, .section-title {
+  page-break-inside: avoid;
+}
+
+/* Reduce top space */
+#payslip {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+@media(min-width:768px){
+.btn{
+width:auto;
+margin:5px;
+}
+}
+
+.total-box{
+background:#f1f5f8;
+padding:10px;
+border-radius:5px;
+font-weight:600;
+margin-top:10px;
+text-align:center;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container-fluid px-2 px-md-4 mt-3 mb-5" id="payslip">
+
+<!-- HEADER -->
+<div class="section-title">Header Details</div>
+
+<div class="card-box text-center">
+
+<input id="title" class="form-control mb-3 fw-bold text-center fs-5" placeholder="Payslip Title">
+
+<input id="company" class="form-control mb-3" placeholder="Company Name">
+
+<textarea id="address" class="form-control" rows="2" placeholder="Company Address"></textarea>
+
+</div>
+
+
+<!-- DETAILS -->
+<div class="section-title">Payslip & Employee Details</div>
+
+<div class="row g-3">
+
+<div class="col-12 col-md-6">
+
+<div class="card-box">
+
+<h6>Payslip Details</h6>
+
+<label>Pay Date</label>
+<input type="date" id="date" class="form-control mb-2">
+
+<label>Working Days</label>
+<input type="number" id="days" class="form-control">
+
+</div>
+</div>
+
+
+<div class="col-12 col-md-6">
+
+<div class="card-box">
+
+<h6>Employee Details</h6>
+
+<label>Employee Name</label>
+<input id="empName" class="form-control mb-2">
+
+<label>Employee ID</label>
+<input id="empId" class="form-control">
+
+</div>
+</div>
+
+</div>
+
+
+<!-- SALARY -->
+<div class="section-title">Salary Details</div>
+
+<div class="row g-3">
+
+<!-- EARNINGS -->
+<div class="col-12 col-md-6">
+
+<div class="card-box">
+
+<h6>Earnings</h6>
+
+<div class="table-responsive">
+
+<table class="table table-sm" id="earnTable">
+
+<tr>
+<th>Title</th>
+<th>Amount</th>
+<th></th>
+</tr>
+
+</table>
+
+</div>
+
+<button class="btn btn-primary btn-sm" onclick="addEarn()">+ Add Item</button>
+
+<div class="total-box">
+Total Earnings: ₹ <span id="earnTotal">0</span>
+</div>
+
+</div>
+</div>
+
+
+<!-- DEDUCTIONS -->
+<div class="col-12 col-md-6">
+
+<div class="card-box">
+
+<h6>Deductions</h6>
+
+<div class="table-responsive">
+
+<table class="table table-sm" id="dedTable">
+
+<tr>
+<th>Title</th>
+<th>Amount</th>
+<th></th>
+</tr>
+
+</table>
+
+</div>
+
+<button class="btn btn-primary btn-sm" onclick="addDed()">+ Add Item</button>
+
+<div class="total-box">
+Total Deductions: ₹ <span id="dedTotal">0</span>
+</div>
+
+</div>
+</div>
+
+</div>
+
+
+<!-- NET PAY -->
+<div class="card-box text-center">
+
+<h6>Net Pay</h6>
+
+<h4 class="fw-bold text-success">
+₹ <span id="netPay">0</span>
+</h4>
+
+</div>
+
+
+<!-- FOOTER -->
+<div class="section-title">Footer Details</div>
+
+<div class="card-box">
+
+<label>Final Amount</label>
+<input id="finalAmt" class="form-control mb-2">
+
+<label>Amount in Words</label>
+<input id="words" class="form-control">
+
+</div>
+
+
+<!-- BUTTONS -->
+<div class="text-center mt-3">
+
+<button class="btn btn-success" onclick="savePDF()">📄 PDF</button>
+<button class="btn btn-warning" onclick="saveExcel()">📊 Excel</button>
+<button class="btn btn-info" onclick="saveWord()">📝 Word</button>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* =====================
+   ELEMENT CACHE
+===================== */
+
+const earnTable = document.getElementById("earnTable");
+const dedTable  = document.getElementById("dedTable");
+
+const earnTotal = document.getElementById("earnTotal");
+const dedTotal  = document.getElementById("dedTotal");
+const netPay    = document.getElementById("netPay");
+
+const finalAmt  = document.getElementById("finalAmt");
+const wordsBox  = document.getElementById("words");
+
+const payslip   = document.getElementById("payslip");
+
+
+/* =====================
+   INIT
+===================== */
+
+addEarn();
+addDed();
+
+let calcTimer = null;
+
+
+/* =====================
+   ADD ROW
+===================== */
+
+function addEarn(){
+
+const row = earnTable.insertRow(-1);
+
+row.innerHTML = `
+<td><input class="form-control form-control-sm"></td>
+<td><input type="number" value="0" class="form-control form-control-sm earn"></td>
+<td><button class="btn btn-sm btn-danger del">−</button></td>
+`;
+
+calc();
+}
+
+
+function addDed(){
+
+const row = dedTable.insertRow(-1);
+
+row.innerHTML = `
+<td><input class="form-control form-control-sm"></td>
+<td><input type="number" value="0" class="form-control form-control-sm ded"></td>
+<td><button class="btn btn-sm btn-danger del">−</button></td>
+`;
+
+calc();
+}
+
+
+/* =====================
+   EVENT DELEGATION
+===================== */
+
+earnTable.addEventListener("input", handleInput);
+dedTable.addEventListener("input", handleInput);
+
+earnTable.addEventListener("click", handleDelete);
+dedTable.addEventListener("click", handleDelete);
+
+
+function handleInput(e){
+
+if(e.target.classList.contains("earn") ||
+   e.target.classList.contains("ded")){
+
+    debounceCalc();
+}
+
+}
+
+
+function handleDelete(e){
+
+if(e.target.classList.contains("del")){
+
+    e.target.closest("tr").remove();
+    calc();
+}
+
+}
+
+
+/* =====================
+   DEBOUNCE
+===================== */
+
+function debounceCalc(){
+
+clearTimeout(calcTimer);
+
+calcTimer = setTimeout(calc,150);
+
+}
+
+
+/* =====================
+   CALCULATION (FAST)
+===================== */
+
+function calc(){
+
+let earn = 0;
+let ded  = 0;
+
+/* Earnings */
+
+for(const el of document.getElementsByClassName("earn")){
+    earn += Number(el.value) || 0;
+}
+
+/* Deductions */
+
+for(const el of document.getElementsByClassName("ded")){
+    ded += Number(el.value) || 0;
+}
+
+const net = earn - ded;
+
+earnTotal.textContent = earn.toFixed(2);
+dedTotal.textContent  = ded.toFixed(2);
+netPay.textContent    = net.toFixed(2);
+
+finalAmt.value = net.toFixed(2);
+wordsBox.value = numberToWords(net);
+
+}
+
+
+/* =====================
+   NUMBER TO WORDS
+===================== */
+
+function numberToWords(n){
+
+if(n <= 0) return "Zero Only";
+
+n = Math.floor(n);
+
+const a = [
+"", "One","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten",
+"Eleven","Twelve","Thirteen","Fourteen","Fifteen","Sixteen","Seventeen","Eighteen","Nineteen"
+];
+
+const b = [
+"", "", "Twenty","Thirty","Forty","Fifty","Sixty","Seventy","Eighty","Ninety"
+];
+
+function convert(num){
+
+if(num < 20) return a[num];
+
+if(num < 100)
+ return b[Math.floor(num/10)] + (num%10 ? " " + a[num%10] : "");
+
+if(num < 1000)
+ return a[Math.floor(num/100)] + " Hundred" + (num%100 ? " " + convert(num%100) : "");
+
+if(num < 100000)
+ return convert(num/1000|0) + " Thousand" + (num%1000 ? " " + convert(num%1000) : "");
+
+if(num < 10000000)
+ return convert(num/100000|0) + " Lakh" + (num%100000 ? " " + convert(num%100000) : "");
+
+return convert(num/10000000|0) + " Crore" + (num%10000000 ? " " + convert(num%10000000) : "");
+
+}
+
+return convert(n) + " Only";
+
+}
+
+
+/* =====================
+   PDF
+===================== */
+
+function savePDF(){
+
+const element = document.getElementById("payslip");
+
+html2pdf().set({
+
+    margin: [0.2, 0.2, 0.2, 0.2], // top, left, bottom, right
+    filename: "payslip.pdf",
+
+    html2canvas: {
+        scale: 2,
+        scrollY: 0
+    },
+
+    jsPDF: {
+        unit: "in",
+        format: "a4",
+        orientation: "portrait"
+    },
+
+    pagebreak: {
+        mode: ["avoid-all", "css", "legacy"]
+    }
+
+}).from(element).save();
+
+}
+
+
+
+/* =====================
+   EXCEL
+===================== */
+
+function saveExcel(){
+
+const wb = XLSX.utils.book_new();
+const data = [];
+
+
+/* Header */
+
+data.push(["Payslip"]);
+data.push(["Company", company.value]);
+data.push(["Employee", empName.value]);
+data.push(["ID", empId.value]);
+data.push(["Date", date.value]);
+data.push([]);
+
+
+/* Earnings */
+
+data.push(["Earnings"]);
+data.push(["Title","Amount"]);
+
+for(const row of earnTable.rows){
+
+ if(row.rowIndex===0) continue;
+
+ const i = row.querySelectorAll("input");
+
+ data.push([i[0].value,i[1].value]);
+}
+
+data.push([]);
+
+
+/* Deductions */
+
+data.push(["Deductions"]);
+data.push(["Title","Amount"]);
+
+for(const row of dedTable.rows){
+
+ if(row.rowIndex===0) continue;
+
+ const i = row.querySelectorAll("input");
+
+ data.push([i[0].value,i[1].value]);
+}
+
+data.push([]);
+
+
+/* Totals */
+
+data.push(["Total Earnings", earnTotal.textContent]);
+data.push(["Total Deductions", dedTotal.textContent]);
+data.push(["Net Pay", netPay.textContent]);
+
+
+const ws = XLSX.utils.aoa_to_sheet(data);
+
+XLSX.utils.book_append_sheet(wb, ws, "Payslip");
+
+XLSX.writeFile(wb,"payslip.xlsx");
+
+}
+
+
+/* =====================
+   WORD (NO WARNING)
+===================== */
+
+
+</script>
+
+
+
+</body>
+</html>
