@@ -1,11 +1,11 @@
 const tools = [
 
-// {
-// name:"QR Code Generator",
-// desc:"Create QR codes instantly for links and text.",
+ {
+ name:"QR Code Generator",
+ desc:"Create QR codes instantly for links and text.",
 
-// link:"qr-generator.html"
-// },
+ link:"qr-generator.html"
+ },
 
 // {
 // name:"Password Generator",
@@ -45,3 +45,4 @@ const tools = [
  // Add all 40 tools here
 
 ];
+
