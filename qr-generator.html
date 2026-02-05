@@ -1,26 +1,358 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>QR Code Generator</title>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>QR Code Generator | TechTools</title>
+
+<meta name="description"
+content="Generate free QR codes online for URLs, WiFi, Email, SMS, and Text. Customize size and colors. Download high-quality QR codes instantly with TechTools.">
+
+<meta name="keywords"
+content="qr code generator, free qr generator, online qr code maker, wifi qr code, url qr code generator, qr code creator, techtools qr">
+
+<meta name="author" content="TechTools">
+
+<meta name="robots" content="index, follow">
+
+<link rel="icon" href="img/logo.png">
+<link rel="stylesheet" href="css/style.css">
+
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+<!-- QR Library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+
 </head>
 
 <body>
+<div id="loader">
+<div class="spinner"></div>
+</div>
+<!-- NAVBAR -->
+<nav class="navbar navbar-dark bg-primary fixed-top">
+<div class="container">
 
-<h1>QR Code Generator</h1>
+<a class="navbar-brand fw-bold" href="/">
+<img src="img/logo.png" width="30"> TechTools
+</a>
 
-<input type="text" id="text">
+<button class="navbar-toggler" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu">
+<span class="navbar-toggler-icon"></span>
+</button>
 
-<button onclick="gen()">Generate</button>
+</div>
+</nav>
 
-<div id="qr"></div>
 
-<script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
+<!-- MOBILE MENU -->
+<div class="offcanvas offcanvas-end" id="mobileMenu">
 
-<script>
-function gen(){
-new QRCode("qr",document.getElementById("text").value);
-}
-</script>
+<div class="offcanvas-header bg-primary text-white">
+
+<h5>Menu</h5>
+
+<button class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+
+</div>
+
+<div class="offcanvas-body">
+
+<ul class="navbar-nav">
+
+<li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+<li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+<li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+<li class="nav-item"><a class="nav-link" href="disclaimer.html">Disclaimer</a></li>
+<li class="nav-item"><a class="nav-link" href="privacy.html">Privacy</a></li>
+<li class="nav-item"><a class="nav-link" href="terms.html">Terms</a></li>
+
+</ul>
+
+</div>
+</div>
+
+
+<!-- MAIN -->
+<div class="container margintop ">
+
+<div class="row mt-3 g-4">
+
+
+<!-- LEFT -->
+<div class="col-lg-8">
+
+<div class="card  cardcustom p-4">
+
+<h5>⚡ Generate QR Code</h5>
+
+
+<!-- TYPE BUTTONS -->
+<div class="mb-3">
+
+<button class=" option-btn btn btn-primary active" onclick="selectType('url',this)">URL</button>
+<button class=" option-btn btn btn-primary" onclick="selectType('text',this)">Text</button>
+<button class=" option-btn btn btn-primary" onclick="selectType('wifi',this)">WiFi</button>
+<button class=" option-btn btn btn-primary" onclick="selectType('email',this)">Email</button>
+<button class=" option-btn btn btn-primary" onclick="selectType('sms',this)">SMS</button>
+
+</div>
+
+
+<!-- TEXT -->
+<div id="textBox" class="mb-3">
+
+<label id="mainLabel">Website URL</label>
+
+<input id="mainInput" class="form-control controlcustom" placeholder="https://example.com">
+
+</div>
+
+
+<!-- WIFI -->
+<div id="wifiBox" class="mb-3 hidden">
+
+<input id="wifiName" class="form-control controlcustom mb-2" placeholder="SSID">
+
+<input id="wifiPass" class="form-control controlcustom mb-2" placeholder="Password">
+
+<select id="wifiType" class="form-control controlcustom">
+
+<option value="WPA">WPA/WPA2</option>
+<option value="WEP">WEP</option>
+<option value="nopass">No Password</option>
+
+</select>
+
+</div>
+
+
+<!-- EMAIL -->
+<div id="emailBox" class="mb-3 hidden">
+
+<input id="emailTo" class="form-control controlcustom mb-2" placeholder="Email">
+
+<input id="emailSub" class="form-control controlcustom mb-2" placeholder="Subject">
+
+<textarea id="emailMsg" class="form-control controlcustom" placeholder="Message"></textarea>
+
+</div>
+
+
+<!-- SMS -->
+<div id="smsBox" class="mb-3 hidden">
+
+<input id="smsNum" class="form-control controlcustom mb-2" placeholder="Phone">
+
+<textarea id="smsMsg" class="form-control controlcustom" placeholder="Message"></textarea>
+
+</div>
+
+
+<!-- CUSTOMIZE -->
+<h6>Customize</h6>
+
+<div class="row">
+
+<div class="col-6 mb-3">
+
+<label>QR Color</label>
+
+<input id="qrColor" type="color" class="form-control controlcustom form-control-color">
+
+</div>
+
+<div class="col-6 mb-3">
+
+<label>Background</label>
+
+<input id="bgColor" type="color" class="form-control controlcustom form-control-color" value="#ffffff">
+
+</div>
+
+</div>
+
+
+<!-- SIZE -->
+<div class="mb-3">
+
+<label>
+Size: <span id="sizeLabel">256</span>px
+</label>
+
+<input id="qrSize" type="range" min="150" max="400" value="256" class="form-range">
+
+</div>
+
+
+<button onclick="generateQR()" class="btn btn-purple w-100">
+Generate QR
+</button>
+
+</div>
+</div>
+
+
+
+<!-- RIGHT -->
+<div class="col-lg-4">
+
+<div  class="card cardcustom p-0 text-center">
+
+<div id="qr" class="qr-box mb-3 p-3">
+
+<div id="qrcode"></div>
+
+</div>
+
+
+<button onclick="downloadQR()" class="btn btn-purple  w-100 mb-2">
+Download PNG
+</button>
+
+<button onclick="clearQR()" class="btn text-info w-100">
+Clear
+</button>
+
+</div>
+</div>
+
+
+</div>
+</div>
+<div class="container mt-4">
+    <div class="row">
+        <article>
+
+<h2>Free Online QR Code Generator – Create Custom QR Codes Easily | TechTools</h2>
+
+<p>
+QR codes have become an essential part of modern digital communication. From sharing website links to connecting users with WiFi networks, QR codes make information access fast and convenient. The <strong>TechTools QR Code Generator</strong> is a free online tool that helps you create professional and customizable QR codes in just a few clicks.
+</p>
+
+<h3>What is a QR Code Generator?</h3>
+
+<p>
+A QR Code Generator is an online tool that converts text, links, contact details, and other information into a scannable QR code. When users scan the code using their smartphone camera, they are instantly redirected to the stored content. This makes QR codes useful for marketing, education, business, and personal use.
+</p>
+
+<h3>Features of TechTools QR Code Generator</h3>
+
+<ul>
+<li>Create QR codes for URLs, Text, WiFi, Email, and SMS</li>
+<li>Customize QR color and background</li>
+<li>Adjust size for printing and digital use</li>
+<li>High-quality PNG download</li>
+<li>Mobile-friendly and responsive design</li>
+<li>No registration required</li>
+<li>100% free and secure</li>
+</ul>
+
+<h3>How to Use the QR Code Generator</h3>
+
+<p>
+Using the TechTools QR Generator is simple and user-friendly. Follow these easy steps:
+</p>
+
+<ol>
+<li>Select the type of QR code you want to generate.</li>
+<li>Enter the required information in the input fields.</li>
+<li>Customize the color, background, and size.</li>
+<li>Click on the “Generate QR” button.</li>
+<li>Preview your QR code and download it.</li>
+</ol>
+
+<p>
+Within seconds, your QR code will be ready to use for websites, posters, business cards, or digital campaigns.
+</p>
+
+<h3>Benefits of Using Online QR Codes</h3>
+
+<p>
+QR codes help businesses and individuals share information quickly without typing long URLs or details. They improve user experience and save time. With TechTools, you can generate reliable and high-quality QR codes that work on all devices.
+</p>
+
+<ul>
+<li>Faster information sharing</li>
+<li>Improved customer engagement</li>
+<li>Easy marketing integration</li>
+<li>Contactless data sharing</li>
+<li>Cost-effective promotion tool</li>
+</ul>
+
+<h3>Why Choose TechTools?</h3>
+
+<p>
+TechTools is dedicated to providing fast, secure, and easy-to-use online tools. Our QR Code Generator works directly in your browser, ensuring privacy and data protection. We do not store user information, making our platform safe and trustworthy.
+</p>
+
+<p>
+Whether you are a student, developer, marketer, or business owner, TechTools helps you create QR codes efficiently without technical knowledge.
+</p>
+
+<h3>Mobile-Friendly and Secure Platform</h3>
+
+<p>
+The TechTools QR Generator is optimized for mobile devices, tablets, and desktops. You can generate and download QR codes anytime, anywhere. All processing happens locally in your browser, ensuring maximum security and privacy.
+</p>
+
+<h2>Frequently Asked Questions (FAQ)</h2>
+
+<h4>Is the QR Code Generator free?</h4>
+<p>
+Yes, the tool is completely free and does not require any registration.
+</p>
+
+<h4>Can I use QR codes for commercial purposes?</h4>
+<p>
+Yes, you can use generated QR codes for business, marketing, and commercial projects.
+</p>
+
+<h4>Do I need to install any software?</h4>
+<p>
+No installation is required. Everything works online in your web browser.
+</p>
+
+<h3>Conclusion</h3>
+
+<p>
+The TechTools QR Code Generator is a reliable and efficient solution for creating high-quality QR codes online. With customization options, instant downloads, and a secure platform, it is suitable for all users. Start using our QR Generator today and simplify your digital communication.
+</p>
+
+</article>
+
+    </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+
+<p>© 2026 TechTools. All Rights Reserved.</p>
+
+<p>
+<a href="privacy.html">Privacy Policy</a> |
+<a href="terms.html">Terms of Service</a> |
+<a href="contact.html">Contact Us</a>
+</p>
+
+<p class="mt-2">
+TechTools is committed to providing reliable and secure online utilities for daily use.
+</p>
+
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="js/main.js"></script>
 
 </body>
 </html>
