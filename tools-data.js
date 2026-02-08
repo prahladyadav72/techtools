@@ -18,8 +18,8 @@ const tools = [
  name:"Payslip Generator",
  desc:"Generate Your Payslip (Salary Slip) and Download",
 
-// link:"payslip.html"
-// },
+ link:"payslip.html"
+ }
 
 // {
 // name:"Image Resizer",
@@ -45,5 +45,6 @@ const tools = [
  // Add all 40 tools here
 
 ];
+
 
 
