@@ -6,18 +6,11 @@ desc:"Create QR codes instantly for links and text.",
 
 link:"qr-generator.html"
 },
-
-
-
 {
 name:"Payslip Generator",
 desc:"Generate Your Payslip and Download",
 
 link:"payslip.html"
 }
-
-
-
- // Add all 40 tools here
-
 ];
+
