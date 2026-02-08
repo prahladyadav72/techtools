@@ -1,165 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Payslip Generator</title>
+<title>Free Online Tools | TechTools</title>
+
+<meta name="description"
+content="Free online tools for PDF, images, calculators and developers. Secure, fast and easy to use tools for everyday needs.">
+
+<meta name="keywords" content="online tools, payslip generate, image tools, salary slip generate,salary, slip,tools,techtools, developer tools, free tools">
+
+<meta name="author" content="TechTools">
+<link rel="icon" href="img/logo.png" type="image/png">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-<style>
-    /* ===== FINAL PAYSLIP FORMAT ===== */
-
-#printView{
- display:none;
- background:#fff;
- padding:30px;
- max-width:800px;
- margin:auto;
- color:#000;
-}
-
-#printView h3{
- text-align:center;
- margin-bottom:5px;
-}
-
-#printView .line{
- border-bottom:1px solid #000;
- margin:15px 0;
-}
-
-#printView table{
- width:100%;
- border-collapse:collapse;
-}
-
-#printView th,#printView td{
- border:1px solid #000;
- padding:6px;
- text-align:left;
-}
-
-#printView .sign{
- margin-top:50px;
- display:flex;
- justify-content:space-between;
-}
-
-#printView .sign div{
- width:45%;
- text-align:center;
-}
-
-
-
-
-body{
-background:#edf2f6;
-font-family:system-ui,Arial;
-}
-
-.section-title{
-background:#6c8fa3;
-color:white;
-padding:10px 15px;
-font-weight:600;
-border-radius:5px;
-margin-top:15px;
-}
-
-.card-box{
-background:white;
-padding:15px;
-border-radius:8px;
-box-shadow:0 2px 6px rgba(0,0,0,0.1);
-margin-bottom:15px;
-}
-
-.form-control{
-border:none;
-border-bottom:1px solid #aaa;
-border-radius:0;
-padding-left:0;
-}
-
-.form-control:focus{
-box-shadow:none;
-border-color:#0d6efd;
-}
-
-.table input{
-width:100%;
-border:none;
-border-bottom:1px solid #ccc;
-}
-
-.btn{
-width:100%;
-margin-bottom:8px;
-}
-
-/* ===== PRINT / PDF FIX ===== */
-
-@media print{
- body *{
-  visibility:hidden;
- }
-
- #printView, #printView *{
-  visibility:visible;
- }
-
- #printView{
-  position:absolute;
-  left:0;
-  top:0;
-  width:100%;
- }
-}
-
-/* Prevent page break */
-.card-box, .section-title {
-  page-break-inside: avoid;
-}
-
-/* Reduce top space */
-#payslip {
-  margin-top: 0 !important;
-  padding-top: 0 !important;
-}
-
-@media(min-width:768px){
-.btn{
-width:auto;
-margin:5px;
-}
-}
-
-.total-box{
-background:#f1f5f8;
-padding:10px;
-border-radius:5px;
-font-weight:600;
-margin-top:10px;
-text-align:center;
-}
-
-</style>
+<link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
-<div class="container-fluid px-2 px-md-4 mt-3 mb-5" id="payslip">
+<!-- LOADER -->
+ <div id="loader">
+<div class="spinner"></div>
+</div> 
+
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-dark bg-primary fixed-top">
+<div class="container">
+
+<a class="navbar-brand fw-bold" href="/"><img src="img/logo.png" alt="" style="width: 30px;"> TechTools</a>
+
+<button class="navbar-toggler" type="button" 
+data-bs-toggle="offcanvas" 
+data-bs-target="#mobileMenu">
+
+<span class="navbar-toggler-icon"></span>
+</button>
+
+</div>
+</nav>
+
+
+<!-- DRAWER -->
+<div class="offcanvas offcanvas-end" id="mobileMenu">
+
+<div class="offcanvas-header bg-primary text-white">
+
+<h5 class="offcanvas-title">Menu</h5>
+
+<button type="button" class="btn-close btn-close-white"
+data-bs-dismiss="offcanvas"></button>
+
+</div>
+
+<div class="offcanvas-body">
+
+<ul class="navbar-nav">
+
+<li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+<li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+<li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+<li class="nav-item"><a class="nav-link" href="disclaimer.html">Disclaimer</a></li>
+<li class="nav-item"><a class="nav-link" href="privacy.html">Privacy</a></li>
+<li class="nav-item"><a class="nav-link" href="terms.html">Terms</a></li>
+
+</ul>
+
+</div>
+
+</div>
+
+<div class="container px-2 px-md-4 mt-3 mb-5" id="payslip">
 
 <!-- HEADER -->
 <div class="section-title">Header Details</div>
 
-<div class="card-box text-center">
+<div class="card-box-custom text-center">
 
 <input id="title" class="form-control mb-3 fw-bold text-center fs-5" placeholder="Payslip Title">
 
@@ -177,7 +101,7 @@ text-align:center;
 
 <div class="col-12 col-md-6">
 
-<div class="card-box">
+<div class="card-box-custom">
 
 <h6>Payslip Details</h6>
 
@@ -193,7 +117,7 @@ text-align:center;
 
 <div class="col-12 col-md-6">
 
-<div class="card-box">
+<div class="card-box-custom">
 
 <h6>Employee Details</h6>
 
@@ -217,7 +141,7 @@ text-align:center;
 <!-- EARNINGS -->
 <div class="col-12 col-md-6">
 
-<div class="card-box">
+<div class="card-box-custom">
 
 <h6>Earnings</h6>
 
@@ -248,7 +172,7 @@ Total Earnings: ₹ <span id="earnTotal">0</span>
 <!-- DEDUCTIONS -->
 <div class="col-12 col-md-6">
 
-<div class="card-box">
+<div class="card-box-custom">
 
 <h6>Deductions</h6>
 
@@ -279,7 +203,7 @@ Total Deductions: ₹ <span id="dedTotal">0</span>
 
 
 <!-- NET PAY -->
-<div class="card-box text-center">
+<div class="card-box-custom text-center">
 
 <h6>Net Pay</h6>
 
@@ -293,13 +217,13 @@ Total Deductions: ₹ <span id="dedTotal">0</span>
 <!-- FOOTER -->
 <div class="section-title">Footer Details</div>
 
-<div class="card-box">
+<div class="card-box-custom">
 
 <label>Final Amount</label>
 <input id="finalAmt" class="form-control mb-2">
 
-<label>Amount in Words</label>
-<input id="words" class="form-control">
+<!-- <label>Amount in Words</label>
+<input id="words" class="form-control"> -->
 
 </div>
 
@@ -308,308 +232,74 @@ Total Deductions: ₹ <span id="dedTotal">0</span>
 <div class="text-center mt-3">
 
 <button class="btn btn-success" onclick="savePDF()">📄 PDF</button>
-<button class="btn btn-warning" onclick="saveExcel()">📊 Excel</button>
 <button class="btn btn-info" onclick="saveWord()">📝 Word</button>
 
 </div>
 
 </div>
-
-
-<script>
-
-/* =====================
-   ELEMENT CACHE
-===================== */
-
-const earnTable = document.getElementById("earnTable");
-const dedTable  = document.getElementById("dedTable");
-
-const earnTotal = document.getElementById("earnTotal");
-const dedTotal  = document.getElementById("dedTotal");
-const netPay    = document.getElementById("netPay");
-
-const finalAmt  = document.getElementById("finalAmt");
-const wordsBox  = document.getElementById("words");
-
-const payslip   = document.getElementById("payslip");
-
-
-/* =====================
-   INIT
-===================== */
-
-addEarn();
-addDed();
-
-let calcTimer = null;
-
-
-/* =====================
-   ADD ROW
-===================== */
-
-function addEarn(){
-
-const row = earnTable.insertRow(-1);
-
-row.innerHTML = `
-<td><input class="form-control form-control-sm"></td>
-<td><input type="number" value="0" class="form-control form-control-sm earn"></td>
-<td><button class="btn btn-sm btn-danger del">−</button></td>
-`;
-
-calc();
-}
-
-
-function addDed(){
-
-const row = dedTable.insertRow(-1);
-
-row.innerHTML = `
-<td><input class="form-control form-control-sm"></td>
-<td><input type="number" value="0" class="form-control form-control-sm ded"></td>
-<td><button class="btn btn-sm btn-danger del">−</button></td>
-`;
-
-calc();
-}
-
-
-/* =====================
-   EVENT DELEGATION
-===================== */
-
-earnTable.addEventListener("input", handleInput);
-dedTable.addEventListener("input", handleInput);
-
-earnTable.addEventListener("click", handleDelete);
-dedTable.addEventListener("click", handleDelete);
-
-
-function handleInput(e){
-
-if(e.target.classList.contains("earn") ||
-   e.target.classList.contains("ded")){
-
-    debounceCalc();
-}
-
-}
-
-
-function handleDelete(e){
-
-if(e.target.classList.contains("del")){
-
-    e.target.closest("tr").remove();
-    calc();
-}
-
-}
-
-
-/* =====================
-   DEBOUNCE
-===================== */
-
-function debounceCalc(){
-
-clearTimeout(calcTimer);
-
-calcTimer = setTimeout(calc,150);
-
-}
-
-
-/* =====================
-   CALCULATION (FAST)
-===================== */
-
-function calc(){
-
-let earn = 0;
-let ded  = 0;
-
-/* Earnings */
-
-for(const el of document.getElementsByClassName("earn")){
-    earn += Number(el.value) || 0;
-}
-
-/* Deductions */
-
-for(const el of document.getElementsByClassName("ded")){
-    ded += Number(el.value) || 0;
-}
-
-const net = earn - ded;
-
-earnTotal.textContent = earn.toFixed(2);
-dedTotal.textContent  = ded.toFixed(2);
-netPay.textContent    = net.toFixed(2);
-
-finalAmt.value = net.toFixed(2);
-wordsBox.value = numberToWords(net);
-
-}
-
-
-/* =====================
-   NUMBER TO WORDS
-===================== */
-
-function numberToWords(n){
-
-if(n <= 0) return "Zero Only";
-
-n = Math.floor(n);
-
-const a = [
-"", "One","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten",
-"Eleven","Twelve","Thirteen","Fourteen","Fifteen","Sixteen","Seventeen","Eighteen","Nineteen"
-];
-
-const b = [
-"", "", "Twenty","Thirty","Forty","Fifty","Sixty","Seventy","Eighty","Ninety"
-];
-
-function convert(num){
-
-if(num < 20) return a[num];
-
-if(num < 100)
- return b[Math.floor(num/10)] + (num%10 ? " " + a[num%10] : "");
-
-if(num < 1000)
- return a[Math.floor(num/100)] + " Hundred" + (num%100 ? " " + convert(num%100) : "");
-
-if(num < 100000)
- return convert(num/1000|0) + " Thousand" + (num%1000 ? " " + convert(num%1000) : "");
-
-if(num < 10000000)
- return convert(num/100000|0) + " Lakh" + (num%100000 ? " " + convert(num%100000) : "");
-
-return convert(num/10000000|0) + " Crore" + (num%10000000 ? " " + convert(num%10000000) : "");
-
-}
-
-return convert(n) + " Only";
-
-}
-
-
-/* =====================
-   PDF
-===================== */
-
-function savePDF(){
-
-const element = document.getElementById("payslip");
-
-html2pdf().set({
-
-    margin: [0.2, 0.2, 0.2, 0.2], // top, left, bottom, right
-    filename: "payslip.pdf",
-
-    html2canvas: {
-        scale: 2,
-        scrollY: 0
-    },
-
-    jsPDF: {
-        unit: "in",
-        format: "a4",
-        orientation: "portrait"
-    },
-
-    pagebreak: {
-        mode: ["avoid-all", "css", "legacy"]
-    }
-
-}).from(element).save();
-
-}
-
-
-
-/* =====================
-   EXCEL
-===================== */
-
-function saveExcel(){
-
-const wb = XLSX.utils.book_new();
-const data = [];
-
-
-/* Header */
-
-data.push(["Payslip"]);
-data.push(["Company", company.value]);
-data.push(["Employee", empName.value]);
-data.push(["ID", empId.value]);
-data.push(["Date", date.value]);
-data.push([]);
-
-
-/* Earnings */
-
-data.push(["Earnings"]);
-data.push(["Title","Amount"]);
-
-for(const row of earnTable.rows){
-
- if(row.rowIndex===0) continue;
-
- const i = row.querySelectorAll("input");
-
- data.push([i[0].value,i[1].value]);
-}
-
-data.push([]);
-
-
-/* Deductions */
-
-data.push(["Deductions"]);
-data.push(["Title","Amount"]);
-
-for(const row of dedTable.rows){
-
- if(row.rowIndex===0) continue;
-
- const i = row.querySelectorAll("input");
-
- data.push([i[0].value,i[1].value]);
-}
-
-data.push([]);
-
-
-/* Totals */
-
-data.push(["Total Earnings", earnTotal.textContent]);
-data.push(["Total Deductions", dedTotal.textContent]);
-data.push(["Net Pay", netPay.textContent]);
-
-
-const ws = XLSX.utils.aoa_to_sheet(data);
-
-XLSX.utils.book_append_sheet(wb, ws, "Payslip");
-
-XLSX.writeFile(wb,"payslip.xlsx");
-
-}
-
-
-/* =====================
-   WORD (NO WARNING)
-===================== */
-
-
-</script>
+<div id="printView">
+
+  <h3 id="p_title">Payslip</h3>
+  <div style="text-align:center">
+    <div id="p_company"></div>
+    <div id="p_address"></div>
+  </div>
+
+  <div class="line"></div>
+
+  <table style="width:100%">
+    <tr>
+      <td>Pay Date: <span id="p_date"></span></td>
+      <td>Employee Name: <span id="p_name"></span></td>
+    </tr>
+    <tr>
+      <td>Working Days: <span id="p_days"></span></td>
+      <td>Employee ID: <span id="p_id"></span></td>
+    </tr>
+  </table>
+
+  <br>
+
+  <table>
+    <tr>
+      <th>Earnings</th><th>Amount</th>
+      <th>Deductions</th><th>Amount</th>
+    </tr>
+    <tbody id="p_salary"></tbody>
+    <tr>
+      <td><b>Total Earnings</b></td>
+      <td id="p_earn"></td>
+      <td><b>Total Deductions</b></td>
+      <td id="p_ded"></td>
+    </tr>
+    <tr>
+      <td colspan="3"><b>Net Pay</b></td>
+      <td id="p_net"></td>
+    </tr>
+  </table>
+
+</div>
+<!-- FOOTER -->
+<footer>
+
+<p>© 2026 TechTools. All Rights Reserved.</p>
+
+<p>
+<a href="privacy.html">Privacy Policy</a> |
+<a href="terms.html">Terms of Service</a> |
+<a href="contact.html">Contact Us</a>
+</p>
+
+<p class="mt-2">
+TechTools is committed to providing reliable and secure online utilities for daily use.
+</p>
+
+</footer>
+<script src="js/main1.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script></script>
 
 
 
