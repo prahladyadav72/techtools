@@ -14,9 +14,9 @@ const tools = [
 // link:"password-generator.html"
 // },
 
-// {
-// name:"Payslip Generator",
-// desc:"Generate Your Payslip and Download",
+ {
+ name:"Payslip Generator",
+ desc:"Generate Your Payslip (Salary Slip) and Download",
 
 // link:"payslip.html"
 // },
@@ -45,4 +45,5 @@ const tools = [
  // Add all 40 tools here
 
 ];
+
 
