@@ -1,10 +1,5 @@
 
 
-/* LOADER */
-window.addEventListener("load", ()=>{
-document.getElementById("loader").style.display="none";
-});
-
 
 /* SEARCH + PAGINATION */
 
@@ -289,3 +284,5 @@ function clearQR(){
     document.querySelectorAll("input,textarea")
     .forEach(i=>i.value="");
 }
+
+
