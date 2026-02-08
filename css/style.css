@@ -1,4 +1,6 @@
-
+:root{
+   --bs-body-bg:#f5f7fb;  /* Your color */
+}
 
 body{
 background:#f5f7fb;
@@ -169,6 +171,143 @@ padding:12px 0;
     background: rgba(255,255,255,0.9);
     backdrop-filter: blur(5px);
 }
+
+/* ------------------------------------------------------------------------------------------------------------------------ */
+#printView{
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  width: 800px;
+  background: #fff;
+  padding: 30px;
+  color: #000;
+}
+
+
+#printView h3{
+ text-align:center;
+ margin-bottom:5px;
+}
+
+#printView .line{
+ border-bottom:1px solid #000;
+ margin:15px 0;
+}
+
+#printView table{
+ width:100%;
+ border-collapse:collapse;
+}
+
+#printView th,#printView td{
+ border:1px solid #000;
+ padding:6px;
+ text-align:left;
+}
+
+#printView .sign{
+ margin-top:50px;
+ display:flex;
+ justify-content:space-between;
+}
+
+#printView .sign div{
+ width:45%;
+ text-align:center;
+}
+
+
+
+
+
+
+.section-title{
+background:#6c8fa3;
+color:white;
+padding:10px 15px;
+font-weight:600;
+border-radius:5px;
+margin-top:15px;
+}
+
+.card-box-custom{
+background:white;
+padding:15px;
+border-radius:8px;
+box-shadow:0 2px 6px rgba(0,0,0,0.1);
+margin-bottom:15px;
+}
+
+.form-control{
+border:none;
+border-bottom:1px solid #aaa;
+border-radius:0;
+padding-left:0;
+}
+
+.form-control:focus{
+box-shadow:none;
+border-color:#0d6efd;
+}
+
+.table input{
+width:100%;
+border:none;
+border-bottom:1px solid #ccc;
+}
+
+.btn{
+width:100%;
+margin-bottom:8px;
+}
+
+/* ===== PRINT / PDF FIX ===== */
+
+@media print{
+ body *{
+  visibility:hidden;
+ }
+
+ #printView, #printView *{
+  visibility:visible;
+ }
+
+ #printView{
+  position:absolute;
+  left:0;
+  top:0;
+  width:100%;
+ }
+}
+
+/* Prevent page break */
+.card-box-custom, .section-title {
+  page-break-inside: avoid;
+}
+
+/* Reduce top space */
+#payslip {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+@media(min-width:768px){
+.btn{
+width:auto;
+margin:5px;
+}
+}
+
+.total-box{
+background:#f1f5f8;
+padding:10px;
+border-radius:5px;
+font-weight:600;
+margin-top:10px;
+text-align:center;
+}
+
+/* ----------------------------------------------------------------------------------------------------------------------- */
 
 @keyframes spin{
 100%{transform:rotate(360deg);}
