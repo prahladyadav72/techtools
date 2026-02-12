@@ -166,9 +166,11 @@ let qr;
 const sizeSlider=document.getElementById("qrSize");
 const sizeLabel=document.getElementById("sizeLabel");
 
-sizeSlider.oninput=()=>{
-    sizeLabel.innerText=sizeSlider.value;
-};
+if (sizeSlider && sizeLabel) {
+  sizeSlider.oninput = () => {
+    sizeLabel.innerText = sizeSlider.value;
+  };
+}
 
 
 function selectType(type,btn){
@@ -284,5 +286,6 @@ function clearQR(){
     document.querySelectorAll("input,textarea")
     .forEach(i=>i.value="");
 }
+
 
 
