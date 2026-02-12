@@ -17,12 +17,14 @@ desc:"Generate Your Payslip and Download",
 
 link:"payslip.html"
 },
+{
 name:"Image Resizer",
 desc:"Resize images online without quality loss.",
 
 link:"image-resizer.html"
 }
 ];
+
 
 
 
