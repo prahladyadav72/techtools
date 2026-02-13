@@ -1,8 +1,23 @@
 // payslip generator
-/* LOADER */
+    /* LOADER */
 window.addEventListener("load", ()=>{
 document.getElementById("loader").style.display="none";
 });
+
+const input = document.getElementById("payperiod");
+
+input.addEventListener("change", () => {
+  const [year, month] = input.value.split("-");
+  const date = new Date(year, month - 1);
+
+  const formatted = date.toLocaleString("en-IN", {
+    month: "long",
+    year: "numeric"
+  });
+
+  console.log(formatted); // August 2026
+});
+
 /* =====================
    INIT TABLES
 ===================== */
@@ -79,8 +94,13 @@ function savePDF(){
   doc.text("Employee: " + empName.value, 320, y);
 
   y += 14;
-  doc.text("Working Days: " + days.value, 40, y);
+  const payPeriodFormatted = formatPayPeriod(payperiod.value);
+  doc.text("Pay Period: " + payPeriodFormatted, 40, y);
   doc.text("Employee ID: " + empId.value, 320, y);
+
+    y += 14;
+  doc.text("Working Days: " + days.value, 40, y);
+  doc.text("Department: " + department.value, 320, y);
 
   y += 20;
   doc.line(40, y, 555, y);
@@ -132,8 +152,53 @@ function savePDF(){
   }
 }
 
+
 /* =====================
    WORD EXPORT (SAFE)
 ===================== */
 function saveWord(){ var content = "";
- content += "<h2 style='text-align:center;'>" + (title.value || "Payslip") + "</h2>"; content += "<p style='text-align:center;'><b>" + company.value + "</b><br>" + address.value + "</p>"; content += "<hr>"; content += "<p>"; content += "<b>Pay Date:</b> " + date.value + "<br>"; content += "<b>Working Days:</b> " + days.value + "<br>"; content += "<b>Employee Name:</b> " + empName.value + "<br>"; content += "<b>Employee ID:</b> " + empId.value; content += "</p>"; content += "<table border='1' cellpadding='6' cellspacing='0' width='100%'>"; content += "<tr><th>Earnings</th><th>Amount</th><th>Deductions</th><th>Amount</th></tr>"; var max = Math.max(earnTable.rows.length, dedTable.rows.length); for(var i=1;i<max;i++){ var e = earnTable.rows[i]?.querySelectorAll("input"); var d = dedTable.rows[i]?.querySelectorAll("input"); content += "<tr>"; content += "<td>" + (e?.[0]?.value || "") + "</td>"; content += "<td>" + (e?.[1]?.value || "") + "</td>"; content += "<td>" + (d?.[0]?.value || "") + "</td>"; content += "<td>" + (d?.[1]?.value || "") + "</td>"; content += "</tr>"; } content += "<tr>"; content += "<td><b>Total Earnings</b></td><td>" + earnTotal.textContent + "</td>"; content += "<td><b>Total Deductions</b></td><td>" + dedTotal.textContent + "</td>"; content += "</tr>"; content += "<tr>"; content += "<td colspan='3'><b>Net Pay</b></td><td><b>" + netPay.textContent + "</b></td>"; content += "</tr>"; content += "</table>"; content += "<p><b>Amount in Words:</b> " + words.value + "</p>"; var wordHTML = "<html>" + "<head><meta charset=\"UTF-8\"></head>" + "<body>" + content + "</body></html>"; var blob = new Blob([wordHTML], { type: "application/msword" }); var link = document.createElement("a"); link.href = URL.createObjectURL(blob); link.download = "payslip.doc"; link.click(); }
+ content += "<h2 style='text-align:center;'>" + (title.value || "Payslip") + "</h2>";
+ content += "<p style='text-align:center;'><b>" + company.value + "</b><br>" + address.value + "</p>";
+ content += `
+<table width="100%" cellpadding="4" cellspacing="0" style="margin-top:10px;">
+  <tr>
+    <td width="50%">
+      <b>Pay Date:</b> ${date.value || ""}<br>
+      <b>Pay Period:</b> ${formatPayPeriod(payperiod.value)}<br>
+      <b>Working Days:</b> ${days.value || ""}
+    </td>
+    <td width="50%">
+      <b>Employee:</b> ${empName.value || ""}<br>
+      <b>Employee ID:</b> ${empId.value || ""}<br>
+      <b>Department:</b> ${department.value || ""}
+    </td>
+  </tr>
+</table>
+`;
+
+ content += "<table border='1' cellpadding='6' cellspacing='0' width='100%'>"; 
+ content += "<tr><th>Earnings</th><th>Amount</th><th>Deductions</th><th>Amount</th></tr>"; 
+ var max = Math.max(earnTable.rows.length, dedTable.rows.length); 
+ for(var i=1;i<max;i++){ var e = earnTable.rows[i]?.querySelectorAll("input"); 
+  var d = dedTable.rows[i]?.querySelectorAll("input"); content += "<tr>"; 
+  content += "<td>" + (e?.[0]?.value || "") + "</td>"; content += "<td>" + (e?.[1]?.value || "") + "</td>"; 
+  content += "<td>" + (d?.[0]?.value || "") + "</td>"; content += "<td>" + (d?.[1]?.value || "") + "</td>"; 
+  content += "</tr>"; } content += "<tr>"; content += "<td><b>Total Earnings</b></td><td>" + earnTotal.textContent + "</td>"; 
+  content += "<td><b>Total Deductions</b></td><td>" + dedTotal.textContent + "</td>"; content += "</tr>"; content += "<tr>"; 
+  content += "<td colspan='3'><b>Net Pay</b></td><td><b>" + netPay.textContent + "</b></td>"; 
+  content += "</tr>"; 
+  content += "</table>"; 
+  
+  var wordHTML = "<html>" + "<head><meta charset=\"UTF-8\"></head>" + "<body>" + content + "</body></html>"; var blob = new Blob([wordHTML], { type: "application/msword" }); var link = document.createElement("a"); link.href = URL.createObjectURL(blob); link.download = "payslip.doc"; link.click(); }
+
+function formatPayPeriod(value){
+  if(!value) return "";
+
+  const [year, month] = value.split("-");
+  const date = new Date(year, month - 1);
+
+  return date.toLocaleString("en-IN", {
+    month: "long",
+    year: "numeric"
+  });
+}
