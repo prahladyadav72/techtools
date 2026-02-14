@@ -11,6 +11,13 @@ desc:"Create QR codes instantly for links and text.",
 
 link:"qr-generator.html"
 },
+
+{
+name:"Hastag Generator",
+desc:"Generate Hastag for your video, shorts, instagra and facebook",
+
+link:"payslip.html"
+},
 {
 name:"Payslip Generator",
 desc:"Generate Your Payslip and Download",

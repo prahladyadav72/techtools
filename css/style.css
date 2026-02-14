@@ -422,22 +422,7 @@ border: 1PX solid rgb(225, 221, 221);
 
 /* ===== PRINT / PDF FIX ===== */
 
-@media print{
- body *{
-  visibility:hidden;
- }
 
- #printView, #printView *{
-  visibility:visible;
- }
-
- #printView{
-  position:absolute;
-  left:0;
-  top:0;
-  width:100%;
- }
-}
 
 /* Prevent page break */
 .card-box-custom, .section-title {
@@ -450,12 +435,7 @@ border: 1PX solid rgb(225, 221, 221);
   padding-top: 0 !important;
 }
 
-@media(min-width:768px){
-.btn{
-width:auto;
-margin:5px;
-}
-}
+
 
 .total-box{
 background:#f1f5f8;
@@ -466,7 +446,65 @@ margin-top:10px;
 text-align:center;
 }
 
+.page-box{background:white;padding:30px;border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,0.1);}
+.margintop{
+    margin-top: 70px;
+}
 /* ----------------------------------------------------------------------------------------------------------------------- */
+
+
+
+.tt-hg-box{
+    max-width:900px;
+    background:#fff;
+    margin:auto;
+    
+    border-radius:8px;
+}
+
+.tt-hg-input,
+.tt-hg-select,
+.tt-hg-button,
+.tt-hg-textarea{
+    width:100%;
+    padding:12px;
+    margin-top:10px;
+    font-size:16px;
+}
+
+.tt-hg-button{
+    background:#010101;
+    color:#fafafa;
+    border:none;
+    cursor:pointer;
+}
+
+.tt-hg-textarea{
+    height:160px;
+}
+
+.tt-hg-tag{
+    display:inline-block;
+    padding:6px 10px;
+    margin:5px;
+    border-radius:5px;
+    background:#f1f1f1;
+    font-size:14px;
+}
+
+.tt-hg-counter{
+    margin-top:8px;
+    font-size:14px;
+    color:#555;
+}
+
+.tt-hg-copy-btn{
+    background:#28a745;
+    color:#fff;
+    border:none;
+    cursor:pointer;
+}
 
 @keyframes spin{
 100%{transform:rotate(360deg);}
@@ -484,9 +522,25 @@ font-size:2rem;
 }
 
 }
+@media(min-width:768px){
+.btn{
+width:auto;
+margin:5px;
+}
+}
+@media print{
+ body *{
+  visibility:hidden;
+ }
 
-.page-box{background:white;padding:30px;border-radius:10px;
-box-shadow:0 0 10px rgba(0,0,0,0.1);}
-.margintop{
-    margin-top: 70px;
+ #printView, #printView *{
+  visibility:visible;
+ }
+
+ #printView{
+  position:absolute;
+  left:0;
+  top:0;
+  width:100%;
+ }
 }
