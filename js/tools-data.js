@@ -16,7 +16,7 @@ link:"qr-generator.html"
 name:"Hastag Generator",
 desc:"Generate Hastag for your video, shorts, instagra and facebook",
 
-link:"payslip.html"
+link:"hastag-generator.html"
 },
 {
 name:"Payslip Generator",
@@ -31,6 +31,7 @@ desc:"Resize images online without quality loss.",
 link:"image-resizer.html"
 }
 ];
+
 
 
 
