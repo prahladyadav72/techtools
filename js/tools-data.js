@@ -6,6 +6,12 @@ desc:"Quickly and easily Generate no1 ranking tags ",
 link:"youtube-tags.html"
 },
 {
+name:"Youtube Thumbnail Download",
+desc:"Download Youtube video Thumbnail full HD.",
+
+link:"youtube-thumbnail-download.html"
+},
+{
 name:"QR Code Generator",
 desc:"Create QR codes instantly for links and text.",
 
