@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TechTools – Free YouTube Tag Generator, QR Code, Image Resizer & More</title>
+<meta name="description" content="Free online tools for YouTube creators, students and developers. Generate YouTube tags, hashtags, QR codes, resize images, download thumbnails — no signup, 100% free.">
+<meta name="keywords" content="free online tools, youtube tag generator, hashtag generator, qr code generator, image resizer, youtube thumbnail downloader, payslip generator">
+<meta name="author" content="Prahlad Yadav">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://techtools.best/">
+<meta property="og:title" content="TechTools – Free Online Tools for Creators and Developers">
+<meta property="og:description" content="Generate YouTube tags, hashtags, QR codes, resize images and more — free, no signup.">
+<meta property="og:image" content="https://techtools.best/img/logo.png">
+<meta property="og:url" content="https://techtools.best/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","name":"TechTools","url":"https://techtools.best","description":"Free online tools for YouTube creators, students and developers","author":{"@type":"Person","name":"Prahlad Yadav"}}
+</script>
+<link rel="icon" href="img/logo.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+
+/* ══════════════════════════════════════════
+   VARIABLES & RESET
+══════════════════════════════════════════ */
+:root {
+  --blue:    #2563eb;
+  --blue-d:  #1d4ed8;
+  --blue-l:  #eff6ff;
+  --blue-p:  #dbeafe;
+  --dark:    #0a0e1a;
+  --dark2:   #0f1623;
+  --text:    #111827;
+  --sub:     #6b7280;
+  --border:  #e5e7eb;
+  --bg:      #f9fafb;
+  --white:   #ffffff;
+  --nav-h:   65px;
+  --font:    'Inter', sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font); background: var(--bg); color: var(--text); overflow-x: hidden; padding-top: var(--nav-h); }
+a { text-decoration: none; color: inherit; }
+
+/* ══════════════════════════════════════════
+   LOADER
+══════════════════════════════════════════ */
+#loader { position: fixed; inset: 0; z-index: 9999; background: var(--dark); display: flex; align-items: center; justify-content: center; transition: opacity .4s; }
+.ring { width: 40px; height: 40px; border: 3px solid rgba(255,255,255,.1); border-top-color: var(--blue); border-radius: 50%; animation: spin .7s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ══════════════════════════════════════════
+   NAVBAR
+══════════════════════════════════════════ */
+.navbar {
+  position: fixed; top: 0; left: 0; right: 0;
+  height: var(--nav-h); z-index: 700;
+  background: rgba(10,14,26,.96);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255,255,255,.07);
+}
+.nav-inner {
+  max-width: 1200px; margin: 0 auto;
+  padding: 0 24px; height: 100%;
+  display: flex; align-items: center;
+  justify-content: space-between; gap: 16px;
+}
+
+/* Logo */
+.nav-logo {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 1.08rem; font-weight: 800;
+  color: #fff; white-space: nowrap; flex-shrink: 0;
+}
+.logo-box {
+  width: 35px; height: 35px; border-radius: 9px;
+  background: linear-gradient(135deg, #2563eb, #0ea5e9);
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden; position: relative; flex-shrink: 0;
+}
+.logo-box img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; border-radius: 9px; }
+.logo-box .lf { display: block; color: #fff; font-size: .8rem; font-weight: 900; position: relative; z-index: 1; }
+.logo-text b { color: #60a5fa; font-weight: 800; }
+
+/* Desktop nav links */
+.nav-menu { display: flex; align-items: center; gap: 2px; list-style: none; }
+.nav-menu > li { position: relative; }
+.nav-menu a {
+  display: flex; align-items: center; gap: 4px;
+  color: rgba(255,255,255,.62); font-size: .84rem; font-weight: 600;
+  padding: 7px 13px; border-radius: 8px;
+  transition: color .15s, background .15s; white-space: nowrap;
+}
+.nav-menu a:hover { color: #fff; background: rgba(255,255,255,.08); }
+.nav-menu a.curr { color: #93c5fd; background: rgba(37,99,235,.15); }
+.nav-menu .arrow { font-size: .6rem; opacity: .6; transition: transform .2s; }
+
+/* Nav CTA */
+.nav-cta {
+  background: var(--blue) !important; color: #fff !important;
+  padding: 8px 18px !important; border-radius: 9px !important;
+  font-weight: 700 !important; margin-left: 6px;
+  transition: background .15s !important;
+}
+.nav-cta:hover { background: var(--blue-d) !important; }
+
+/* ── TOOLS DROPDOWN ── */
+.has-drop:hover .drop-menu,
+.has-drop:focus-within .drop-menu { display: block; }
+.has-drop:hover .arrow { transform: rotate(180deg); }
+
+.drop-menu {
+  display: none;
+  position: absolute; top: calc(100% + 6px); left: 0;
+  width: 240px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: 0 16px 48px rgba(0,0,0,.13);
+  padding: 8px;
+  z-index: 900;
+  animation: dropIn .15s ease;
+}
+@keyframes dropIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: none; }
+}
+.drop-menu a {
+  display: flex !important; align-items: center; gap: 10px;
+  color: var(--text) !important;
+  font-size: .84rem !important; font-weight: 600 !important;
+  padding: 10px 12px !important; border-radius: 9px !important;
+  background: none !important;
+  transition: background .12s !important;
+}
+.drop-menu a:hover { background: var(--blue-l) !important; color: var(--blue) !important; }
+.drop-icon {
+  width: 30px; height: 30px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: .95rem; flex-shrink: 0;
+}
+
+/* Hamburger */
+.hbg { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 5px; }
+.hbg span { display: block; width: 22px; height: 2px; background: rgba(255,255,255,.8); border-radius: 2px; transition: all .25s; }
+.hbg.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+.hbg.open span:nth-child(2) { opacity: 0; }
+.hbg.open span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
+
+/* Mobile nav */
+.mob-nav {
+  display: none; position: fixed;
+  top: var(--nav-h); left: 0; right: 0;
+  background: var(--dark2);
+  border-bottom: 1px solid rgba(255,255,255,.07);
+  padding: 12px 20px 20px; z-index: 699;
+  box-shadow: 0 10px 40px rgba(0,0,0,.4);
+}
+.mob-nav.show { display: block; }
+.mob-nav a {
+  display: flex; align-items: center; gap: 10px;
+  color: rgba(255,255,255,.7); font-size: .88rem; font-weight: 600;
+  padding: 10px 12px; border-radius: 10px; margin-bottom: 2px;
+  transition: background .15s, color .15s;
+}
+.mob-nav a:hover { background: rgba(255,255,255,.07); color: #fff; }
+.mob-divider { border: none; border-top: 1px solid rgba(255,255,255,.07); margin: 8px 0; }
+
+@media (max-width: 900px) { .nav-menu { display: none; } .hbg { display: flex; } }
+
+/* ══════════════════════════════════════════
+   HERO
+══════════════════════════════════════════ */
+.hero {
+  background: var(--dark);
+  padding: 72px 24px 64px;
+  text-align: center; position: relative; 
+  overflow: visible; /* IMPORTANT */
+  margin-bottom: 40px; /* ADD THIS */
+}
+.hero::before {
+  content: ''; position: absolute;
+  top: -100px; left: 50%; transform: translateX(-50%);
+  width: 800px; height: 600px;
+  background: radial-gradient(ellipse, rgba(37,99,235,.2) 0%, transparent 68%);
+  pointer-events: none;
+}
+.hero-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(37,99,235,.14);
+  border: 1px solid rgba(96,165,250,.28);
+  color: #93c5fd; font-size: .71rem; font-weight: 700;
+  padding: 5px 15px; border-radius: 99px;
+  letter-spacing: .07em; text-transform: uppercase; margin-bottom: 22px;
+}
+.hero h1 {
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  font-weight: 900; color: #fff; line-height: 1.14;
+  letter-spacing: -.03em; margin-bottom: 16px;
+  max-width: 680px; margin-inline: auto;
+}
+.hero h1 em {
+  font-style: normal;
+  background: linear-gradient(135deg, #60a5fa, #34d399);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.hero-sub {
+  color: rgba(255,255,255,.48); font-size: .96rem; line-height: 1.7;
+  max-width: 480px; margin: 0 auto 40px;
+}
+
+/* ══════════════════════════════════════════
+   SEARCH BAR + POPUP
+══════════════════════════════════════════ */
+.search-wrap { max-width: 580px; margin: 0 auto; position: relative; }
+
+.search-box {
+  display: flex; align-items: center;
+  background: rgba(255,255,255,.07);
+  border: 1.5px solid rgba(255,255,255,.15);
+  border-radius: 13px;
+  padding: 7px 7px 7px 18px; gap: 10px;
+  transition: border-color .2s, background .2s, box-shadow .2s;
+}
+.search-box:focus-within {
+  border-color: rgba(96,165,250,.55);
+  background: rgba(255,255,255,.10);
+  box-shadow: 0 0 0 4px rgba(37,99,235,.15);
+}
+.search-box svg { flex-shrink: 0; }
+.search-box input {
+  flex: 1; min-width: 0;
+  background: none; border: none; outline: none;
+  color: #fff; font-family: var(--font);
+  font-size: .94rem; font-weight: 500; padding: 7px 0;
+}
+.search-box input::placeholder { color: rgba(255,255,255,.3); }
+.search-box button {
+  flex-shrink: 0; width: 96px;
+  background: var(--blue); color: #fff; border: none;
+  border-radius: 9px; padding: 11px 0;
+  font-family: var(--font); font-size: .86rem; font-weight: 700;
+  cursor: pointer; transition: background .15s;
+}
+.search-box button:hover { background: var(--blue-d); }
+
+/* ── POPUP ── */
+.s-popup {
+  display: none; position: absolute;
+  top: calc(100% + 10px); left: 0; right: 0;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.18);
+  overflow: hidden; z-index: 600;
+  animation: fadeIn .15s ease;
+  text-align: left;
+}
+.s-popup.open { display: block; }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: none; }
+}
+.s-popup-hdr {
+  padding: 10px 16px 8px;
+  font-size: .68rem; font-weight: 800; color: var(--sub);
+  text-transform: uppercase; letter-spacing: .08em;
+  background: #f9fafb; border-bottom: 1px solid var(--border);
+}
+/* Each result row */
+.s-row {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 16px;
+  border-bottom: 1px solid #f3f4f6;
+  cursor: pointer; color: var(--text);
+  transition: background .1s;
+  text-decoration: none;
+}
+.s-row:last-child { border-bottom: none; }
+.s-row:hover { background: #f0f7ff; }
+.s-row-icon {
+  width: 38px; height: 38px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem; flex-shrink: 0;
+}
+.s-row-info { flex: 1; min-width: 0; }
+.s-row-name { font-size: .86rem; font-weight: 700; color: var(--text); }
+.s-row-name mark { background: #dbeafe; color: #1d4ed8; border-radius: 3px; padding: 0 2px; font-weight: 800; font-style: normal; }
+.s-row-desc { font-size: .75rem; color: var(--sub); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.s-row-arr { color: var(--blue); font-size: .85rem; font-weight: 700; flex-shrink: 0; margin-left: auto; }
+.s-empty { padding: 24px; text-align: center; color: var(--sub); font-size: .87rem; }
+.s-empty strong { color: var(--text); }
+
+/* ══════════════════════════════════════════
+   STATS BAR
+══════════════════════════════════════════ */
+.stats-bar { background: #fff; border-bottom: 1px solid var(--border); padding: 16px 24px; }
+.stats-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: center; gap: 56px; flex-wrap: wrap; }
+.stat { text-align: center; }
+.stat-num { font-size: 1.35rem; font-weight: 900; color: var(--blue); }
+.stat-lbl { font-size: .72rem; color: var(--sub); font-weight: 600; margin-top: 2px; }
+
+/* ══════════════════════════════════════════
+   MAIN PAGE
+══════════════════════════════════════════ */
+.page { max-width: 1200px; margin: 0 auto; padding: 52px 24px 80px; }
+
+/* Info card */
+.info-card {
+  background: #fff; border: 1px solid var(--border);
+  border-radius: 16px; padding: 36px 40px;
+  text-align: center; margin-bottom: 52px;
+  box-shadow: 0 1px 12px rgba(0,0,0,.04);
+}
+.info-card h2 { font-size: 1.2rem; font-weight: 800; margin-bottom: 12px; letter-spacing: -.02em; }
+.info-card p { color: var(--sub); font-size: .9rem; line-height: 1.8; max-width: 580px; margin: 0 auto 8px; }
+
+/* Section header */
+.sec-top {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 22px; flex-wrap: wrap; gap: 10px;
+}
+.sec-top h2 { font-size: 1.3rem; font-weight: 800; letter-spacing: -.02em; }
+.sec-badge { background: var(--blue-l); color: var(--blue); font-size: .76rem; font-weight: 700; padding: 4px 14px; border-radius: 99px; }
+
+/* SEO nav hidden */
+.seo-links { display: none; }
+
+/* ══════════════════════════════════════════
+   TOOL CARDS
+══════════════════════════════════════════ */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+@media (max-width: 860px) { .grid { grid-template-columns: repeat(2,1fr); } }
+@media (max-width: 520px)  { .grid { grid-template-columns: 1fr; gap: 12px; } }
+
+.card {
+  background: #fff; border: 1.5px solid var(--border);
+  border-radius: 16px; padding: 24px 20px 20px;
+  display: flex; flex-direction: column; gap: 10px;
+  position: relative; overflow: hidden;
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  animation: up .4s ease both;
+}
+.card:nth-child(1){animation-delay:.04s}.card:nth-child(2){animation-delay:.09s}
+.card:nth-child(3){animation-delay:.14s}.card:nth-child(4){animation-delay:.19s}
+.card:nth-child(5){animation-delay:.24s}.card:nth-child(6){animation-delay:.29s}
+@keyframes up { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:none} }
+
+.card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  border-radius: 16px 16px 0 0; opacity: 0; transition: opacity .2s;
+}
+.card:hover { transform: translateY(-5px); box-shadow: 0 16px 48px rgba(37,99,235,.12); border-color: #bfdbfe; }
+.card:hover::before { opacity: 1; }
+.c1::before{background:linear-gradient(90deg,#ef4444,#f97316)}
+.c2::before{background:linear-gradient(90deg,#f59e0b,#facc15)}
+.c3::before{background:linear-gradient(90deg,#22c55e,#10b981)}
+.c4::before{background:linear-gradient(90deg,#3b82f6,#06b6d4)}
+.c5::before{background:linear-gradient(90deg,#a855f7,#ec4899)}
+.c6::before{background:linear-gradient(90deg,#14b8a6,#0ea5e9)}
+
+.card-badge {
+  position: absolute; top: 14px; right: 14px;
+  font-size: .64rem; font-weight: 800; padding: 3px 10px; border-radius: 99px; letter-spacing: .04em;
+}
+.bh{background:#fef2f2;color:#ef4444}
+.bn{background:#eff6ff;color:#3b82f6}
+.bf{background:#f0fdf4;color:#16a34a}
+
+.card-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0; }
+.card-name { font-size: .94rem; font-weight: 800; color: var(--text); line-height: 1.3; }
+.card-desc { font-size: .8rem; color: var(--sub); line-height: 1.65; flex: 1; }
+.card-cta { display: inline-flex; align-items: center; gap: 5px; font-size: .79rem; font-weight: 700; color: var(--blue); margin-top: 4px; transition: gap .18s; }
+.card:hover .card-cta { gap: 9px; }
+
+/* Features */
+.feats { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; margin-top: 48px; }
+@media (max-width: 760px) { .feats { grid-template-columns: repeat(2,1fr); } }
+.feat { background: #fff; border: 1px solid var(--border); border-radius: 14px; padding: 22px 14px; text-align: center; }
+.feat .fi { font-size: 1.4rem; }
+.feat .ft { font-size: .85rem; font-weight: 700; margin-top: 8px; }
+.feat .fd { font-size: .74rem; color: var(--sub); margin-top: 3px; }
+
+/* ══════════════════════════════════════════
+   FOOTER
+══════════════════════════════════════════ */
+.footer {
+  background: var(--dark);
+  border-top: 1px solid rgba(255,255,255,.06);
+  padding: 52px 24px 28px;
+}
+.footer-in { max-width: 1200px; margin: 0 auto; }
+.footer-top {
+  display: grid; grid-template-columns: 1.7fr 1fr 1fr 1fr;
+  gap: 40px; padding-bottom: 40px;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+}
+@media (max-width: 860px) { .footer-top { grid-template-columns: 1fr 1fr; gap: 28px; } }
+@media (max-width: 500px)  { .footer-top { grid-template-columns: 1fr; } }
+
+.ft-logo { display: flex; align-items: center; gap: 9px; font-size: 1rem; font-weight: 800; color: #fff; margin-bottom: 14px; }
+.ft-logo-box { width: 30px; height: 30px; border-radius: 8px; background: linear-gradient(135deg,#2563eb,#0ea5e9); display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; flex-shrink: 0; }
+.ft-logo-box img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
+.ft-logo-box .lf { position: relative; z-index: 1; color: #fff; font-size: .75rem; font-weight: 900; }
+.ft-desc { font-size: .81rem; color: rgba(255,255,255,.38); line-height: 1.75; max-width: 250px; margin-bottom: 16px; }
+.chips { display: flex; gap: 7px; flex-wrap: wrap; }
+.chip { font-size: .67rem; font-weight: 700; padding: 4px 10px; border-radius: 6px; background: rgba(255,255,255,.06); color: rgba(255,255,255,.45); border: 1px solid rgba(255,255,255,.08); }
+.ft-col h4 { font-size: .68rem; font-weight: 800; color: rgba(255,255,255,.28); text-transform: uppercase; letter-spacing: .09em; margin-bottom: 14px; }
+.ft-col ul { list-style: none; }
+.ft-col li { margin-bottom: 9px; }
+.ft-col a { color: rgba(255,255,255,.48); font-size: .82rem; font-weight: 500; display: flex; align-items: center; gap: 7px; transition: color .15s; }
+.ft-col a:hover { color: #fff; }
+.footer-bottom { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; padding-top: 24px; font-size: .77rem; color: rgba(255,255,255,.26); }
+.footer-bottom a { color: rgba(255,255,255,.32); transition: color .15s; }
+.footer-bottom a:hover { color: rgba(255,255,255,.65); }
+.fbl { display: flex; gap: 14px; flex-wrap: wrap; }
+.ads-note { text-align: center; margin-top: 12px; font-size: .7rem; color: rgba(255,255,255,.17); }
+.ads-note a { color: rgba(255,255,255,.24); }
+</style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader"><div class="ring"></div></div>
+
+<!-- ═══════════════════════════
+     NAVBAR
+═══════════════════════════ -->
+<nav class="navbar" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+
+    <!-- Logo -->
+    <a href="/" class="nav-logo" aria-label="TechTools home">
+      <div class="logo-box">
+        <img src="img/logo.png" alt="TechTools" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+        <span class="lf" style="display:none">T</span>
+      </div>
+      <div class="logo-text">Tech<b>Tools</b></div>
+    </a>
+
+    <!-- Desktop menu -->
+    <ul class="nav-menu" role="list">
+
+      <li><a href="/" class="curr" aria-current="page">Home</a></li>
+
+      <!-- TOOLS DROPDOWN -->
+      <li class="has-drop">
+        <a href="#" onclick="return false" aria-haspopup="true" aria-expanded="false">
+          Tools <span class="arrow">▼</span>
+        </a>
+        <div class="drop-menu" role="menu">
+          <a href="youtube-tags.html" role="menuitem">
+            <div class="drop-icon" style="background:#fef2f2">🎯</div>YouTube Tag Generator
+          </a>
+          <a href="youtube-thumbnail-download.html" role="menuitem">
+            <div class="drop-icon" style="background:#fffbeb">🖼️</div>Thumbnail Downloader
+          </a>
+          <a href="qr-generator.html" role="menuitem">
+            <div class="drop-icon" style="background:#f0fdf4">📱</div>QR Code Generator
+          </a>
+          <a href="hastag-generator.html" role="menuitem">
+            <div class="drop-icon" style="background:#eff6ff">#️⃣</div>Hashtag Generator
+          </a>
+          <a href="payslip.html" role="menuitem">
+            <div class="drop-icon" style="background:#fdf4ff">💼</div>Payslip Generator
+          </a>
+          <a href="image-resizer.html" role="menuitem">
+            <div class="drop-icon" style="background:#f0fdfa">🖼</div>Image Resizer
+          </a>
+        </div>
+      </li>
+
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="privacy.html">Privacy</a></li>
+      <li><a href="terms.html">Terms</a></li>
+      <li><a href="contact.html" class="nav-cta">Get Help →</a></li>
+    </ul>
+
+    <!-- Hamburger -->
+    <button class="hbg" id="hbg" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile nav -->
+<nav class="mob-nav" id="mobNav" aria-label="Mobile navigation">
+  <a href="/">🏠 Home</a>
+  <hr class="mob-divider">
+  <a href="youtube-tags.html">🎯 YouTube Tag Generator</a>
+  <a href="youtube-thumbnail-download.html">🖼️ Thumbnail Downloader</a>
+  <a href="qr-generator.html">📱 QR Code Generator</a>
+  <a href="hastag-generator.html">#️⃣ Hashtag Generator</a>
+  <a href="payslip.html">💼 Payslip Generator</a>
+  <a href="image-resizer.html">🖼 Image Resizer</a>
+  <hr class="mob-divider">
+  <a href="about.html">👤 About</a>
+  <a href="contact.html">✉️ Contact</a>
+  <a href="privacy.html">🔒 Privacy Policy</a>
+  <a href="terms.html">📋 Terms of Service</a>
+</nav>
+
+<!-- ═══════════════════════════
+     HERO
+═══════════════════════════ -->
+<section class="hero">
+  <div class="hero-pill">✦ Free · No Signup · Privacy First</div>
+  <h1>Free Online Tools for<br><em>Creators &amp; Developers</em></h1>
+  <p class="hero-sub">YouTube tags, QR codes, image resizing, hashtags and more — all free, instant, right in your browser.</p>
+
+  <!-- SEARCH -->
+  <div class="search-wrap">
+    <div class="search-box">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
+      <input
+        type="search" id="sInput" autocomplete="off" spellcheck="false"
+        placeholder="Search tools... try 'YouTube', 'QR', 'Image', 'Salary'"
+        aria-label="Search tools"
+        oninput="runSearch(this.value)"
+        onkeydown="searchKey(event)"
+      >
+      <button onclick="goFirst()" aria-label="Search">Search</button>
+    </div>
+
+    <!-- POPUP -->
+    <div class="s-popup" id="sPopup" role="listbox">
+      <div class="s-popup-hdr" id="sHdr">Results</div>
+      <div id="sBody"></div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat"><div class="stat-num">6+</div><div class="stat-lbl">Free Tools</div></div>
+    <div class="stat"><div class="stat-num">0</div><div class="stat-lbl">Signups Needed</div></div>
+    <div class="stat"><div class="stat-num">100%</div><div class="stat-lbl">Browser-Based</div></div>
+    <div class="stat"><div class="stat-num">🔒</div><div class="stat-lbl">Privacy First</div></div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<main class="page">
+
+  <div class="info-card">
+    <h2>Why Choose TechTools?</h2>
+    <p>High-quality free tools for YouTube creators, students, professionals and developers. No software to install, no account required — everything runs in your browser.</p>
+    <p>We never store your files, track your data, or show intrusive popups. Fast, secure, and always 100% free.</p>
+  </div>
+
+  <!-- Hidden SEO nav -->
+  <nav class="seo-links" aria-label="All tools">
+    <a href="youtube-tags.html">YouTube Tag Generator</a>
+    <a href="youtube-thumbnail-download.html">YouTube Thumbnail Downloader</a>
+    <a href="qr-generator.html">QR Code Generator</a>
+    <a href="hastag-generator.html">Hashtag Generator</a>
+    <a href="payslip.html">Payslip Generator</a>
+    <a href="image-resizer.html">Image Resizer</a>
+  </nav>
+
+  <div class="sec-top">
+    <h2>All Tools</h2>
+    <span class="sec-badge">6 tools available</span>
+  </div>
+
+  <div class="grid" role="list">
+
+    <a href="youtube-tags.html" class="card c1" role="listitem">
+      <span class="card-badge bh">🔥 Popular</span>
+      <div class="card-icon" style="background:#fef2f2">🎯</div>
+      <p class="card-name">YouTube Tag Generator</p>
+      <p class="card-desc">Generate real ranking tags using YouTube autocomplete. Find low-competition keywords and grow your channel faster.</p>
+      <span class="card-cta">Use Tool →</span>
+    </a>
+
+    <a href="youtube-thumbnail-download.html" class="card c2" role="listitem">
+      <span class="card-badge bn">⭐ New</span>
+      <div class="card-icon" style="background:#fffbeb">🖼️</div>
+      <p class="card-name">YouTube Thumbnail Downloader</p>
+      <p class="card-desc">Download any YouTube video thumbnail in Full HD, SD and all available qualities. One click, instant save.</p>
+      <span class="card-cta">Use Tool →</span>
+    </a>
+
+    <a href="qr-generator.html" class="card c3" role="listitem">
+      <span class="card-badge bh">🔥 Popular</span>
+      <div class="card-icon" style="background:#f0fdf4">📱</div>
+      <p class="card-name">QR Code Generator</p>
+      <p class="card-desc">Create custom QR codes for URLs, text, WiFi, email and SMS. Customize colors and download as PNG instantly.</p>
+      <span class="card-cta">Use Tool →</span>
+    </a>
+
+    <a href="hastag-generator.html" class="card c4" role="listitem">
+      <span class="card-badge bn">⭐ New</span>
+      <div class="card-icon" style="background:#eff6ff">#️⃣</div>
+      <p class="card-name">Hashtag Generator</p>
+      <p class="card-desc">Generate platform-specific hashtags for YouTube, Instagram, TikTok, Facebook and Twitter in seconds.</p>
+      <span class="card-cta">Use Tool →</span>
+    </a>
+
+    <a href="payslip.html" class="card c5" role="listitem">
+      <span class="card-badge bf">✔ Free</span>
+      <div class="card-icon" style="background:#fdf4ff">💼</div>
+      <p class="card-name">Payslip Generator</p>
+      <p class="card-desc">Create professional salary slips in PDF or Word format. Ideal for HR teams, freelancers and small businesses.</p>
+      <span class="card-cta">Use Tool →</span>
+    </a>
+
+    <a href="image-resizer.html" class="card c6" role="listitem">
+      <span class="card-badge bf">✔ Free</span>
+      <div class="card-icon" style="background:#f0fdfa">🖼</div>
+      <p class="card-name">Image Resizer</p>
+      <p class="card-desc">Resize JPG, PNG and WEBP images without quality loss. Custom dimensions, DPI and format support.</p>
+      <span class="card-cta">Use Tool →</span>
+    </a>
+
+  </div>
+
+  <div class="feats">
+    <div class="feat"><div class="fi">⚡</div><div class="ft">Instant Results</div><div class="fd">No waiting, ever</div></div>
+    <div class="feat"><div class="fi">🔒</div><div class="ft">Privacy First</div><div class="fd">Zero file storage</div></div>
+    <div class="feat"><div class="fi">📱</div><div class="ft">Mobile Ready</div><div class="fd">Any device, any screen</div></div>
+    <div class="feat"><div class="fi">💸</div><div class="ft">Always Free</div><div class="fd">No hidden costs</div></div>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-in">
+    <div class="footer-top">
+
+      <div>
+        <div class="ft-logo">
+          <div class="ft-logo-box">
+            <img src="img/logo.png" alt="TechTools" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+            <span class="lf" style="display:none">T</span>
+          </div>
+          TechTools
+        </div>
+        <p class="ft-desc">Free online tools for YouTube creators, students, and developers. Built with care by Prahlad Yadav from India. No signup, no cost, always free.</p>
+        <div class="chips">
+          <span class="chip">🔒 No File Storage</span>
+          <span class="chip">✅ No Login</span>
+          <span class="chip">⚡ 100% Free</span>
+        </div>
+      </div>
+
+      <div class="ft-col">
+        <h4>Tools</h4>
+        <ul>
+          <li><a href="youtube-tags.html">🎯 YouTube Tags</a></li>
+          <li><a href="youtube-thumbnail-download.html">🖼️ Thumbnail Downloader</a></li>
+          <li><a href="qr-generator.html">📱 QR Code Generator</a></li>
+          <li><a href="hastag-generator.html">#️⃣ Hashtag Generator</a></li>
+          <li><a href="payslip.html">💼 Payslip Generator</a></li>
+          <li><a href="image-resizer.html">🖼 Image Resizer</a></li>
+        </ul>
+      </div>
+
+      <div class="ft-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">👤 About Us</a></li>
+          <li><a href="contact.html">✉️ Contact</a></li>
+          <li><a href="disclaimer.html">📄 Disclaimer</a></li>
+        </ul>
+      </div>
+
+      <div class="ft-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="privacy.html">🔒 Privacy Policy</a></li>
+          <li><a href="terms.html">📋 Terms of Service</a></li>
+          <li><a href="disclaimer.html">⚠️ Disclaimer</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 TechTools by <a href="about.html">Prahlad Yadav</a>. All Rights Reserved.</span>
+      <div class="fbl">
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+        <a href="contact.html">Contact</a>
+        <a href="about.html">About</a>
+      </div>
+    </div>
+
+    <p class="ads-note">This site may display ads via Google AdSense to support free tool development. See our <a href="privacy.html">Privacy Policy</a> for details.</p>
+  </div>
+</footer>
+
+<!-- ADSENSE -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3666396936157058" crossorigin="anonymous"></script>
+
+<script>
+// ═══════════════════════════════════════
+// SEARCH DATA
+// ═══════════════════════════════════════
+var TOOLS = [
+  {
+    name: "YouTube Tag Generator",
+    desc: "Generate real ranking tags using YouTube autocomplete data.",
+    link: "youtube-tags.html",
+    icon: "🎯",
+    bg:   "#fef2f2",
+    tags: ["youtube","tag","tags","seo","video","ranking","keyword","channel","shorts","creator","tube"]
+  },
+  {
+    name: "YouTube Thumbnail Downloader",
+    desc: "Download any YouTube video thumbnail in Full HD quality.",
+    link: "youtube-thumbnail-download.html",
+    icon: "🖼️",
+    bg:   "#fffbeb",
+    tags: ["youtube","thumbnail","download","hd","video","image","cover","picture","photo","tube"]
+  },
+  {
+    name: "QR Code Generator",
+    desc: "Create custom QR codes for URLs, WiFi, email and SMS.",
+    link: "qr-generator.html",
+    icon: "📱",
+    bg:   "#f0fdf4",
+    tags: ["qr","qrcode","barcode","link","url","wifi","scan","code","generate","create"]
+  },
+  {
+    name: "Hashtag Generator",
+    desc: "Generate hashtags for YouTube, Instagram, TikTok and Twitter.",
+    link: "hastag-generator.html",
+    icon: "#️⃣",
+    bg:   "#eff6ff",
+    tags: ["hashtag","hash","instagram","tiktok","twitter","facebook","social","reels","shorts","trending"]
+  },
+  {
+    name: "Payslip Generator",
+    desc: "Create professional salary slips in PDF or Word format.",
+    link: "payslip.html",
+    icon: "💼",
+    bg:   "#fdf4ff",
+    tags: ["payslip","salary","slip","hr","employee","pdf","word","pay","wage","document","download"]
+  },
+  {
+    name: "Image Resizer",
+    desc: "Resize JPG, PNG and WEBP images without quality loss.",
+    link: "image-resizer.html",
+    icon: "🖼",
+    bg:   "#f0fdfa",
+    tags: ["image","resize","photo","jpg","png","webp","compress","size","picture","convert","dimension"]
+  }
+];
+
+// Escape regex special chars
+function esc(s) {
+  return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+// Highlight matched text
+function highlight(text, q) {
+  if (!q) return text;
+  return text.replace(new RegExp('(' + esc(q) + ')', 'gi'), '<mark>$1</mark>');
+}
+
+// ── MAIN SEARCH FUNCTION ──
+function runSearch(val) {
+  var q       = val.trim().toLowerCase();
+  var popup   = document.getElementById('sPopup');
+  var header  = document.getElementById('sHdr');
+  var body    = document.getElementById('sBody');
+
+  // Hide popup if empty query
+  if (!q) {
+    popup.classList.remove('open');
+    return;
+  }
+
+  // Filter tools
+  var results = TOOLS.filter(function(t) {
+    if (t.name.toLowerCase().indexOf(q) !== -1) return true;
+    if (t.desc.toLowerCase().indexOf(q) !== -1) return true;
+    for (var i = 0; i < t.tags.length; i++) {
+      if (t.tags[i].indexOf(q) !== -1) return true;
+    }
+    return false;
+  });
+
+  // Show popup
+  popup.classList.add('open');
+
+  // No results
+  if (results.length === 0) {
+    header.textContent = 'No results found';
+    body.innerHTML =
+      '<div class="s-empty">' +
+        '😕 No tools match <strong>"' + val + '"</strong><br>' +
+        '<small style="color:#9ca3af;font-size:.76rem">Try: YouTube, QR, Image, Hashtag, Salary</small>' +
+      '</div>';
+    return;
+  }
+
+  // Render results
+  header.textContent = results.length + ' tool' + (results.length > 1 ? 's' : '') + ' found';
+
+  var html = '';
+  for (var i = 0; i < results.length; i++) {
+    var t = results[i];
+    html +=
+      '<a href="' + t.link + '" class="s-row">' +
+        '<div class="s-row-icon" style="background:' + t.bg + '">' + t.icon + '</div>' +
+        '<div class="s-row-info">' +
+          '<div class="s-row-name">' + highlight(t.name, val.trim()) + '</div>' +
+          '<div class="s-row-desc">' + t.desc + '</div>' +
+        '</div>' +
+        '<span class="s-row-arr">→</span>' +
+      '</a>';
+  }
+  body.innerHTML = html;
+}
+
+// Go to first result on Enter / button click
+function goFirst() {
+  var q = document.getElementById('sInput').value.trim().toLowerCase();
+  if (!q) return;
+  for (var i = 0; i < TOOLS.length; i++) {
+    var t = TOOLS[i];
+    if (t.name.toLowerCase().indexOf(q) !== -1) { window.location.href = t.link; return; }
+    for (var j = 0; j < t.tags.length; j++) {
+      if (t.tags[j].indexOf(q) !== -1) { window.location.href = t.link; return; }
+    }
+  }
+}
+
+// Keyboard shortcuts
+function searchKey(e) {
+  if (e.key === 'Enter') { goFirst(); }
+  if (e.key === 'Escape') { document.getElementById('sPopup').classList.remove('open'); }
+}
+
+// Close popup on outside click
+document.addEventListener('click', function(e) {
+  var wrap = document.querySelector('.search-wrap');
+  if (wrap && !wrap.contains(e.target)) {
+    document.getElementById('sPopup').classList.remove('open');
+  }
+});
+
+// ═══════════════════════════════════════
+// HAMBURGER
+// ═══════════════════════════════════════
+var hbg    = document.getElementById('hbg');
+var mobNav = document.getElementById('mobNav');
+hbg.addEventListener('click', function() {
+  var open = mobNav.classList.toggle('show');
+  hbg.classList.toggle('open', open);
+  hbg.setAttribute('aria-expanded', String(open));
+});
+
+// ═══════════════════════════════════════
+// LOADER
+// ═══════════════════════════════════════
+window.addEventListener('load', function() {
+  var l = document.getElementById('loader');
+  l.style.opacity = '0';
+  setTimeout(function() { l.remove(); }, 450);
+});
+</script>
+
+</body>
+</html>
