@@ -271,6 +271,8 @@ margin-bottom:8px;
   padding:25px;
   text-align:center;
 }
+
+
 .tag{
   display:inline-block;
   background:#fff;
@@ -506,8 +508,145 @@ box-shadow:0 0 10px rgba(0,0,0,0.1);}
     cursor:pointer;
 }
 
-/* youtube thumbnail downloader start here + all page btn style here */
-.tool-header {
+@keyframes spin{
+100%{transform:rotate(360deg);}
+}
+
+/* MOBILE */
+@media(max-width:768px){
+
+.hero{
+padding:60px 15px;
+}
+
+.hero h1{
+font-size:2rem;
+}
+
+}
+@media(min-width:768px){
+.btn{
+width:auto;
+margin:5px;
+}
+}
+@media print{
+ body *{
+  visibility:hidden;
+ }
+
+ #printView, #printView *{
+  visibility:visible;
+ }
+
+ #printView{
+  position:absolute;
+  left:0;
+  top:0;
+  width:100%;
+ }
+}
+
+
+
+/* MOBILE DRAWER MENU */
+.mobile-nav {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.mobile-nav li {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.mobile-nav li a {
+  display: block;
+  padding: 15px 20px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  text-decoration: none;
+}
+
+.mobile-nav li a:hover,
+.mobile-nav li a:focus {
+  background-color: #f5f5f5;
+  color: #0d6efd;
+}
+.mobile-nav li a.active {
+  background-color: #e9f0ff;
+  color: #0d6efd;
+  font-weight: 600;
+}
+
+/* DESKTOP NAVBAR IMPROVEMENT */
+.desktop-nav .nav-item {
+  margin-left: 18px;
+}
+
+.desktop-nav .nav-link {
+  color: #eaf2ff;
+  font-size: 15px;
+  font-weight: 500;
+  padding: 8px 10px;
+  transition: color 0.2s ease, border-bottom 0.2s ease;
+  position: relative;
+}
+
+/* Hover underline effect */
+.desktop-nav .nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0%;
+  height: 2px;
+  background-color: #ffffff;
+  transition: width 0.25s ease;
+}
+
+.desktop-nav .nav-link:hover::after {
+  width: 100%;
+}
+
+.desktop-nav .nav-link:hover {
+  color: #ffffff;
+}
+
+.desktop-nav .nav-link.active::after {
+  width: 100%;
+}
+
+.desktop-nav .nav-link.active {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+
+
+/* //                   ------------------------------------------------------here new */
+
+
+   /* Responsive */
+        @media (max-width: 768px) {
+           
+            .search-btn{
+                 flex-direction: column;
+            }
+           
+
+            .url-input-wrapper {
+                flex-direction: column;
+            }
+
+           
+
+            .thumbnails-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        .tool-header {
             text-align: center;
             margin-bottom: 2rem;
         }
@@ -748,55 +887,3 @@ box-shadow:0 0 10px rgba(0,0,0,0.1);}
         .quality-badge.sd {
             background: #ffc107;
         }
-
-@keyframes spin{
-100%{transform:rotate(360deg);}
-}
-
-/* MOBILE */
-@media(max-width:768px){
-.search-btn{
-flex-direction: column;
-}
-           
-
-.url-input-wrapper {
-flex-direction: column;
-}
-
-           
-
-.thumbnails-grid {
-grid-template-columns: 1fr;
-}
-.hero{
-padding:60px 15px;
-}
-
-.hero h1{
-font-size:2rem;
-}
-
-}
-@media(min-width:768px){
-.btn{
-width:auto;
-margin:5px;
-}
-}
-@media print{
- body *{
-  visibility:hidden;
- }
-
- #printView, #printView *{
-  visibility:visible;
- }
-
- #printView{
-  position:absolute;
-  left:0;
-  top:0;
-  width:100%;
- }
-}

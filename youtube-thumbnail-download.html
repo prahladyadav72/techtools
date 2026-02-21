@@ -1,312 +1,344 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Download YouTube video thumbnails in HD, SD, and all available qualities. Free YouTube Thumbnail Downloader by TechTools - fast, secure, and simple.">
-    <meta name="keywords" content="youtube thumbnail downloader, download youtube thumbnail, youtube thumbnail hd, get youtube thumbnail, youtube thumbnail url">
-    <title>YouTube Thumbnail Downloader - Download in HD & All Qualities | TechTools</title>
-    <meta name="author" content="TechTools">
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>YouTube Thumbnail Downloader – Download HD Thumbnails Free | TechTools</title>
+<meta name="description" content="Download YouTube video thumbnails in HD, SD and all available qualities. Free, instant, no signup. Works with any public YouTube video including Shorts.">
+<meta name="keywords" content="youtube thumbnail downloader, download youtube thumbnail, youtube thumbnail hd, get youtube thumbnail, youtube thumbnail url, techtools">
+<meta name="author" content="Prahlad Yadav">
 <meta name="robots" content="index, follow">
-
-<link rel="icon" href="img/logo.png">
-
-
-<!-- Bootstrap CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
-<!-- Google Font -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
-<style>
-    html, body {
-  background-color: #f5f7fb !important;
+<link rel="canonical" href="https://techtools.best/youtube-thumbnail-download.html">
+<meta property="og:title" content="YouTube Thumbnail Downloader – HD Free | TechTools">
+<meta property="og:description" content="Download any YouTube thumbnail in HD, SD and all qualities. Free, no signup.">
+<meta property="og:url" content="https://techtools.best/youtube-thumbnail-download.html">
+<meta property="og:type" content="website">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "YouTube Thumbnail Downloader",
+  "url": "https://techtools.best/youtube-thumbnail-download.html",
+  "description": "Download YouTube video thumbnails in all available qualities for free.",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "All",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
 }
+</script>
+<link rel="icon" href="img/logo.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style1.css">
 
-</style>
+
 </head>
 
 <body>
-<div id="loader">
-<div class="spinner"></div>
-</div>
-<!-- NAVBAR -->
-<nav class="navbar navbar-dark bg-primary fixed-top">
-<div class="container">
 
-<a class="navbar-brand fw-bold" href="/">
-<img src="img/logo.png" width="30"> TechTools
-</a>
+<!-- LOADER -->
+<div id="loader"><div class="ring"></div></div>
 
-<button class="navbar-toggler" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu">
-<span class="navbar-toggler-icon"></span>
-</button>
+<!-- ═══════════════ NAVBAR ═══════════════ -->
+<nav class="navbar" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo" aria-label="TechTools Home">
+      <div class="logo-box">
+        <img src="img/logo.png" alt="TechTools"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+        <span class="lf">T</span>
+      </div>
+      <div class="logo-text">Tech<b>Tools</b></div>
+    </a>
 
-</div>
+    <ul class="nav-menu" role="list">
+      <li><a href="/">Home</a></li>
+      <li class="has-drop">
+        <a href="#" onclick="return false" aria-haspopup="true">
+          Tools <span class="arrow">▼</span>
+        </a>
+        <div class="drop-menu">
+          <a href="youtube-tags.html"><div class="drop-icon" style="background:#fef2f2">🎯</div>YouTube Tag Generator</a>
+          <a href="youtube-thumbnail-download.html" class="curr"><div class="drop-icon" style="background:#fffbeb">🖼️</div>Thumbnail Downloader</a>
+          <a href="qr-generator.html"><div class="drop-icon" style="background:#f0fdf4">📱</div>QR Code Generator</a>
+          <a href="hastag-generator.html"><div class="drop-icon" style="background:#eff6ff">#️⃣</div>Hashtag Generator</a>
+          <a href="payslip.html"><div class="drop-icon" style="background:#fdf4ff">💼</div>Payslip Generator</a>
+          <a href="image-resizer.html"><div class="drop-icon" style="background:#f0fdfa">🖼</div>Image Resizer</a>
+        </div>
+      </li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="privacy.html">Privacy</a></li>
+      <li><a href="terms.html">Terms</a></li>
+      <li><a href="contact.html" class="nav-cta">Get Help →</a></li>
+    </ul>
+
+    <button class="hbg" id="hbg" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </nav>
 
+<!-- Mobile nav -->
+<nav class="mob-nav" id="mobNav">
+  <a href="/">🏠 Home</a>
+  <hr class="mob-divider">
+  <a href="youtube-tags.html">🎯 YouTube Tag Generator</a>
+  <a href="youtube-thumbnail-download.html" style="color:#60a5fa">🖼️ Thumbnail Downloader</a>
+  <a href="qr-generator.html">📱 QR Code Generator</a>
+  <a href="hastag-generator.html">#️⃣ Hashtag Generator</a>
+  <a href="payslip.html">💼 Payslip Generator</a>
+  <a href="image-resizer.html">🖼 Image Resizer</a>
+  <hr class="mob-divider">
+  <a href="about.html">👤 About</a>
+  <a href="contact.html">✉️ Contact</a>
+  <a href="privacy.html">🔒 Privacy Policy</a>
+  <a href="terms.html">📋 Terms of Service</a>
+</nav>
 
-<!-- MOBILE MENU -->
-<div class="offcanvas offcanvas-end" id="mobileMenu">
+<!-- ═══════════════ HERO ═══════════════ -->
+<section class="hero">
+  <div class="hero-pill">🖼️ Thumbnail Tool · Free · No Signup</div>
+  <h1>YouTube Thumbnail Downloader<br><em>HD Quality, Instant Download</em></h1>
+  <p class="hero-sub">Download any YouTube video thumbnail in all available qualities — HD, SD and more. Works with videos, Shorts and live streams.</p>
+</section>
 
-<div class="offcanvas-header bg-primary text-white">
+<!-- ═══════════════ MAIN TOOL ═══════════════ -->
+<main class="page-wrap">
+  <div class="tool-layout">
 
-<h5>Menu</h5>
+    <!-- LEFT: Tool card -->
+    <div class="tt-card">
+      <h2 class="tt-card-title">🖼️ YouTube Thumbnail Downloader</h2>
+      <p style="text-align:center;color:var(--sub);font-size:.84rem;margin-bottom:20px">
+        Paste any YouTube URL to get all thumbnail qualities instantly
+      </p>
 
-<button class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+      <!-- URL Input -->
+      <div class="mb-3">
+        <label class="tt-label" for="videoUrl">YouTube Video URL</label>
+        <div class="url-row">
+          <input
+            type="text"
+            id="videoUrl"
+            placeholder="https://www.youtube.com/watch?v=VIDEO_ID"
+            autocomplete="off"
+            spellcheck="false"
+          >
+          <button class="tt-btn tt-btn-primary" onclick="getThumbnails()">
+            Get Thumbnails
+          </button>
+        </div>
+      </div>
 
-</div>
+      <!-- Error message — id matches thumbnail.js -->
+      <div id="errorMessage"></div>
 
-<div class="offcanvas-body">
+      <!-- Results — id matches thumbnail.js -->
+      <div id="results">
+        <div class="video-info">
+          <h3>Video Information</h3>
+          <p id="videoIdDisplay"></p>
+          <p id="videoLinkDisplay"></p>
+        </div>
+        <h3>Available Thumbnail Qualities:</h3>
+        <!-- Thumbnails grid — id matches thumbnail.js -->
+        <div id="thumbnailsGrid"></div>
+      </div>
+    </div>
 
-<ul class="navbar-nav">
+    <!-- RIGHT: Sidebar info -->
+    <div>
+      <div class="info-box">
+        <h3>📐 Thumbnail Sizes</h3>
+        <ul>
+          <li><span class="blt">HD</span> Maxres — 1920×1080 px</li>
+          <li><span class="blt">SD</span> Standard — 640×480 px</li>
+          <li><span class="blt">HQ</span> High Quality — 480×360 px</li>
+          <li><span class="blt">MQ</span> Medium — 320×180 px</li>
+          <li><span class="blt">SM</span> Default — 120×90 px</li>
+        </ul>
+      </div>
 
-<li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-<li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-<li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-<li class="nav-item"><a class="nav-link" href="disclaimer.html">Disclaimer</a></li>
-<li class="nav-item"><a class="nav-link" href="privacy.html">Privacy</a></li>
-<li class="nav-item"><a class="nav-link" href="terms.html">Terms</a></li>
+      <!-- <div class="info-box">
+        <h3>✅ Supported URLs</h3>
+        <ul>
+          <li><span class="blt">→</span> youtube.com/watch?v=…</li>
+          <li><span class="blt">→</span> youtu.be/…</li>
+          <li><span class="blt">→</span> youtube.com/shorts/…</li>
+          <li><span class="blt">→</span> youtube.com/live/…</li>
+          <li><span class="blt">→</span> m.youtube.com/…</li>
+        </ul>
+      </div> -->
 
-</ul>
+      <!-- <div class="info-box">
+        <h3>🔒 Privacy</h3>
+        <ul>
+          <li><span class="blt">✓</span> No URLs stored on servers</li>
+          <li><span class="blt">✓</span> All processing in browser</li>
+          <li><span class="blt">✓</span> No account required</li>
+          <li><span class="blt">✓</span> 100% free, always</li>
+        </ul>
+      </div> -->
+    </div>
 
-</div>
-</div>
-<!-- HERO -->
-<section class="hero mt-5 pt-4">
+  </div>
+</main>
 
-<h1>Generate ranking tags for your YouTube videos</h1>
+<!-- ═══════════════ ARTICLE / SEO ═══════════════ -->
+<section class="tt-article">
 
-<p>Fast • Secure • Simple • 100% Free</p>
+  <h2>YouTube Thumbnail Downloader by TechTools – Get HD Thumbnails Instantly</h2>
+  <p>YouTube thumbnails are critical for video performance, but YouTube doesn't provide an easy way to download them. The <strong>TechTools YouTube Thumbnail Downloader</strong> gives you instant access to all thumbnail qualities — from maximum resolution HD to standard and mobile versions.</p>
+  <p>Whether you're a content creator analysing what works, a designer creating mockups, or a marketer studying competitor strategies, this tool saves hours of manual work.</p>
+
+  <h2>How It Works</h2>
+  <p>YouTube stores video thumbnails at predictable URLs based on the video ID. TechTools extracts the video ID from any YouTube URL and displays all available qualities for one-click download.</p>
+
+  <h2>Why Download YouTube Thumbnails?</h2>
+  <ul>
+    <li><strong>Competitor Analysis</strong> — Study what thumbnail styles work in your niche</li>
+    <li><strong>Content Research</strong> — Analyse trends in successful videos</li>
+    <li><strong>Presentations &amp; Reports</strong> — Include video references in slides</li>
+    <li><strong>Design Inspiration</strong> — Learn from effective thumbnail strategies</li>
+    <li><strong>Thumbnail Testing</strong> — Download your own thumbnails to test on different devices</li>
+  </ul>
+
+  <h2>Best Practices</h2>
+  <p>Thumbnails are owned by the video creator. Use them for analysis and research — not for reposting or claiming as your own. For presentations use maxresdefault; for web articles sddefault or hqdefault work well. Always attribute when using in public content.</p>
+
+  <h2>Pro Tip</h2>
+  <p>Download thumbnails from the top 10–20 videos in your niche and lay them out side by side. You'll quickly spot patterns in colour schemes, text placement, facial expressions and design styles that consistently drive clicks.</p>
+
+  <!-- FAQ -->
+  <h2 style="margin-top:40px">Frequently Asked Questions</h2>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">Can I download thumbnails from any YouTube video? <span class="faq-icon">▼</span></div>
+    <div class="faq-a">Yes, any public YouTube video — standard videos, Shorts, live streams and premieres. Private or deleted videos won't work.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">Why doesn't the HD thumbnail show for some videos? <span class="faq-icon">▼</span></div>
+    <div class="faq-a">Not all videos have 1920×1080 thumbnails. Older videos and mobile uploads may only have SD or HQ versions. The tool shows all available qualities automatically.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">Is it legal to download YouTube thumbnails? <span class="faq-icon">▼</span></div>
+    <div class="faq-a">Downloading for personal use, research and analysis is legal. Thumbnails are publicly accessible. Reposting as your own or commercial use without permission violates copyright.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">What format are the downloaded thumbnails? <span class="faq-icon">▼</span></div>
+    <div class="faq-a">YouTube thumbnails are in JPG format — compatible with all image viewers, editors and presentation software.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">Does this work on mobile? <span class="faq-icon">▼</span></div>
+    <div class="faq-a">Yes, fully responsive and works on smartphones, tablets and desktop browsers.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">Do you store the videos I search for? <span class="faq-icon">▼</span></div>
+    <div class="faq-a">No. Everything is processed in your browser. We don't store video URLs, track searches or collect any personal data.</div>
+  </div>
 
 </section>
 
-    <!-- Hero Section -->
-<div class="container py-4">
-  <div class="card ccsx">
-    <div class="header headslsfei">
-      <h2>📸 YouTube Thumbnail Downloader</h2>
-      <p>Download thumbnail your YouTube videos</p>
-      <p>Get HD thumbnails from any YouTube video in all available qualities with the powerful TechTools .</p>
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer class="site-footer">
+  <div class="footer-in">
+    <div class="footer-top">
+
+      <div>
+        <div class="ft-logo">
+          <div class="ft-logo-box">
+            <img src="img/logo.png" alt="TechTools"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+            <span class="lf">T</span>
+          </div>
+          TechTools
+        </div>
+        <p class="ft-desc">Free online tools for YouTube creators, students, and developers. Built by Prahlad Yadav from India. No signup, no cost, always free.</p>
+        <div class="ft-chips">
+          <span class="ft-chip">🔒 No File Storage</span>
+          <span class="ft-chip">✅ No Login</span>
+          <span class="ft-chip">⚡ 100% Free</span>
+        </div>
+      </div>
+
+      <div class="ft-col">
+        <h4>Tools</h4>
+        <ul>
+          <li><a href="youtube-tags.html">🎯 YouTube Tags</a></li>
+          <li><a href="youtube-thumbnail-download.html">🖼️ Thumbnail Downloader</a></li>
+          <li><a href="qr-generator.html">📱 QR Code Generator</a></li>
+          <li><a href="hastag-generator.html">#️⃣ Hashtag Generator</a></li>
+          <li><a href="payslip.html">💼 Payslip Generator</a></li>
+          <li><a href="image-resizer.html">🖼 Image Resizer</a></li>
+        </ul>
+      </div>
+
+      <div class="ft-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">👤 About Us</a></li>
+          <li><a href="contact.html">✉️ Contact</a></li>
+          <li><a href="disclaimer.html">📄 Disclaimer</a></li>
+        </ul>
+      </div>
+
+      <div class="ft-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="privacy.html">🔒 Privacy Policy</a></li>
+          <li><a href="terms.html">📋 Terms of Service</a></li>
+          <li><a href="disclaimer.html">⚠️ Disclaimer</a></li>
+        </ul>
+      </div>
+
     </div>
 
-    <!-- Tool Section -->
-    <section class="container py-4">
-        <div class="tool-section">
-            <div class="tool-header">
-                <h2></h2>
-                <p></p>
-            </div>
-
-            <div class="table-customss">
-                <label for="videoUrl">Enter YouTube Video URL:</label>
-                <div class="url-input-wrapper">
-                    <input class="thumbnail-search"
-                        type="text" 
-                        id="videoUrl" 
-                        placeholder="https://www.youtube.com/watch?v=VIDEO_ID"
-                        autocomplete="off"
-                    >
-                    <button class="custom-btn btn" onclick="getThumbnails()">Get Thumbnails</button>
-                </div>
-            </div>
-
-            <!-- Error Message -->
-            <div class="error-message" id="errorMessage"></div>
-
-            <!-- Results -->
-            <div class="results" id="results">
-                <div class="video-info">
-                    <h3>Video Information</h3>
-                    <p id="videoIdDisplay"></p>
-                    <p id="videoLinkDisplay"></p>
-                </div>
-
-                <h3 style="margin-bottom: 1rem;">Available Thumbnail Qualities:</h3>
-                <div class="thumbnails-grid p-3" id="thumbnailsGrid"></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Content Section -->
+    <div class="footer-bottom">
+      <span>© 2026 TechTools by <a href="about.html">Prahlad Yadav</a>. All Rights Reserved.</span>
+      <div class="fbl">
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+        <a href="contact.html">Contact</a>
+        <a href="about.html">About</a>
+      </div>
+    </div>
+    <p class="ads-note">This site may display ads via Google AdSense. See our <a href="privacy.html">Privacy Policy</a> for details.</p>
   </div>
+</footer>
 
+<!-- ADSENSE -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3666396936157058" crossorigin="anonymous"></script>
 
-   <section class="container content-section">
-        <h2>YouTube Thumbnail Downloader by TechTools – Get HD Thumbnails Instantly</h2>
-        <p>
-            YouTube thumbnails are critical for video performance, but YouTube doesn't provide an easy way to 
-            download them directly. The <strong>YouTube Thumbnail Downloader by TechTools</strong> solves this 
-            by giving you instant access to all thumbnail qualities – from maximum resolution HD thumbnails to 
-            standard and mobile versions.
-        </p>
-        <p>
-            I created this tool after needing thumbnail images for presentations, competitor analysis, and 
-            content research. Whether you're a content creator analyzing what works, a designer creating mockups, 
-            or a marketer studying competitor strategies, this tool saves hours of manual work.
-        </p>
-
-        <h3>How the TechTools YouTube Thumbnail Downloader Works</h3>
-        <p>
-            YouTube stores video thumbnails at predictable URLs based on the video ID. TechTools extracts 
-            the video ID from any YouTube URL and displays all available thumbnail qualities:
-        </p>
-        <ul>
-            <li><strong>Maximum Resolution (1920x1080)</strong> – Highest quality, perfect for presentations and prints</li>
-            <li><strong>Standard Definition (640x480)</strong> – High quality, balanced file size</li>
-            <li><strong>High Quality (480x360)</strong> – Good quality for web use</li>
-            <li><strong>Medium Quality (320x180)</strong> – Optimized for faster loading</li>
-            <li><strong>Default Quality (120x90)</strong> – Smallest thumbnail size</li>
-        </ul>
-
-        <h3>Why Download YouTube Thumbnails?</h3>
-        <p>There are many legitimate reasons to download YouTube thumbnails:</p>
-        <ul>
-            <li><strong>Competitor Analysis</strong> – Study what thumbnail styles work in your niche</li>
-            <li><strong>Content Research</strong> – Analyze trends and patterns in successful videos</li>
-            <li><strong>Presentations & Reports</strong> – Include video references in slides and documents</li>
-            <li><strong>Design Inspiration</strong> – Learn from effective thumbnail design strategies</li>
-            <li><strong>Thumbnail Testing</strong> – Download your own thumbnails to test on different devices</li>
-            <li><strong>Archive & Reference</strong> – Save thumbnails for future reference or comparison</li>
-        </ul>
-
-        <h3>Understanding YouTube Thumbnail Qualities</h3>
-        <p>
-            YouTube generates multiple thumbnail versions for each video to optimize loading on different devices 
-            and connection speeds. Here's what each quality means:
-        </p>
-        <ul>
-            <li><strong>Maxresdefault (Best Quality)</strong> – Full HD 1920x1080 pixels. Not all videos have this, 
-            especially older uploads or videos from mobile devices. If unavailable, the tool will show the next best quality.</li>
-            <li><strong>SD Default</strong> – 640x480 pixels. This is the standard thumbnail size used on desktop YouTube.</li>
-            <li><strong>HQ Default</strong> – 480x360 pixels. High quality but smaller file size, good for web embedding.</li>
-            <li><strong>MQ Default</strong> – 320x180 pixels. Medium quality, often used in suggested videos sidebar.</li>
-            <li><strong>Default</strong> – 120x90 pixels. The smallest version, used in some mobile views.</li>
-        </ul>
-
-        <h3>Best Practices for Using Downloaded Thumbnails</h3>
-        <ul>
-            <li><strong>Respect Copyright</strong> – Thumbnails are owned by the video creator. Use for analysis 
-            and research, not for reposting or claiming as your own.</li>
-            <li><strong>Choose the Right Quality</strong> – For presentations, use maxresdefault. For web articles, 
-            sddefault or hqdefault work well.</li>
-            <li><strong>Attribution</strong> – When using thumbnails in public content, attribute them to the 
-            original video creator.</li>
-            <li><strong>Analyze Patterns</strong> – Download thumbnails from top videos in your niche to identify 
-            common design elements that drive clicks.</li>
-        </ul>
-
-        <h3>Why Use TechTools YouTube Thumbnail Downloader?</h3>
-        <ul>
-            <li>Instant access to all available thumbnail qualities</li>
-            <li>No signup, no login, completely free</li>
-            <li>Works with any public YouTube video</li>
-            <li>One-click download for each quality</li>
-            <li>Mobile-friendly and fast</li>
-            <li>Privacy-focused – no data stored or tracked</li>
-        </ul>
-
-        <h3>Pro Tip from My Experience</h3>
-        <p>
-            When analyzing competitor thumbnails, download thumbnails from the top 10-20 videos in your niche 
-            and lay them out side by side. You'll quickly spot patterns in color schemes, text placement, 
-            facial expressions, and design styles that consistently drive clicks. This visual analysis is 
-            far more effective than just browsing YouTube.
-        </p>
-
-        <!-- FAQ Section -->
-        <div class="faq-section">
-            <h2>Frequently Asked Questions</h2>
-
-            <div class="faq-item">
-                <h3>Can I download thumbnails from any YouTube video?</h3>
-                <p>
-                    Yes, you can download thumbnails from any public YouTube video. The tool works with standard 
-                    videos, shorts, live streams, and premieres. Private or deleted videos won't work.
-                </p>
-            </div>
-
-            <div class="faq-item">
-                <h3>Why doesn't the maximum resolution thumbnail show up for some videos?</h3>
-                <p>
-                    Not all videos have 1920x1080 (maxresdefault) thumbnails. Older videos, mobile uploads, and 
-                    some lower-quality uploads may only have standard or high-quality versions. The tool 
-                    automatically shows all available qualities.
-                </p>
-            </div>
-
-            <div class="faq-item">
-                <h3>Is it legal to download YouTube thumbnails?</h3>
-                <p>
-                    Yes, downloading thumbnails for personal use, research, and analysis is legal. Thumbnails are 
-                    publicly accessible. However, reposting thumbnails as your own or using them commercially 
-                    without permission violates copyright. Always respect the original creator's rights.
-                </p>
-            </div>
-
-            <div class="faq-item">
-                <h3>What format are the downloaded thumbnails?</h3>
-                <p>
-                    YouTube thumbnails are in JPG format. This is a widely compatible image format that works 
-                    in all image viewers, editors, and presentation software.
-                </p>
-            </div>
-
-            <div class="faq-item">
-                <h3>Can I download thumbnails from YouTube Shorts?</h3>
-                <p>
-                    Yes, YouTube Shorts have thumbnails just like regular videos. Simply paste the Shorts URL 
-                    and the tool will extract the video ID and display all available thumbnail qualities.
-                </p>
-            </div>
-
-            <div class="faq-item">
-                <h3>Does this work on mobile devices?</h3>
-                <p>
-                    Absolutely! TechTools YouTube Thumbnail Downloader is fully responsive and works perfectly 
-                    on smartphones, tablets, and desktop browsers. Just paste the URL and download.
-                </p>
-            </div>
-
-            <div class="faq-item">
-                <h3>Is TechTools YouTube Thumbnail Downloader free?</h3>
-                <p>
-                    Yes, this tool is 100% free with no limits. You don't need to sign up, provide any personal 
-                    information, or watch ads. Use it as many times as you need.
-                </p>
-            </div>
-
-            <div class="faq-item">
-                <h3>Do you store or track the videos I search for?</h3>
-                <p>
-                    No. TechTools processes everything in your browser. We don't store video URLs, track your 
-                    searches, or collect any personal data. Your privacy is fully protected.
-                </p>
-            </div>
-        </div>
-    </section>
-</div>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 TechTools. All Rights Reserved.</p>
-            <p>
-                <a href="privacy.html">Privacy Policy</a> |
-                <a href="terms.html">Terms of Service</a> |
-                <a href="contact.html">Contact Us</a>
-            </p>
-            <p>TechTools is committed to providing reliable and secure online utilities for daily use.</p>
-        </div>
-    </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" defer></script>
-    <script>
-            /* LOADER */
-window.addEventListener("load", ()=>{
-document.getElementById("loader").style.display="none";
+<!-- SHARED NAV + LOADER -->
+<script>
+var hbg    = document.getElementById('hbg');
+var mobNav = document.getElementById('mobNav');
+hbg.addEventListener('click', function() {
+  var open = mobNav.classList.toggle('show');
+  hbg.classList.toggle('open', open);
+  hbg.setAttribute('aria-expanded', String(open));
 });
-    </script>
+window.addEventListener('load', function() {
+  var l = document.getElementById('loader');
+  if (l) { l.style.opacity = '0'; setTimeout(function(){ l.remove(); }, 450); }
+});
+
+// FAQ accordion
+function toggleFaq(el) {
+  var item = el.parentElement;
+  document.querySelectorAll('.faq-item').forEach(function(i) {
+    if (i !== item) i.classList.remove('open');
+  });
+  item.classList.toggle('open');
+}
+</script>
+
+<!-- YOUR EXISTING thumbnail.js — all element IDs preserved -->
 <script src="js/thumbnail.js"></script>
 
 </body>

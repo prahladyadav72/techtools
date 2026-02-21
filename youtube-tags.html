@@ -1,318 +1,481 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
-<title>Generate Youtube videos tags | TechTools</title>
-
-<meta name="description"
-content="Free online tools for PDF, images, calculators and developers. Secure, fast and easy to use tools for everyday needs.">
-
-<meta name="keywords" content="
-online tools,
-free online tools,
-youtube tag generator,
-youtube tag generator online,
-youtube tag generator free,
-how to generate tags for youtbe,
-web tools,
-seo tools,
-utility tools,
-TechTools,
-TechTools best,
-TechTools online,
-free tools website,
-all in one tools,
-salary slip generate,
-no login tools
-">
-
-<meta name="author" content="TechTools">
+<title>YouTube Tag Generator – Free Ranking Tags for YouTube Videos | TechTools</title>
+<meta name="description" content="Generate real ranking tags for your YouTube videos using YouTube autocomplete data. Find low-competition keywords, support 300 & 500 character limits. Free, no signup.">
+<meta name="keywords" content="youtube tag generator, youtube tags, youtube seo, free youtube tags, ranking tags youtube, youtube keyword generator, techtools">
+<meta name="author" content="Prahlad Yadav">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://techtools.best/youtube-tags.html">
+<meta property="og:title" content="YouTube Tag Generator – Free Ranking Tags | TechTools">
+<meta property="og:description" content="Generate real YouTube ranking tags from autocomplete data. Free, no signup, 300 & 500 char limit support.">
+<meta property="og:url" content="https://techtools.best/youtube-tags.html">
+<meta property="og:type" content="website">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "YouTube Tag Generator",
+  "url": "https://techtools.best/youtube-tags.html",
+  "description": "Generate real ranking tags for YouTube videos using autocomplete data.",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "All",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
 <link rel="icon" href="img/logo.png" type="image/png">
-<link rel="preconnect" href="https://cdn.jsdelivr.net">
-<link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style1.css">
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+/* ── Page-specific styles ── */
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+.tool-layout {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 24px;
+  align-items: start;
+}
+@media (max-width: 860px) { .tool-layout { grid-template-columns: 1fr; } }
 
-<link rel="stylesheet" href="css/style.css">
+/* ── Keyword input row — matches JS id="kw" ── */
+.kw-row {
+  display: flex; gap: 10px;
+  margin-bottom: 18px; flex-wrap: wrap;
+}
+.kw-row input { flex: 1; min-width: 0; }
+.kw-row button { flex-shrink: 0; white-space: nowrap; }
+
+/* ── Tag limit controls row ── */
+.limit-row {
+  display: flex; align-items: center;
+  gap: 10px; flex-wrap: wrap;
+  margin-bottom: 20px;
+  padding: 12px 16px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+.limit-row label {
+  font-size: .82rem; font-weight: 600; color: var(--sub);
+  white-space: nowrap; margin: 0;
+}
+/* select override for inline use */
+.limit-row select {
+  width: auto !important;
+  display: inline-block !important;
+  padding: 7px 32px 7px 12px;
+  font-size: .85rem;
+}
+.limit-row .char-info {
+  font-size: .78rem; color: var(--sub); font-weight: 500;
+  margin-left: auto;
+}
+
+/* ── Result area — matches JS id="result" ── */
+#result {
+  min-height: 60px;
+  margin-bottom: 16px;
+}
+
+/* Tag chips rendered by JS */
+.tag-chip {
+  display: inline-flex; align-items: center;
+  background: var(--blue-l); color: var(--blue);
+  border: 1px solid var(--blue-p);
+  border-radius: 99px; padding: 4px 12px;
+  font-size: .78rem; font-weight: 600;
+  margin: 3px; cursor: default;
+  transition: background .12s;
+}
+.tag-chip:hover { background: var(--blue-p); }
+
+/* Copy all button */
+.copy-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--blue); color: #fff;
+  border: none; border-radius: 9px;
+  padding: 10px 22px; font-size: .86rem;
+  font-weight: 700; font-family: var(--font);
+  cursor: pointer; transition: background .15s;
+}
+.copy-btn:hover { background: var(--blue-d); }
+.copy-btn.copied { background: #16a34a; }
+
+/* Sidebar info boxes */
+.info-box {
+  background: #fff; border: 1px solid var(--border);
+  border-radius: var(--r); padding: 20px 22px;
+  box-shadow: 0 1px 8px rgba(0,0,0,.04);
+  margin-bottom: 14px;
+}
+.info-box h3 { font-size: .9rem; font-weight: 800; margin-bottom: 12px; }
+.info-box ul { list-style: none; padding: 0; }
+.info-box li {
+  display: flex; gap: 8px; align-items: flex-start;
+  font-size: .81rem; color: var(--sub); line-height: 1.6;
+  padding: 6px 0; border-bottom: 1px solid #f3f4f6;
+}
+.info-box li:last-child { border-bottom: none; }
+.info-box .blt { color: var(--blue); font-weight: 900; flex-shrink: 0; }
+
+/* FAQ */
+.faq-item {
+  border: 1px solid var(--border); border-radius: 12px;
+  overflow: hidden; margin-bottom: 10px;
+}
+.faq-q {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 18px; cursor: pointer;
+  font-size: .87rem; font-weight: 700; color: var(--text);
+  background: #fff; gap: 12px; user-select: none;
+  transition: background .15s;
+}
+.faq-q:hover { background: var(--blue-l); }
+.faq-icon { font-size: .65rem; color: var(--sub); flex-shrink: 0; transition: transform .2s; }
+.faq-item.open .faq-q   { background: var(--blue-l); color: var(--blue); }
+.faq-item.open .faq-icon { transform: rotate(180deg); }
+.faq-a {
+  display: none; padding: 0 18px 14px;
+  font-size: .84rem; color: var(--sub); line-height: 1.75;
+  background: var(--blue-l);
+}
+.faq-item.open .faq-a { display: block; }
+</style>
 </head>
 
 <body>
 
 <!-- LOADER -->
-<div id="loader">
-<div class="spinner"></div>
-</div>
+<div id="loader"><div class="ring"></div></div>
 
+<!-- ═══════════════ NAVBAR ═══════════════ -->
+<nav class="navbar" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
 
-<!-- NAVBAR -->
-<nav class="navbar navbar-dark bg-primary fixed-top">
-<div class="container">
+    <a href="/" class="nav-logo" aria-label="TechTools Home">
+      <div class="logo-box">
+        <img src="img/logo.png" alt="TechTools"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+        <span class="lf">T</span>
+      </div>
+      <div class="logo-text">Tech<b>Tools</b></div>
+    </a>
 
-<a class="navbar-brand fw-bold" href="/"><img src="img/logo.png" alt="" style="width: 30px;"> TechTools</a>
+    <ul class="nav-menu" role="list">
+      <li><a href="/">Home</a></li>
+      <li class="has-drop">
+        <a href="#" onclick="return false" aria-haspopup="true">
+          Tools <span class="arrow">▼</span>
+        </a>
+        <div class="drop-menu">
+          <a href="youtube-tags.html" class="curr"><div class="drop-icon" style="background:#fef2f2">🎯</div>YouTube Tag Generator</a>
+          <a href="youtube-thumbnail-download.html"><div class="drop-icon" style="background:#fffbeb">🖼️</div>Thumbnail Downloader</a>
+          <a href="qr-generator.html"><div class="drop-icon" style="background:#f0fdf4">📱</div>QR Code Generator</a>
+          <a href="hastag-generator.html"><div class="drop-icon" style="background:#eff6ff">#️⃣</div>Hashtag Generator</a>
+          <a href="payslip.html"><div class="drop-icon" style="background:#fdf4ff">💼</div>Payslip Generator</a>
+          <a href="image-resizer.html"><div class="drop-icon" style="background:#f0fdfa">🖼</div>Image Resizer</a>
+        </div>
+      </li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="privacy.html">Privacy</a></li>
+      <li><a href="terms.html">Terms</a></li>
+      <li><a href="contact.html" class="nav-cta">Get Help →</a></li>
+    </ul>
 
-<button class="navbar-toggler" type="button" 
-data-bs-toggle="offcanvas" 
-data-bs-target="#mobileMenu">
-
-<span class="navbar-toggler-icon"></span>
-</button>
-
-</div>
+    <button class="hbg" id="hbg" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </nav>
 
+<!-- Mobile nav -->
+<nav class="mob-nav" id="mobNav">
+  <a href="/">🏠 Home</a>
+  <hr class="mob-divider">
+  <a href="youtube-tags.html" style="color:#60a5fa">🎯 YouTube Tag Generator</a>
+  <a href="youtube-thumbnail-download.html">🖼️ Thumbnail Downloader</a>
+  <a href="qr-generator.html">📱 QR Code Generator</a>
+  <a href="hastag-generator.html">#️⃣ Hashtag Generator</a>
+  <a href="payslip.html">💼 Payslip Generator</a>
+  <a href="image-resizer.html">🖼 Image Resizer</a>
+  <hr class="mob-divider">
+  <a href="about.html">👤 About</a>
+  <a href="contact.html">✉️ Contact</a>
+  <a href="privacy.html">🔒 Privacy Policy</a>
+  <a href="terms.html">📋 Terms of Service</a>
+</nav>
 
-<!-- DRAWER -->
-<div class="offcanvas offcanvas-end" id="mobileMenu">
-
-<div class="offcanvas-header bg-primary text-white">
-
-<h5 class="offcanvas-title">Menu</h5>
-
-<button type="button" class="btn-close btn-close-white"
-data-bs-dismiss="offcanvas"></button>
-
-</div>
-
-<div class="offcanvas-body">
-
-<ul class="navbar-nav">
-
-<li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-<li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-<li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-<li class="nav-item"><a class="nav-link" href="disclaimer.html">Disclaimer</a></li>
-<li class="nav-item"><a class="nav-link" href="privacy.html">Privacy</a></li>
-<li class="nav-item"><a class="nav-link" href="terms.html">Terms</a></li>
-
-</ul>
-
-</div>
-
-</div>
-
-
-<!-- HERO -->
-<section class="hero mt-5 pt-4">
-
-<h1>Generate ranking tags for your YouTube videos</h1>
-
-<p>Fast • Secure • Simple • 100% Free</p>
-
+<!-- ═══════════════ HERO ═══════════════ -->
+<section class="hero">
+  <div class="hero-pill">🎯 YouTube SEO · Free · No Signup</div>
+  <h1>YouTube Tag Generator<br><em>Real Ranking Tags, Instantly</em></h1>
+  <p class="hero-sub">Generate real YouTube ranking tags using autocomplete data. Find low-competition keywords and grow your channel faster.</p>
 </section>
 
-<div class="container py-4">
-  <div class="card ccsx">
-    <div class="header headslsfei">
-      <h2>🔥 Real YouTube Keyword Research</h2>
-      <p>Generate tags for your YouTube videos</p>
-      <p>Quickly and easily find tags and improve discoverability with the powerful TechTools Tag Generator.</p>
-    </div>
-<div class="d-flex gap-2 mb-3 align-items-center flex-wrap">
+<!-- ═══════════════ MAIN TOOL ═══════════════ -->
+<main class="page-wrap">
+  <div class="tool-layout">
 
+    <!-- LEFT: Tool -->
+    <div class="tt-card">
+      <h2 class="tt-card-title">🔥 YouTube Tag Generator</h2>
+      <p style="text-align:center;color:var(--sub);font-size:.84rem;margin-bottom:20px">
+        Enter your video title or keyword to generate ranking tags
+      </p>
 
+      <!-- Keyword input — id="kw" matches youtube-tags.js -->
+      <div class="kw-row">
+        <input
+          type="search"
+          id="kw"
+          placeholder="Enter video title or keyword…"
+          autocomplete="off"
+          spellcheck="false"
+          onkeydown="if(event.key==='Enter') generate()"
+        >
+        <button class="tt-btn tt-btn-primary" onclick="generate()">
+          Generate Tags
+        </button>
+      </div>
 
+      <!-- Tag limit row — id="tagLimit", id="charCount", id="totalCount" match JS -->
+      <div class="limit-row">
+        <label for="tagLimit">Tag length limit:</label>
+        <select id="tagLimit" onchange="applyLimit()">
+          <option value="300">300 chars</option>
+          <option value="500" selected>500 chars</option>
+          <option value="all">All tags</option>
+        </select>
+        <div class="char-info">
+          <span id="charCount"></span>
+          <span id="totalCount"></span>
+        </div>
+      </div>
 
-  <!-- COPY ALL BUTTON -->
-
-
-</div>
-
-<div class="search-wrap slfjifji mb-4">
-  <input
-    id="kw"
-    type="search"
-    class="search-input"
-    placeholder="Enter video title or keyword…">
-
-  <button class="search-btn" onclick="generate()">
-    Generate
-  </button>
-</div>
-<div class="d-flex  justify-content-center align-items-center gap-2 text-center flex-wrap">
-  
-  <label for="tagLimit" class="mb-0 text-muted">
-    Select Tag length
-  </label>
-
-  <select id="tagLimit" class="form-select form-select-sm w-auto">
-    <option value="300">300</option>
-    <option value="500" selected>500</option>
-    <option value="all">All</option>
-  </select>
-
-  <small id="charCount" class="text-muted"></small>
-  <small id="totalCount" class="text-muted"></small>
-
-</div>
-
-
-
-    <div class="p-4">
+      <!-- Result area — id="result" matches youtube-tags.js -->
       <div id="result"></div>
-        <button class="btn border btn-primary textcenters  " onclick="copyAllTags()">
-    Copy All
-  </button>
+
+      <!-- Copy button — onclick="copyAllTags()" matches youtube-tags.js -->
+      <button class="copy-btn" id="copyBtn" onclick="copyAllTags()">
+        📋 Copy All Tags
+      </button>
     </div>
+
+    <!-- RIGHT: Sidebar -->
+    <div>
+      <div class="info-box">
+        <h3>💡 How to Use</h3>
+        <ul>
+          <li><span class="blt">1</span> Type your video title or keyword</li>
+          <li><span class="blt">2</span> Click "Generate Tags"</li>
+          <li><span class="blt">3</span> Choose 300 or 500 char limit</li>
+          <li><span class="blt">4</span> Click "Copy All Tags"</li>
+          <li><span class="blt">5</span> Paste into YouTube Studio</li>
+        </ul>
+      </div>
+
+      <div class="info-box">
+        <h3>📊 YouTube Tag Limits</h3>
+        <ul>
+          <li><span class="blt">Max</span> 500 characters total</li>
+          <li><span class="blt">Tip</span> Use 300 for focused targeting</li>
+          <li><span class="blt">Best</span> Mix broad + long-tail tags</li>
+          <li><span class="blt">Avoid</span> Unrelated or misleading tags</li>
+        </ul>
+      </div>
+
+      <!-- <div class="info-box">
+        <h3>🔒 Privacy</h3>
+        <ul>
+          <li><span class="blt">✓</span> No search data stored</li>
+          <li><span class="blt">✓</span> Browser-based only</li>
+          <li><span class="blt">✓</span> No account needed</li>
+          <li><span class="blt">✓</span> 100% free always</li>
+        </ul>
+      </div> -->
+    </div>
+
   </div>
-</div>
-<!-- INFO (ADSENSE CONTENT) -->
+</main>
 
+<!-- ═══════════════ SEO ARTICLE ═══════════════ -->
+<section class="tt-article">
 
-<!-- SEO META -->
-<meta name="description" content="TechTools YouTube Tag Generator helps you find real ranking tags. Generate SEO-optimized YouTube tags within 300 or 500 characters. Free, fast, and no signup required.">
+  <h2>YouTube Tag Generator by TechTools – Find Real Ranking Tags</h2>
+  <p>Choosing the right tags is one of the simplest but most ignored parts of YouTube SEO. Many creators struggle because they either use random tags or copy keywords that are already too competitive. The <strong>YouTube Tag Generator by TechTools</strong> was created to solve this exact problem.</p>
+  <p>This tool uses YouTube's autocomplete system — so you get tags that people are actively searching for right now, not outdated or unrelated keywords.</p>
 
-<section class="container content-section my-5">
+  <h2>How It Works</h2>
+  <p>When you type a video title or keyword, YouTube automatically suggests popular searches. TechTools collects and expands those suggestions, then applies alphabet-based keyword expansion (A–Z) to uncover long-tail tags — especially useful for new channels because they are less competitive and easier to rank for.</p>
 
-  <h1>YouTube Tag Generator by TechTools – Find Real Ranking Tags</h1>
-
-  <p>
-    Choosing the right tags is one of the simplest but most ignored parts of YouTube SEO.
-    Many creators struggle because they either use random tags or copy keywords that
-    are already too competitive. The <strong>YouTube Tag Generator by TechTools</strong>
-    was created to solve this exact problem.
-  </p>
-
-  <p>
-    I built this tool after testing several popular tag generators and noticing that
-    many of them show outdated or unrelated keywords. TechTools focuses only on
-    <strong>real YouTube autocomplete suggestions</strong>, so you get tags that people
-    are actively searching for right now.
-  </p>
-
-  <h2>How the TechTools YouTube Tag Generator Works</h2>
-
-  <p>
-    This tool uses YouTube’s autocomplete system to generate keyword ideas based on
-    actual user search behavior. When you type a video title or main keyword,
-    YouTube automatically suggests popular searches. TechTools collects and expands
-    those suggestions to give you accurate, search-friendly tags.
-  </p>
-
-  <p>
-    The generator also applies alphabet-based keyword expansion (A–Z),
-    which helps uncover long-tail tags. In my experience, these long-tail tags
-    are especially useful for <strong>new YouTube channels</strong> because they are
-    less competitive and easier to rank for.
-  </p>
-
-  <h2>Control Tag Length with 300 & 500 Character Limits</h2>
-
-  <p>
-    YouTube allows a maximum of <strong>500 characters</strong> for video tags.
-    To make optimization easier, TechTools lets you choose between
-    <strong>300 characters</strong>, <strong>500 characters</strong>, or
-    <strong>All tags</strong>.
-  </p>
-
-  <p>
-    When you select a limit, the tool automatically trims the tag list so it fits
-    perfectly within YouTube’s requirements. The <strong>Copy All Tags</strong>
-    button copies only the optimized tags, saving you time and avoiding manual cleanup.
-  </p>
+  <h2>Control Tag Length with 300 &amp; 500 Character Limits</h2>
+  <p>YouTube allows a maximum of <strong>500 characters</strong> for video tags. TechTools lets you choose between <strong>300 characters</strong>, <strong>500 characters</strong>, or <strong>All tags</strong>. When you select a limit, the tool automatically trims the tag list so it fits perfectly within YouTube's requirements.</p>
 
   <h2>Why Use TechTools YouTube Tag Generator?</h2>
-
   <ul>
     <li>Uses real YouTube autocomplete data</li>
     <li>Finds long-tail and low-competition tags</li>
     <li>No signup, no login, completely free</li>
-    <li>Fast and works directly in your browser</li>
-    <li>Supports YouTube’s 300 and 500 character limits</li>
+    <li>Supports YouTube's 300 and 500 character limits</li>
+    <li>One-click copy — ready to paste into YouTube Studio</li>
   </ul>
 
-  <p>
-    Whether you create music videos, movie clips, tutorials, vlogs,
-    educational content, or tech reviews, TechTools helps your videos
-    reach the right audience by improving keyword relevance.
-  </p>
+  <h2>YouTube SEO Tip</h2>
+  <p>Tags alone won't make a video go viral, but they help YouTube understand your content faster. Videos with properly optimised autocomplete tags appear in search results sooner — especially important for new channels with low authority.</p>
 
-  <h2>YouTube SEO Tip (From Experience)</h2>
+  <!-- FAQ -->
+  <h2 style="margin-top:40px">Frequently Asked Questions</h2>
 
-  <p>
-    Tags alone won’t make a video go viral, but they do help YouTube
-    understand your content faster. In my testing, videos with
-    properly optimized autocomplete tags started appearing in
-    search results sooner than videos without tags.
-  </p>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">What are YouTube tags and do they still matter? <span class="faq-icon">▼</span></div>
+    <div class="faq-a">YouTube tags help explain your video topic to YouTube's algorithm. While titles and descriptions are more important, tags still support discoverability — especially for new channels and niche content.</div>
+  </div>
 
-  <!-- FAQ SECTION -->
-  <h2>Frequently Asked Questions</h2>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">How many tags should I use on YouTube? <span class="faq-icon">▼</span></div>
+    <div class="faq-a">You can use up to 500 characters for tags. It's better to use relevant and specific keywords instead of filling the space with unrelated or misleading tags.</div>
+  </div>
 
-  <h3>What are YouTube tags and do they still matter?</h3>
-  <p>
-    YouTube tags are keywords that help explain your video topic to YouTube.
-    While titles and descriptions are more important, tags still support
-    discoverability—especially for new channels and niche content.
-  </p>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">Is TechTools YouTube Tag Generator free? <span class="faq-icon">▼</span></div>
+    <div class="faq-a">Yes, 100% free. You don't need to sign up or provide any personal information. Use it as many times as you need.</div>
+  </div>
 
-  <h3>How many tags should I use on YouTube?</h3>
-  <p>
-    You can use up to 500 characters for tags. It’s better to use
-    relevant and specific keywords instead of filling the space
-    with unrelated or misleading tags.
-  </p>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">Can this tool help new YouTube channels? <span class="faq-icon">▼</span></div>
+    <div class="faq-a">Yes. New channels benefit the most from long-tail and low-competition tags. This tool is designed to help smaller creators compete more effectively against established channels.</div>
+  </div>
 
-  <h3>Is TechTools YouTube Tag Generator free?</h3>
-  <p>
-    Yes, the TechTools YouTube Tag Generator is 100% free.
-    You don’t need to sign up or provide any personal information.
-  </p>
-
-  <h3>Can this tool help new YouTube channels?</h3>
-  <p>
-    Yes. New channels benefit the most from long-tail and
-    low-competition tags. This tool is designed to help
-    smaller creators compete more effectively.
-  </p>
-
-  <h3>Does this tool work on mobile devices?</h3>
-  <p>
-    Yes, TechTools is fully responsive and works smoothly
-    on mobile phones, tablets, and desktop browsers.
-  </p>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">Does this tool work on mobile devices? <span class="faq-icon">▼</span></div>
+    <div class="faq-a">Yes, TechTools is fully responsive and works smoothly on mobile phones, tablets and desktop browsers.</div>
+  </div>
 
 </section>
 
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer class="site-footer">
+  <div class="footer-in">
+    <div class="footer-top">
 
+      <div>
+        <div class="ft-logo">
+          <div class="ft-logo-box">
+            <img src="img/logo.png" alt="TechTools"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+            <span class="lf">T</span>
+          </div>
+          TechTools
+        </div>
+        <p class="ft-desc">Free online tools for YouTube creators, students, and developers. Built by Prahlad Yadav from India. No signup, no cost, always free.</p>
+        <div class="ft-chips">
+          <span class="ft-chip">🔒 No File Storage</span>
+          <span class="ft-chip">✅ No Login</span>
+          <span class="ft-chip">⚡ 100% Free</span>
+        </div>
+      </div>
 
+      <div class="ft-col">
+        <h4>Tools</h4>
+        <ul>
+          <li><a href="youtube-tags.html">🎯 YouTube Tags</a></li>
+          <li><a href="youtube-thumbnail-download.html">🖼️ Thumbnail Downloader</a></li>
+          <li><a href="qr-generator.html">📱 QR Code Generator</a></li>
+          <li><a href="hastag-generator.html">#️⃣ Hashtag Generator</a></li>
+          <li><a href="payslip.html">💼 Payslip Generator</a></li>
+          <li><a href="image-resizer.html">🖼 Image Resizer</a></li>
+        </ul>
+      </div>
 
-<!-- FOOTER -->
-<footer>
+      <div class="ft-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">👤 About Us</a></li>
+          <li><a href="contact.html">✉️ Contact</a></li>
+          <li><a href="disclaimer.html">📄 Disclaimer</a></li>
+        </ul>
+      </div>
 
-<p>© 2026 TechTools. All Rights Reserved.</p>
+      <div class="ft-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="privacy.html">🔒 Privacy Policy</a></li>
+          <li><a href="terms.html">📋 Terms of Service</a></li>
+          <li><a href="disclaimer.html">⚠️ Disclaimer</a></li>
+        </ul>
+      </div>
 
-<p>
-<a href="privacy.html">Privacy Policy</a> |
-<a href="terms.html">Terms of Service</a> |
-<a href="contact.html">Contact Us</a>
-</p>
+    </div>
 
-<p class="mt-2">
-TechTools is committed to providing reliable and secure online utilities for daily use.
-</p>
-
+    <div class="footer-bottom">
+      <span>© 2026 TechTools by <a href="about.html">Prahlad Yadav</a>. All Rights Reserved.</span>
+      <div class="fbl">
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+        <a href="contact.html">Contact</a>
+        <a href="about.html">About</a>
+      </div>
+    </div>
+    <p class="ads-note">This site may display ads via Google AdSense. See our <a href="privacy.html">Privacy Policy</a> for details.</p>
+  </div>
 </footer>
 
+<!-- ADSENSE -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3666396936157058" crossorigin="anonymous"></script>
 
-<!-- JS -->
- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3666396936157058"
-     crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" defer></script>
-
-<script src="js/youtube-tags.js"></script>
+<!-- SHARED NAV + LOADER -->
 <script>
-    /* LOADER */
-window.addEventListener("load", ()=>{
-document.getElementById("loader").style.display="none";
+var hbg    = document.getElementById('hbg');
+var mobNav = document.getElementById('mobNav');
+hbg.addEventListener('click', function() {
+  var open = mobNav.classList.toggle('show');
+  hbg.classList.toggle('open', open);
+  hbg.setAttribute('aria-expanded', String(open));
+});
+window.addEventListener('load', function() {
+  var l = document.getElementById('loader');
+  if (l) { l.style.opacity = '0'; setTimeout(function(){ l.remove(); }, 450); }
+});
+
+// FAQ accordion
+function toggleFaq(el) {
+  var item = el.parentElement;
+  document.querySelectorAll('.faq-item').forEach(function(i) {
+    if (i !== item) i.classList.remove('open');
+  });
+  item.classList.toggle('open');
+}
+
+// Copy button visual feedback (works alongside youtube-tags.js copyAllTags())
+var copyBtn = document.getElementById('copyBtn');
+var _origCopyAllTags;
+window.addEventListener('DOMContentLoaded', function() {
+  _origCopyAllTags = window.copyAllTags;
+});
+// Patch copyAllTags to add visual feedback after JS loads
+document.getElementById('copyBtn').addEventListener('click', function() {
+  var btn = this;
+  setTimeout(function() {
+    var orig = btn.textContent;
+    if (orig.indexOf('Copy') !== -1) {
+      btn.classList.add('copied');
+      btn.textContent = '✅ Copied!';
+      setTimeout(function() {
+        btn.classList.remove('copied');
+        btn.textContent = '📋 Copy All Tags';
+      }, 2000);
+    }
+  }, 100);
 });
 </script>
 
+<!-- YOUR EXISTING youtube-tags.js — all element IDs preserved -->
+<script src="js/youtube-tags.js"></script>
 
 </body>
 </html>
-

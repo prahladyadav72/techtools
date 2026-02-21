@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Tag Extractor - Professional Tool</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --dark-bg: #0f0f23;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --text-primary: #ffffff;
+            --text-secondary: #b8b8d1;
+            --success-color: #10b981;
+            --error-color: #ef4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(102, 126, 234, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(245, 87, 108, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(79, 172, 254, 0.1) 0%, transparent 50%);
+            z-index: -1;
+            animation: bgShift 15s ease infinite;
+        }
+
+        @keyframes bgShift {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.1); }
+        }
+
+        .container-custom {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .logo-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-gradient);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.4);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #667eea 0%, #f5576c 50%, #4facfe 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            font-weight: 300;
+        }
+
+        /* Main Card */
+        .main-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 0.8s ease;
+            animation-delay: 0.2s;
+            animation-fill-mode: backwards;
+        }
+
+        /* API Key Section */
+        .api-section {
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+        }
+
+        .api-section h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .api-section p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .api-section a {
+            color: #4facfe;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .api-section a:hover {
+            text-decoration: underline;
+        }
+
+        /* Form Elements */
+        .form-label {
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+        }
+
+        .form-control {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-primary);
+            border-radius: 12px;
+            padding: 0.85rem 1.2rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: #667eea;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.2);
+            color: var(--text-primary);
+        }
+
+        .form-control::placeholder {
+            color: rgba(184, 184, 209, 0.5);
+        }
+
+        /* Button */
+        .btn-extract {
+            background: var(--primary-gradient);
+            border: none;
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1.05rem;
+            width: 100%;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-extract::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn-extract:hover::before {
+            left: 100%;
+        }
+
+        .btn-extract:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(102, 126, 234, 0.5);
+        }
+
+        .btn-extract:active {
+            transform: translateY(0);
+        }
+
+        .btn-extract:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        /* Loading Spinner */
+        .spinner-border {
+            width: 1.2rem;
+            height: 1.2rem;
+            border-width: 2px;
+        }
+
+        /* Alert Messages */
+        .alert-custom {
+            border-radius: 12px;
+            border: none;
+            padding: 1rem 1.5rem;
+            margin-top: 1.5rem;
+            animation: slideIn 0.3s ease;
+        }
+
+        .alert-danger {
+            background: rgba(239, 68, 68, 0.15);
+            color: #fca5a5;
+            border-left: 4px solid var(--error-color);
+        }
+
+        .alert-success {
+            background: rgba(16, 185, 129, 0.15);
+            color: #6ee7b7;
+            border-left: 4px solid var(--success-color);
+        }
+
+        /* Results Section */
+        .results-section {
+            animation: fadeInUp 0.5s ease;
+        }
+
+        .video-info {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .video-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .video-stats {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .stat-item i {
+            color: #667eea;
+        }
+
+        /* Tags Display */
+        .tags-container {
+            margin-top: 1.5rem;
+        }
+
+        .tags-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .tags-header h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .tag-count {
+            background: var(--accent-gradient);
+            padding: 0.35rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: white;
+        }
+
+        .tags-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .tag-item {
+            background: rgba(79, 172, 254, 0.15);
+            border: 1px solid rgba(79, 172, 254, 0.3);
+            padding: 0.6rem 1.2rem;
+            border-radius: 24px;
+            font-size: 0.9rem;
+            color: #4facfe;
+            font-family: 'JetBrains Mono', monospace;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .tag-item:hover {
+            background: rgba(79, 172, 254, 0.25);
+            border-color: rgba(79, 172, 254, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .copy-all-btn {
+            background: rgba(245, 87, 108, 0.2);
+            border: 1px solid rgba(245, 87, 108, 0.4);
+            color: #f5576c;
+            padding: 0.6rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .copy-all-btn:hover {
+            background: rgba(245, 87, 108, 0.3);
+            border-color: rgba(245, 87, 108, 0.6);
+        }
+
+        .no-tags {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: var(--text-secondary);
+        }
+
+        .no-tags i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .main-card {
+                padding: 1.5rem;
+            }
+            
+            .video-stats {
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+   <body>
+<div class="container-custom">
+
+    <!-- Header -->
+    <div class="header">
+        <div class="logo">
+            <div class="logo-icon">
+                <i class="bi bi-tags-fill"></i>
+            </div>
+        </div>
+        <h1>YouTube Tag Extractor</h1>
+        <p class="subtitle">Extract video tags instantly from any YouTube video</p>
+    </div>
+
+    <!-- Main Card -->
+    <div class="main-card">
+
+        <!-- INFO SECTION (API REMOVED) -->
+        <div class="api-section">
+            <h3><i class="bi bi-info-circle-fill"></i> No API Key Required</h3>
+            <p>
+                This tool extracts publicly available metadata from YouTube video pages.
+                No login, no API key, and no data is stored.
+            </p>
+        </div>
+
+        <!-- URL Input -->
+        <div class="mb-4">
+            <label class="form-label">YouTube Video URL</label>
+            <input type="text" class="form-control" id="videoUrl"
+                   placeholder="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
+        </div>
+
+        <!-- Extract Button -->
+        <button class="btn btn-extract" id="extractBtn">
+            <span id="btnText">
+                <i class="bi bi-search"></i> Extract Tags
+            </span>
+            <span id="btnLoading" class="d-none">
+                <span class="spinner-border spinner-border-sm me-2"></span>
+                Extracting...
+            </span>
+        </button>
+
+        <div id="alertContainer"></div>
+        <div id="resultsContainer"></div>
+
+        <!-- DISCLAIMER -->
+        <p style="font-size:13px;color:#b8b8d1;margin-top:20px;">
+            <b>Disclaimer:</b> This tool is not affiliated with YouTube or Google.
+            It extracts publicly available metadata for educational and research purposes only.
+            Tag usage does not guarantee rankings or views.
+        </p>
+
+    </div>
+</div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  
+<script>
+const videoUrlInput = document.getElementById('videoUrl');
+const extractBtn = document.getElementById('extractBtn');
+const btnText = document.getElementById('btnText');
+const btnLoading = document.getElementById('btnLoading');
+const alertContainer = document.getElementById('alertContainer');
+const resultsContainer = document.getElementById('resultsContainer');
+
+extractBtn.addEventListener('click', extractTags);
+videoUrlInput.addEventListener('keypress', e => {
+    if (e.key === 'Enter') extractTags();
+});
+
+/* ---------- HELPERS ---------- */
+
+function showAlert(message, type = 'danger') {
+    alertContainer.innerHTML = `
+        <div class="alert alert-${type} alert-custom">
+            <i class="bi bi-${type === 'danger' ? 'exclamation-triangle-fill' : 'check-circle-fill'} me-2"></i>
+            ${message}
+        </div>
+    `;
+}
+
+function extractVideoId(url) {
+    const match = url.match(/(?:v=|\/)([0-9A-Za-z_-]{11})/);
+    return match ? match[1] : null;
+}
+
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
+function generateTagsFromTitle(title) {
+    const words = title
+        .toLowerCase()
+        .replace(/[^a-z0-9\s]/g, '')
+        .split(/\s+/)
+        .filter(w => w.length > 2);
+
+    const phrases = new Set();
+
+    for (let i = 0; i < words.length; i++) {
+        phrases.add(words[i]);
+        if (i < words.length - 1)
+            phrases.add(words[i] + ' ' + words[i + 1]);
+        if (i < words.length - 2)
+            phrases.add(words[i] + ' ' + words[i + 1] + ' ' + words[i + 2]);
+    }
+
+    return Array.from(phrases).slice(0, 25);
+}
+
+/* ---------- MAIN LOGIC ---------- */
+
+async function extractTags() {
+    const url = videoUrlInput.value.trim();
+    if (!url) {
+        showAlert('Please enter a YouTube video URL.');
+        return;
+    }
+
+    const videoId = extractVideoId(url);
+    if (!videoId) {
+        showAlert('Invalid YouTube URL.');
+        return;
+    }
+
+    extractBtn.disabled = true;
+    btnText.classList.add('d-none');
+    btnLoading.classList.remove('d-none');
+    alertContainer.innerHTML = '';
+    resultsContainer.innerHTML = '';
+
+    try {
+        const proxy = 'https://corsproxy.io/?';
+        const res = await fetch(
+            proxy + encodeURIComponent(`https://www.youtube.com/watch?v=${videoId}`)
+        );
+        const html = await res.text();
+
+        let title = 'YouTube Video';
+        let tags = [];
+        let source = 'generated';
+
+        /* --- Extract title --- */
+        const titleMatch = html.match(/"title":"([^"]+)"/);
+        if (titleMatch) title = titleMatch[1];
+
+        /* --- Extract real tags (if available) --- */
+        const playerMatch = html.match(/ytInitialPlayerResponse\s*=\s*(\{.+?\});/);
+        if (playerMatch) {
+            try {
+                const data = JSON.parse(playerMatch[1]);
+                if (data?.videoDetails?.keywords?.length) {
+                    tags = data.videoDetails.keywords;
+                    source = 'extracted';
+                }
+            } catch (e) {}
+        }
+
+        /* --- Meta keywords fallback --- */
+        if (tags.length === 0) {
+            const metaMatch = html.match(/<meta name="keywords" content="([^"]*)">/);
+            if (metaMatch && metaMatch[1].trim()) {
+                tags = metaMatch[1].split(',').map(t => t.trim());
+                source = 'extracted';
+            }
+        }
+
+        /* --- Title-based fallback --- */
+        if (tags.length === 0) {
+            tags = generateTagsFromTitle(title);
+            source = 'generated';
+        }
+
+        displayResults(title, tags, source);
+
+        if (source === 'extracted') {
+            showAlert(`Extracted ${tags.length} real tags from this video.`, 'success');
+        } else {
+            showAlert(
+                'This video does not expose tags publicly. Showing title-based tag suggestions.',
+                'success'
+            );
+        }
+
+    } catch (err) {
+        showAlert('Failed to fetch video data. Try another video.');
+    } finally {
+        extractBtn.disabled = false;
+        btnText.classList.remove('d-none');
+        btnLoading.classList.add('d-none');
+    }
+}
+
+/* ---------- UI OUTPUT ---------- */
+
+function displayResults(title, tags, source) {
+    const heading =
+        source === 'extracted'
+            ? 'Extracted Video Tags'
+            : 'Title-Based Suggested Tags';
+
+    let html = `
+        <div class="results-section">
+            <div class="video-info">
+                <div class="video-title">${escapeHtml(title)}</div>
+            </div>
+
+            <div class="tags-container">
+                <div class="tags-header">
+                    <h3>${heading}</h3>
+                    <span class="tag-count">${tags.length} tags</span>
+                </div>
+    `;
+
+    if (tags.length > 0) {
+        html += `
+            <button class="btn copy-all-btn mb-3" onclick="copyAllTags()">
+                <i class="bi bi-clipboard me-2"></i>Copy All Tags
+            </button>
+            <div class="tags-list">
+        `;
+
+        tags.forEach(tag => {
+            html += `
+                <span class="tag-item" onclick="copyTag(this)">
+                    ${escapeHtml(tag)}
+                </span>
+            `;
+        });
+
+        html += `</div>`;
+    } else {
+        html += `
+            <div class="no-tags">
+                <p>No tags available.</p>
+            </div>
+        `;
+    }
+
+    html += `</div></div>`;
+    resultsContainer.innerHTML = html;
+}
+
+/* ---------- COPY ---------- */
+
+function copyTag(el) {
+    navigator.clipboard.writeText(el.textContent);
+}
+
+function copyAllTags() {
+    const tags = Array.from(document.querySelectorAll('.tag-item'))
+        .map(t => t.textContent)
+        .join(', ');
+    navigator.clipboard.writeText(tags);
+}
+</script>
+
+
+
+</body>
+</html>

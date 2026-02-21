@@ -1,389 +1,551 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
-<title>Free Online Tools | TechTools</title>
-
-<meta name="description"
-content="Free online tools for PDF, images, calculators and developers. Secure, fast and easy to use tools for everyday needs.">
-
-<meta name="keywords" content="online tools, payslip generate, Generate Payslips, salary slip generate,salary slip online, salary slip generate free online, free tools">
-
-<meta name="author" content="TechTools">
+<title>Free Payslip Generator – Generate Salary Slip Online | TechTools</title>
+<meta name="description" content="Generate professional salary slips and payslips online for free. Customize earnings, deductions, download as PDF or Word. No signup required.">
+<meta name="keywords" content="payslip generator, salary slip generator, salary slip online, payslip free, generate payslip, techtools">
+<meta name="author" content="Prahlad Yadav">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://techtools.best/payslip.html">
+<meta property="og:title" content="Free Payslip Generator – Generate Salary Slip Online | TechTools">
+<meta property="og:description" content="Generate professional salary slips online for free. Customize earnings, deductions, download as PDF or Word.">
+<meta property="og:url" content="https://techtools.best/payslip.html">
+<meta property="og:type" content="website">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Payslip Generator",
+  "url": "https://techtools.best/payslip.html",
+  "description": "Generate professional salary slips and payslips online for free.",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "All",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
 <link rel="icon" href="img/logo.png" type="image/png">
-<link rel="preconnect" href="https://cdn.jsdelivr.net">
-<link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style1.css">
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+/* ── Payslip page-specific ── */
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+/* Section labels */
+.ps-section {
+  font-size: .7rem; font-weight: 800;
+  color: var(--sub); text-transform: uppercase;
+  letter-spacing: .08em; margin: 24px 0 10px;
+}
 
-<link rel="stylesheet" href="css/style.css">
+/* Card blocks */
+.ps-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 22px 20px;
+  box-shadow: var(--shadow);
+  margin-bottom: 16px;
+}
+.ps-card h6 {
+  font-size: .82rem; font-weight: 800;
+  color: var(--text); margin-bottom: 14px;
+  letter-spacing: -.01em;
+}
+
+/* Two-col grid for payslip + employee */
+.ps-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+@media (max-width: 640px) { .ps-grid-2 { grid-template-columns: 1fr; } }
+
+/* Earnings / Deductions side by side */
+.ps-sal-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+@media (max-width: 700px) { .ps-sal-grid { grid-template-columns: 1fr; } }
+
+/* Salary table */
+.ps-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 12px;
+  font-size: .82rem;
+}
+.ps-table th {
+  font-size: .72rem; font-weight: 700; color: var(--sub);
+  text-transform: uppercase; letter-spacing: .04em;
+  padding: 6px 8px; border-bottom: 2px solid var(--border);
+  text-align: left;
+}
+.ps-table td { padding: 6px 8px; border-bottom: 1px solid #f3f4f6; }
+.ps-table input[type="text"],
+.ps-table input[type="number"] {
+  width: 100%; padding: 6px 8px;
+  border: 1.5px solid var(--border); border-radius: 7px;
+  font-size: .82rem; background: var(--bg);
+  font-family: var(--font); color: var(--text);
+  outline: none; transition: border-color .15s;
+}
+.ps-table input:focus { border-color: var(--blue); background: #fff; box-shadow: 0 0 0 3px rgba(37,99,235,.08); }
+
+/* Style the remove button inserted by main1.js */
+.ps-table td button {
+  background: #fef2f2; border: 1px solid #fecaca;
+  color: #dc2626; border-radius: 7px;
+  width: 28px; height: 28px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: .9rem; font-weight: 700; cursor: pointer;
+  transition: background .15s; padding: 0; line-height: 1;
+  font-family: var(--font);
+}
+.ps-table td button:hover { background: #fee2e2; }
+
+/* Add row button */
+.ps-add-btn {
+  display: inline-flex; align-items: center; gap: 5px;
+  background: var(--blue-l); color: var(--blue);
+  border: 1.5px solid var(--blue-p); border-radius: 8px;
+  padding: 7px 14px; font-size: .78rem; font-weight: 700;
+  cursor: pointer; transition: background .15s;
+  font-family: var(--font);
+}
+.ps-add-btn:hover { background: var(--blue-p); }
+
+/* Totals strip */
+.ps-total {
+  display: flex; align-items: center; justify-content: space-between;
+  background: var(--bg); border: 1px solid var(--border);
+  border-radius: 9px; padding: 10px 14px;
+  font-size: .82rem; font-weight: 700; color: var(--sub);
+  margin-top: 12px;
+}
+.ps-total span { color: var(--blue); font-size: .9rem; }
+
+/* Net pay */
+.ps-net {
+  text-align: center;
+  background: #f0fdf4; border: 1.5px solid #bbf7d0;
+  border-radius: var(--r); padding: 20px;
+  margin-bottom: 16px;
+}
+.ps-net h6 { font-size: .78rem; font-weight: 700; color: #16a34a; margin-bottom: 6px; text-transform: uppercase; letter-spacing: .06em; }
+.ps-net .ps-net-amount { font-size: 1.6rem; font-weight: 900; color: #15803d; }
+
+/* Action buttons */
+.ps-actions {
+  display: flex; gap: 12px; justify-content: center;
+  flex-wrap: wrap; margin-top: 4px;
+}
+
+/* Toast */
+#tt-toast {
+  position: fixed; bottom: 28px;
+  left: 50%; transform: translateX(-50%) translateY(20px);
+  z-index: 9999; padding: 12px 22px; border-radius: 99px;
+  font-size: .86rem; font-weight: 700; font-family: var(--font);
+  box-shadow: 0 8px 32px rgba(0,0,0,.18);
+  pointer-events: none; opacity: 0;
+  transition: opacity .25s, transform .25s;
+  display: flex; align-items: center; gap: 8px; white-space: nowrap;
+}
+#tt-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+#tt-toast.info    { background: var(--blue); color: #fff; }
+#tt-toast.success { background: #16a34a;     color: #fff; }
+#tt-toast.warn    { background: #f59e0b;     color: #fff; }
+#tt-toast.error   { background: #dc2626;     color: #fff; }
+
+/* ── Hidden print view (used by PDF/Word) ── */
+#printView {
+  display: none;
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  padding: 20px;
+}
+#printView h3 { text-align: center; font-size: 16px; margin-bottom: 4px; }
+#printView .line { border-top: 1px solid #ccc; margin: 10px 0; }
+#printView table { width: 100%; border-collapse: collapse; }
+#printView th, #printView td { border: 1px solid #ccc; padding: 5px 8px; }
+#printView th { background: #f3f4f6; }
+</style>
 </head>
 
 <body>
 
 <!-- LOADER -->
- <div id="loader">
-<div class="spinner"></div>
-</div> 
+<div id="loader"><div class="ring"></div></div>
 
+<!-- Toast -->
+<div id="tt-toast" role="alert" aria-live="polite"></div>
 
-<!-- NAVBAR -->
-<nav class="navbar navbar-dark bg-primary fixed-top">
-<div class="container">
+<!-- ═══════════════ NAVBAR ═══════════════ -->
+<nav class="navbar" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
 
-<a class="navbar-brand fw-bold" href="/"><img src="img/logo.png" alt="" style="width: 30px;"> TechTools</a>
+    <a href="/" class="nav-logo" aria-label="TechTools Home">
+      <div class="logo-box">
+        <img src="img/logo.png" alt="TechTools"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+        <span class="lf">T</span>
+      </div>
+      <div class="logo-text">Tech<b>Tools</b></div>
+    </a>
 
-<button class="navbar-toggler" type="button" 
-data-bs-toggle="offcanvas" 
-data-bs-target="#mobileMenu">
+    <ul class="nav-menu" role="list">
+      <li><a href="/">Home</a></li>
+      <li class="has-drop">
+        <a href="#" onclick="return false" aria-haspopup="true">
+          Tools <span class="arrow">▼</span>
+        </a>
+        <div class="drop-menu">
+          <a href="youtube-tags.html"><div class="drop-icon" style="background:#fef2f2">🎯</div>YouTube Tag Generator</a>
+          <a href="youtube-thumbnail-download.html"><div class="drop-icon" style="background:#fffbeb">🖼️</div>Thumbnail Downloader</a>
+          <a href="qr-generator.html"><div class="drop-icon" style="background:#f0fdf4">📱</div>QR Code Generator</a>
+          <a href="hastag-generator.html"><div class="drop-icon" style="background:#eff6ff">#️⃣</div>Hashtag Generator</a>
+          <a href="payslip.html" class="curr"><div class="drop-icon" style="background:#fdf4ff">💼</div>Payslip Generator</a>
+          <a href="image-resizer.html"><div class="drop-icon" style="background:#f0fdfa">🖼</div>Image Resizer</a>
+        </div>
+      </li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="privacy.html">Privacy</a></li>
+      <li><a href="terms.html">Terms</a></li>
+      <li><a href="contact.html" class="nav-cta">Get Help →</a></li>
+    </ul>
 
-<span class="navbar-toggler-icon"></span>
-</button>
-
-</div>
+    <button class="hbg" id="hbg" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </nav>
 
+<!-- Mobile nav -->
+<nav class="mob-nav" id="mobNav">
+  <a href="/">🏠 Home</a>
+  <hr class="mob-divider">
+  <a href="youtube-tags.html">🎯 YouTube Tag Generator</a>
+  <a href="youtube-thumbnail-download.html">🖼️ Thumbnail Downloader</a>
+  <a href="qr-generator.html">📱 QR Code Generator</a>
+  <a href="hastag-generator.html">#️⃣ Hashtag Generator</a>
+  <a href="payslip.html" style="color:#60a5fa">💼 Payslip Generator</a>
+  <a href="image-resizer.html">🖼 Image Resizer</a>
+  <hr class="mob-divider">
+  <a href="about.html">👤 About</a>
+  <a href="contact.html">✉️ Contact</a>
+  <a href="privacy.html">🔒 Privacy Policy</a>
+  <a href="terms.html">📋 Terms of Service</a>
+</nav>
 
-<!-- DRAWER -->
-<div class="offcanvas offcanvas-end" id="mobileMenu">
-
-<div class="offcanvas-header bg-primary text-white">
-
-<h5 class="offcanvas-title">Menu</h5>
-
-<button type="button" class="btn-close btn-close-white"
-data-bs-dismiss="offcanvas"></button>
-
-</div>
-
-<div class="offcanvas-body">
-
-<ul class="navbar-nav">
-
-<li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-<li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-<li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-<li class="nav-item"><a class="nav-link" href="disclaimer.html">Disclaimer</a></li>
-<li class="nav-item"><a class="nav-link" href="privacy.html">Privacy</a></li>
-<li class="nav-item"><a class="nav-link" href="terms.html">Terms</a></li>
-
-</ul>
-
-</div>
-
-</div>
-
-<!-- HERO -->
-<section class="hero mt-5 pt-4">
-
-<h1>Generate Your Salary Slip Free </h1>
-
-<p>Fast • Secure • Simple • 100% Free</p>
-
+<!-- ═══════════════ HERO ═══════════════ -->
+<section class="hero">
+  <div class="hero-pill">💼 Payslip Generator · Free · No Signup</div>
+  <h1>Payslip Generator<br><em>Professional Salary Slips Instantly</em></h1>
+  <p class="hero-sub">Create customized salary slips with earnings, deductions and net pay. Download as PDF or Word — free, no account needed.</p>
 </section>
 
-<div class="container px-2 px-md-4 mt-3 mb-5" id="payslip">
-
-<!-- HEADER -->
-<div class="section-title">Header Details</div>
-
-<div class="card-box-custom text-center">
-
-<input id="title" class="form-control mb-3 fw-bold text-center fs-5" value="Payslip" placeholder="Payslip Title">
-
-<input id="company" class="form-control mb-3" placeholder="Company Name">
-
-<textarea id="address" class="form-control" rows="2" placeholder="Company Address"></textarea>
-
-</div>
-
-
-<!-- DETAILS -->
-<div class="section-title">Payslip & Employee Details</div>
-
-<div class="row g-3">
-
-<div class="col-12 col-md-6">
-
-<div class="card-box-custom">
-
-<h6>Payslip Details</h6>
-
-<label>Pay Date</label>
-<input type="date" id="date" class="form-control mb-2">
-
-<label>Pay Period</label>
-<input type="month" id="payperiod" class="form-control">
-
-<label>Working Days</label>
-<input type="number" id="days" class="form-control">
-
-</div>
-</div>
-
-
-<div class="col-12 col-md-6">
-
-<div class="card-box-custom">
-
-<h6>Employee Details</h6>
-
-<label>Employee Name</label>
-<input id="empName" class="form-control mb-2">
-
-<label>Employee ID</label>
-<input id="empId" class="form-control">
-<label>Department</label>
-<input id="department" class="form-control">
-
-</div>
-</div>
-
-</div>
-
-
-<!-- SALARY -->
-<div class="section-title">Salary Details</div>
-
-<div class="row g-3">
-
-<!-- EARNINGS -->
-<div class="col-12 col-md-6">
-
-<div class="card-box-custom">
-
-<h6>Earnings</h6>
-
-<div class="table-responsive">
-
-<table class="table table-sm" id="earnTable">
-
-<tr>
-<th>Title</th>
-<th>Amount</th>
-<th></th>
-</tr>
-
-</table>
-
-</div>
-
-<button class="btn btn-primary btn-sm" onclick="addEarn()">+ Add Item</button>
-
-<div class="total-box">
-Total Earnings: ₹ <span id="earnTotal">0</span>
-</div>
-
-</div>
-</div>
-
-
-<!-- DEDUCTIONS -->
-<div class="col-12 col-md-6">
-
-<div class="card-box-custom">
-
-<h6>Deductions</h6>
-
-<div class="table-responsive">
-
-<table class="table table-sm" id="dedTable">
-
-<tr>
-<th>Title</th>
-<th>Amount</th>
-<th></th>
-</tr>
-
-</table>
-
-</div>
-
-<button class="btn btn-primary btn-sm" onclick="addDed()">+ Add Item</button>
-
-<div class="total-box">
-Total Deductions: ₹ <span id="dedTotal">0</span>
-</div>
-
-</div>
-</div>
-
-</div>
-
-
-<!-- NET PAY -->
-<div class="card-box-custom text-center">
-
-<h6>Net Pay</h6>
-
-<h4 class="fw-bold text-success">
-₹ <span id="netPay">0</span>
-</h4>
-
-</div>
-
-
-<!-- FOOTER -->
-<div class="section-title">Footer Details</div>
-
-<div class="card-box-custom">
-
-<label>Final Amount</label>
-<input id="finalAmt" class="form-control mb-2">
-
-<!-- <label>Amount in Words</label>
-<input id="words" class="form-control"> -->
-
-</div>
-
-
-<!-- BUTTONS -->
-<div class="text-center mt-3">
-
-<button class="btn btn-success" onclick="savePDF()">📄 PDF</button>
-<button class="btn btn-info" onclick="saveWord()">📝 Word</button>
-
-</div>
-<!-- DISCLAIMER BOX -->
-<div style="background:#fff3cd; border-left:4px solid #f59e0b; border-radius:8px; padding:14px 18px; margin:16px 0; font-size:0.9rem; color:#7c4a00;">
-  <strong>⚠️ Disclaimer:</strong> This tool is intended for personal salary record-keeping, HR documentation, and educational purposes only. 
-  TechTools does not encourage or support the creation of false, fake, or fraudulent documents. 
-  Any misuse of this tool is solely the responsibility of the user. 
-  Generated payslips are not official financial documents and should not be used for illegal purposes.
-</div>
-</div>
+<!-- ═══════════════ MAIN TOOL ═══════════════ -->
+<main class="page-wrap" id="payslip" style="max-width:820px">
+
+  <div class="tt-card">
+    <h2 class="tt-card-title">💼 Payslip Generator</h2>
+
+    <!-- ── HEADER DETAILS ── -->
+    <div class="ps-section">Header Details</div>
+
+    <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:16px;">
+      <input id="title" class="tt-input" value="Payslip" placeholder="Payslip Title" style="text-align:center; font-weight:800; font-size:1rem;">
+      <input id="company" class="tt-input" placeholder="Company Name">
+      <textarea id="address" class="tt-input" rows="2" placeholder="Company Address" style="resize:vertical;"></textarea>
+    </div>
+
+    <!-- ── PAYSLIP + EMPLOYEE DETAILS ── -->
+    <div class="ps-section">Payslip &amp; Employee Details</div>
+
+    <div class="ps-grid-2">
+      <!-- Payslip Details -->
+      <div class="ps-card">
+        <h6>📅 Payslip Details</h6>
+        <label class="tt-label">Pay Date</label>
+        <input type="date" id="date" class="tt-input" style="margin-bottom:10px;">
+        <label class="tt-label">Pay Period</label>
+        <input type="month" id="payperiod" class="tt-input" style="margin-bottom:10px;">
+        <label class="tt-label">Working Days</label>
+        <input type="number" id="days" class="tt-input" placeholder="e.g. 26">
+      </div>
+      <!-- Employee Details -->
+      <div class="ps-card">
+        <h6>👤 Employee Details</h6>
+        <label class="tt-label">Employee Name</label>
+        <input id="empName" class="tt-input" placeholder="Full Name" style="margin-bottom:10px;">
+        <label class="tt-label">Employee ID</label>
+        <input id="empId" class="tt-input" placeholder="EMP001" style="margin-bottom:10px;">
+        <label class="tt-label">Department</label>
+        <input id="department" class="tt-input" placeholder="e.g. Engineering">
+      </div>
+    </div>
+
+    <!-- ── SALARY DETAILS ── -->
+    <div class="ps-section">Salary Details</div>
+
+    <div class="ps-sal-grid">
+      <!-- Earnings -->
+      <div class="ps-card">
+        <h6>💰 Earnings</h6>
+        <table class="ps-table" id="earnTable">
+          <tr>
+            <th>Title</th>
+            <th>Amount (₹)</th>
+            <th></th>
+          </tr>
+        </table>
+        <button class="ps-add-btn" onclick="addEarn()">＋ Add Item</button>
+        <div class="ps-total">Total Earnings <span id="earnTotal">0.00</span></div>
+      </div>
+
+      <!-- Deductions -->
+      <div class="ps-card">
+        <h6>📉 Deductions</h6>
+        <table class="ps-table" id="dedTable">
+          <tr>
+            <th>Title</th>
+            <th>Amount (₹)</th>
+            <th></th>
+          </tr>
+        </table>
+        <button class="ps-add-btn" onclick="addDed()">＋ Add Item</button>
+        <div class="ps-total">Total Deductions <span id="dedTotal">0.00</span></div>
+      </div>
+    </div>
+
+    <!-- NET PAY -->
+    <div class="ps-net">
+      <h6>Net Pay</h6>
+      <div class="ps-net-amount">₹ <span id="netPay">0.00</span></div>
+    </div>
+
+    <!-- ── FOOTER DETAILS ── -->
+    <div class="ps-section">Footer Details</div>
+    <div style="margin-bottom:24px;">
+      <label class="tt-label">Final Amount (auto-filled)</label>
+      <input id="finalAmt" class="tt-input" readonly placeholder="Auto-calculated net pay">
+    </div>
+
+    <!-- DOWNLOAD BUTTONS -->
+    <div class="ps-actions">
+      <button class="tt-btn tt-btn-primary" onclick="savePDF()">
+        📄 Download PDF
+      </button>
+      <button class="tt-btn tt-btn-outline" onclick="saveWord()">
+        📝 Download Word
+      </button>
+    </div>
+  </div>
+
+</main>
+
+<!-- Hidden print view for PDF/Word rendering -->
 <div id="printView">
-
   <h3 id="p_title">Payslip</h3>
   <div style="text-align:center">
     <div id="p_company"></div>
     <div id="p_address"></div>
   </div>
-
   <div class="line"></div>
-
-  <table style="width:100%">
+  <table style="width:100%; border:none;">
     <tr>
-      <td>Pay Date: <span id="p_date"></span></td>
-      <td>Employee Name: <span id="p_name"></span></td>
+      <td style="border:none;">Pay Date: <span id="p_date"></span></td>
+      <td style="border:none;">Employee Name: <span id="p_name"></span></td>
     </tr>
     <tr>
-      <td>Working Days: <span id="p_days"></span></td>
-      <td>Employee ID: <span id="p_id"></span></td>
+      <td style="border:none;">Working Days: <span id="p_days"></span></td>
+      <td style="border:none;">Employee ID: <span id="p_id"></span></td>
     </tr>
   </table>
-
   <br>
-
   <table>
-    <tr>
-      <th>Earnings</th><th>Amount</th>
-      <th>Deductions</th><th>Amount</th>
-    </tr>
+    <thead>
+      <tr>
+        <th>Earnings</th><th>Amount</th>
+        <th>Deductions</th><th>Amount</th>
+      </tr>
+    </thead>
     <tbody id="p_salary"></tbody>
     <tr>
-      <td><b>Total Earnings</b></td>
-      <td id="p_earn"></td>
-      <td><b>Total Deductions</b></td>
-      <td id="p_ded"></td>
+      <td><b>Total Earnings</b></td><td id="p_earn"></td>
+      <td><b>Total Deductions</b></td><td id="p_ded"></td>
     </tr>
     <tr>
-      <td colspan="3"><b>Net Pay</b></td>
-      <td id="p_net"></td>
+      <td colspan="3"><b>Net Pay</b></td><td id="p_net"></td>
     </tr>
   </table>
-
 </div>
 
-<section class="container content-section my-5">
+<!-- ═══════════════ SEO ARTICLE ═══════════════ -->
+<section class="tt-article">
+  <div style="background:#fff3cd; border-left:4px solid #f59e0b; border-radius:8px; padding:14px 18px; margin:16px 0; font-size:0.9rem; color:#7c4a00;">
+  <strong>⚠️ Disclaimer:</strong> This tool is intended for personal salary record-keeping, HR documentation, and educational purposes only. 
+  TechTools does not encourage or support the creation of false, fake, or fraudulent documents. 
+  Any misuse of this tool is solely the responsibility of the user. 
+  Generated payslips are not official financial documents and should not be used for illegal purposes.
+</div>
 
-  <h1>What Is a Payslip? Meaning, Uses, and How to Generate One Online</h1>
-
-  <p>
-    A payslip, also known as a salary slip, is an important financial document provided by employers to employees every time they receive their salary. It clearly shows how much an employee has earned during a specific pay period, including their gross salary, deductions, and the final net pay credited to their account. Apart from being a record of income, a payslip also serves as proof of employment and earnings.
-  </p>
-
-  <p>
-    Employees often use payslips for multiple purposes such as applying for loans, filing income tax returns, renting a house, or maintaining personal financial records. For employers, payslips help maintain transparency and trust while ensuring compliance with payroll regulations.
-  </p>
+  <h2>Payslip Generator by TechTools – Create Salary Slips in Seconds</h2>
+  <p>A payslip (also called a salary slip) is an official document provided to employees each pay period showing gross earnings, deductions, and net pay. Beyond being a simple receipt, payslips serve as proof of income for loan applications, tax filings, rental agreements, and personal financial records.</p>
 
   <h2>Why Use an Online Payslip Generator?</h2>
+  <p>Creating payslips manually in Word or Excel is slow and error-prone. TechTools' Payslip Generator lets you build a professional, print-ready salary slip in minutes — with fully customizable earnings and deductions, instant calculation of net pay, and one-click export to PDF or Word. No software installation, no account required.</p>
 
-  <p>
-    An online payslip generator makes the process of creating salary slips quick and hassle-free. Instead of manually designing documents or relying on complex software, users can generate professional-looking payslips within minutes. These tools are especially useful for small businesses, startups, freelancers, and HR professionals who want flexibility and customization.
-  </p>
+  <h2>What's Included in a Payslip</h2>
+  <p>A well-structured payslip covers the company header (name and address), employee details (name, ID, department), pay period information, an earnings breakdown (basic salary, HRA, allowances, bonuses), a deductions breakdown (PF, tax, ESI), and the final net pay. This tool lets you customize every field to match your organization's payroll structure.</p>
 
-  <p>
-    A modern payslip generator allows you to customize layouts, edit text fields, and include only the components that are relevant to your company or organization. This ensures that the payslip reflects your brand style and internal payroll structure.
-  </p>
+  <h2>Who Is This Tool For?</h2>
+  <p>The Payslip Generator is ideal for small business owners, HR managers, freelancers, startups, and individuals who need a quick, professional salary document without investing in expensive payroll software. It handles everything from a simple one-line salary to multi-component payroll structures.</p>
 
-  <h2>Main Sections of a Payslip</h2>
+  <!-- FAQ -->
+  <h2 style="margin-top:40px">Frequently Asked Questions</h2>
 
-  <h3>Header Section</h3>
-  <p>
-    The header usually contains the payslip title, company name, and company address. This section helps identify the organization issuing the salary slip and gives the document a professional appearance.
-  </p>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">Is this payslip generator free? <span class="faq-icon">▼</span></div>
+    <div class="faq-a">Yes, completely free. No signup, no account, no hidden charges. Generate and download as many payslips as you need.</div>
+  </div>
 
-  <h3>Employee and Payslip Information</h3>
-  <p>
-    This section includes key details such as employee name, employee ID, pay date, pay period, department, and total working days. These details help link the payslip to a specific employee and salary cycle.
-  </p>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">What formats can I download? <span class="faq-icon">▼</span></div>
+    <div class="faq-a">You can download your payslip as a PDF file (recommended for printing and sharing) or as a Word .doc file (editable in Microsoft Word or Google Docs).</div>
+  </div>
 
-  <h3>Salary Details</h3>
-  <p>
-    The salary content is divided into earnings and deductions. Earnings may include basic salary, bonuses, overtime payments, house rent allowance (HRA), leave travel allowance (LTA), and insurance benefits. These components together form the gross salary.
-  </p>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">Can I add custom earnings and deductions? <span class="faq-icon">▼</span></div>
+    <div class="faq-a">Yes. Click "Add Item" under Earnings or Deductions to add as many custom rows as needed — HRA, bonuses, PF, ESI, or any other component specific to your payroll.</div>
+  </div>
 
-  <p>
-    Deductions include items such as employee provident fund (EPF), income tax, pension or superannuation contributions, and other statutory or company-specific deductions. After subtracting deductions from gross earnings, the remaining amount is shown as the net pay.
-  </p>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">Is my data stored anywhere? <span class="faq-icon">▼</span></div>
+    <div class="faq-a">No. Everything runs entirely in your browser. No data is sent to any server or stored anywhere. Your payroll information stays completely private.</div>
+  </div>
 
-  <h2>Download or Generate Sample Payslip Templates</h2>
-
-  <p>
-    Many payslip generators provide multiple layout options such as grid-based designs and list-style formats. Users can choose from different sample templates depending on their preference for clarity, presentation, and branding. These templates help create clean, readable, and well-structured payslips suitable for printing or digital sharing.
-  </p>
-
-  <p>
-    A free online payslip generator gives users full control over their salary slips, making it easy to include company details, customize salary components, and instantly download the final document in PDF or Word format.
-  </p>
-
-  <p>
-    Whether you are an employer preparing payroll documents or an individual needing a salary record, an online payslip generator is a reliable and efficient solution.
-  </p>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">Does this work on mobile? <span class="faq-icon">▼</span></div>
+    <div class="faq-a">Yes, the tool is fully responsive and works on mobile, tablet, and desktop browsers.</div>
+  </div>
 
 </section>
 
-<!-- FOOTER -->
-<footer>
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer class="site-footer">
+  <div class="footer-in">
+    <div class="footer-top">
 
-<p>© 2026 TechTools. All Rights Reserved.</p>
+      <div>
+        <div class="ft-logo">
+          <div class="ft-logo-box">
+            <img src="img/logo.png" alt="TechTools"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+            <span class="lf">T</span>
+          </div>
+          TechTools
+        </div>
+        <p class="ft-desc">Free online tools for YouTube creators, students, and developers. Built by Prahlad Yadav from India. No signup, no cost, always free.</p>
+        <div class="ft-chips">
+          <span class="ft-chip">🔒 No File Storage</span>
+          <span class="ft-chip">✅ No Login</span>
+          <span class="ft-chip">⚡ 100% Free</span>
+        </div>
+      </div>
 
-<p>
-<a href="privacy.html">Privacy Policy</a> |
-<a href="terms.html">Terms of Service</a> |
-<a href="contact.html">Contact Us</a>
-</p>
+      <div class="ft-col">
+        <h4>Tools</h4>
+        <ul>
+          <li><a href="youtube-tags.html">🎯 YouTube Tags</a></li>
+          <li><a href="youtube-thumbnail-download.html">🖼️ Thumbnail Downloader</a></li>
+          <li><a href="qr-generator.html">📱 QR Code Generator</a></li>
+          <li><a href="hastag-generator.html">#️⃣ Hashtag Generator</a></li>
+          <li><a href="payslip.html">💼 Payslip Generator</a></li>
+          <li><a href="image-resizer.html">🖼 Image Resizer</a></li>
+        </ul>
+      </div>
 
-<p class="mt-2">
-TechTools is committed to providing reliable and secure online utilities for daily use.
-</p>
+      <div class="ft-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">👤 About Us</a></li>
+          <li><a href="contact.html">✉️ Contact</a></li>
+          <li><a href="disclaimer.html">📄 Disclaimer</a></li>
+        </ul>
+      </div>
 
+      <div class="ft-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="privacy.html">🔒 Privacy Policy</a></li>
+          <li><a href="terms.html">📋 Terms of Service</a></li>
+          <li><a href="disclaimer.html">⚠️ Disclaimer</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 TechTools by <a href="about.html">Prahlad Yadav</a>. All Rights Reserved.</span>
+      <div class="fbl">
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+        <a href="contact.html">Contact</a>
+        <a href="about.html">About</a>
+      </div>
+    </div>
+    <!-- <p class="ads-note">This site may display ads via Google AdSense. See our <a href="privacy.html">Privacy Policy</a> for details.</p> -->
+  </div>
 </footer>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3666396936157058"
-     crossorigin="anonymous"></script>
-<script src="js/main1.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" defer></script>
+
+<!-- ADSENSE -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3666396936157058" crossorigin="anonymous"></script>
+
+<!-- jsPDF -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
-<script></script>
+<!-- NAV + LOADER + FAQ + TOAST -->
+<script>
+/* ── Nav ── */
+var hbg    = document.getElementById('hbg');
+var mobNav = document.getElementById('mobNav');
+hbg.addEventListener('click', function() {
+  var open = mobNav.classList.toggle('show');
+  hbg.classList.toggle('open', open);
+  hbg.setAttribute('aria-expanded', String(open));
+});
 
+/* ── FAQ ── */
+function toggleFaq(el) {
+  var item = el.parentElement;
+  document.querySelectorAll('.faq-item').forEach(function(i) {
+    if (i !== item) i.classList.remove('open');
+  });
+  item.classList.toggle('open');
+}
 
+/* ── Toast ── */
+var _toastTimer;
+function showToast(msg, type) {
+  var t = document.getElementById('tt-toast');
+  if (!t) return;
+  t.textContent = msg;
+  t.className = 'show ' + (type || 'info');
+  clearTimeout(_toastTimer);
+  _toastTimer = setTimeout(function() { t.className = ''; }, 3000);
+}
+</script>
+
+<!-- Original payslip JS — untouched -->
+<script src="js/main1.js"></script>
 
 </body>
 </html>

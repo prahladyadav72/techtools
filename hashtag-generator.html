@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hashtag Generator – Free Hashtags for YouTube, Instagram & TikTok | TechTools</title>
+<meta name="description" content="Generate relevant hashtags for YouTube, Instagram, TikTok, Reels and Twitter (X) for free. No signup, instant results, platform-aware limits.">
+<meta name="keywords" content="hashtag generator, youtube hashtags, instagram hashtags, tiktok hashtags, free hashtag generator, techtools">
+<meta name="author" content="Prahlad Yadav">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://techtools.best/hastag-generator.html">
+<meta property="og:title" content="Hashtag Generator – Free Hashtags for YouTube, Instagram & TikTok | TechTools">
+<meta property="og:description" content="Generate relevant hashtags for YouTube, Instagram, TikTok, Reels and Twitter (X) for free. No signup, instant results.">
+<meta property="og:url" content="https://techtools.best/hastag-generator.html">
+<meta property="og:type" content="website">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Hashtag Generator",
+  "url": "https://techtools.best/hastag-generator.html",
+  "description": "Generate relevant hashtags for YouTube, Instagram, TikTok, Reels and Twitter.",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "All",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+<link rel="icon" href="img/logo.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style1.css">
+
+<style>
+.tool-layout {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 24px;
+  align-items: start;
+}
+@media (max-width: 860px) { .tool-layout { grid-template-columns: 1fr; } }
+
+.kw-row {
+  display: flex; gap: 10px;
+  margin-bottom: 18px;
+}
+.kw-row input { flex: 1; min-width: 0; }
+.kw-row button { flex-shrink: 0; white-space: nowrap; }
+
+/* ── Toast notification ── */
+#tt-toast {
+  position: fixed;
+  bottom: 28px; left: 50%; transform: translateX(-50%) translateY(20px);
+  z-index: 9999;
+  padding: 12px 22px;
+  border-radius: 99px;
+  font-size: .86rem; font-weight: 700;
+  font-family: var(--font);
+  box-shadow: 0 8px 32px rgba(0,0,0,.18);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .25s, transform .25s;
+  display: flex; align-items: center; gap: 8px;
+  white-space: nowrap;
+}
+#tt-toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+#tt-toast.info    { background: var(--blue);   color: #fff; }
+#tt-toast.success { background: #16a34a;        color: #fff; }
+#tt-toast.warn    { background: #f59e0b;        color: #fff; }
+#tt-toast.error   { background: #dc2626;        color: #fff; }
+
+.platform-select-wrap {
+  display: flex; align-items: center;
+  gap: 10px; flex-wrap: wrap;
+  margin-bottom: 20px;
+  padding: 12px 16px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+.platform-select-wrap label {
+  font-size: .82rem; font-weight: 600; color: var(--sub);
+  white-space: nowrap; margin: 0;
+  text-transform: uppercase; letter-spacing: .04em;
+}
+.platform-select-wrap select {
+  width: auto !important;
+  display: inline-block !important;
+  padding: 7px 32px 7px 12px;
+  font-size: .85rem;
+}
+.platform-select-wrap .plat-info {
+  font-size: .78rem; color: var(--sub); font-weight: 500;
+  margin-left: auto;
+}
+
+#result {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  gap: 4px;
+  min-height: 60px;
+  margin-bottom: 16px;
+}
+
+.tag-chip {
+  display: inline-flex; align-items: center;
+  background: var(--blue-l); color: var(--blue);
+  border: 1px solid var(--blue-p);
+  border-radius: 99px; padding: 5px 14px;
+  font-size: .78rem; font-weight: 600;
+  margin: 3px; cursor: default;
+  transition: background .12s;
+}
+.tag-chip:hover { background: var(--blue-p); }
+
+.tt-hg-textarea {
+  width: 100%; display: block;
+  background: var(--bg); border: 1.5px solid var(--border);
+  border-radius: 10px; padding: 10px 14px;
+  font-size: .88rem; font-weight: 500; color: var(--text);
+  outline: none; resize: vertical; min-height: 90px;
+  transition: border-color .15s, box-shadow .15s;
+  font-family: var(--font);
+  margin-bottom: 10px;
+}
+.tt-hg-textarea:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(37,99,235,.12);
+  background: #fff;
+}
+
+.hg-counter {
+  display: flex; gap: 8px; flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+.hg-counter-pill {
+  background: var(--bg); border: 1px solid var(--border);
+  border-radius: 99px; padding: 4px 12px;
+  font-size: .76rem; font-weight: 700; color: var(--sub);
+}
+.hg-counter-pill span { color: var(--blue); }
+
+.copy-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--blue); color: #fff;
+  border: none; border-radius: 9px;
+  padding: 10px 22px; font-size: .86rem;
+  font-weight: 700; font-family: var(--font);
+  cursor: pointer; transition: background .15s;
+}
+.copy-btn:hover { background: var(--blue-d); }
+.copy-btn.copied { background: #16a34a; }
+
+.result-empty {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 8px; padding: 28px 20px; color: #d1d5db;
+  font-size: .84rem; font-weight: 600; text-align: center;
+  border: 2px dashed var(--border); border-radius: 12px;
+  margin-bottom: 16px;
+}
+.result-empty-icon { font-size: 2rem; }
+</style>
+</head>
+
+<body>
+
+<!-- LOADER -->
+<div id="loader"><div class="ring"></div></div>
+
+<!-- ═══════════════ NAVBAR ═══════════════ -->
+<nav class="navbar" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+
+    <a href="/" class="nav-logo" aria-label="TechTools Home">
+      <div class="logo-box">
+        <img src="img/logo.png" alt="TechTools"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+        <span class="lf">T</span>
+      </div>
+      <div class="logo-text">Tech<b>Tools</b></div>
+    </a>
+
+    <ul class="nav-menu" role="list">
+      <li><a href="/">Home</a></li>
+      <li class="has-drop">
+        <a href="#" onclick="return false" aria-haspopup="true">
+          Tools <span class="arrow">▼</span>
+        </a>
+        <div class="drop-menu">
+          <a href="youtube-tags.html"><div class="drop-icon" style="background:#fef2f2">🎯</div>YouTube Tag Generator</a>
+          <a href="youtube-thumbnail-download.html"><div class="drop-icon" style="background:#fffbeb">🖼️</div>Thumbnail Downloader</a>
+          <a href="qr-generator.html"><div class="drop-icon" style="background:#f0fdf4">📱</div>QR Code Generator</a>
+          <a href="hastag-generator.html" class="curr"><div class="drop-icon" style="background:#eff6ff">#️⃣</div>Hashtag Generator</a>
+          <a href="payslip.html"><div class="drop-icon" style="background:#fdf4ff">💼</div>Payslip Generator</a>
+          <a href="image-resizer.html"><div class="drop-icon" style="background:#f0fdfa">🖼</div>Image Resizer</a>
+        </div>
+      </li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="privacy.html">Privacy</a></li>
+      <li><a href="terms.html">Terms</a></li>
+      <li><a href="contact.html" class="nav-cta">Get Help →</a></li>
+    </ul>
+
+    <button class="hbg" id="hbg" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile nav -->
+<nav class="mob-nav" id="mobNav">
+  <a href="/">🏠 Home</a>
+  <hr class="mob-divider">
+  <a href="youtube-tags.html">🎯 YouTube Tag Generator</a>
+  <a href="youtube-thumbnail-download.html">🖼️ Thumbnail Downloader</a>
+  <a href="qr-generator.html">📱 QR Code Generator</a>
+  <a href="hastag-generator.html" style="color:#60a5fa">#️⃣ Hashtag Generator</a>
+  <a href="payslip.html">💼 Payslip Generator</a>
+  <a href="image-resizer.html">🖼 Image Resizer</a>
+  <hr class="mob-divider">
+  <a href="about.html">👤 About</a>
+  <a href="contact.html">✉️ Contact</a>
+  <a href="privacy.html">🔒 Privacy Policy</a>
+  <a href="terms.html">📋 Terms of Service</a>
+</nav>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<section class="hero">
+  <div class="hero-pill">#️⃣ Hashtag Generator · Free · No Signup</div>
+  <h1>Hashtag Generator<br><em>Relevant Tags for Every Platform</em></h1>
+  <p class="hero-sub">Generate accurate, platform-aware hashtags for YouTube, Instagram, TikTok, Reels and Twitter (X). No spam, no guessing — just relevant tags from your keyword.</p>
+</section>
+
+<!-- ═══════════════ MAIN TOOL ═══════════════ -->
+<main class="page-wrap">
+  <div class="tool-layout">
+
+    <!-- LEFT: Tool -->
+    <div class="tt-card">
+      <h2 class="tt-card-title">#️⃣ Hashtag Generator</h2>
+      <p style="text-align:center;color:var(--sub);font-size:.84rem;margin-bottom:20px">
+        Enter your keyword or video title, choose a platform, and get relevant hashtags instantly
+      </p>
+
+      <!-- Keyword input -->
+      <div class="kw-row">
+        <input
+          type="search"
+          id="keyword"
+          placeholder="Enter keyword or video title…"
+          autocomplete="off"
+          spellcheck="false"
+          onkeydown="if(event.key==='Enter') generate()"
+        >
+        <button class="tt-btn tt-btn-primary" onclick="generate()">
+          Generate
+        </button>
+      </div>
+
+      <!-- Platform selector -->
+      <div class="platform-select-wrap">
+        <label for="platform">Platform:</label>
+        <select id="platform" onchange="generate()">
+          <option value="youtube">YouTube Video</option>
+          <option value="shorts">YouTube Shorts</option>
+          <option value="instagram">Instagram Post</option>
+          <option value="reels">Instagram Reels</option>
+          <option value="tiktok">TikTok</option>
+          <option value="twitter">Twitter (X)</option>
+        </select>
+        <div class="plat-info" id="info"></div>
+      </div>
+
+      <!-- Tag chips result -->
+      <div id="result">
+        <div class="result-empty" id="emptyState">
+          <div class="result-empty-icon">#️⃣</div>
+          <div>Your hashtags will appear here</div>
+        </div>
+      </div>
+
+      <!-- Final textarea -->
+      <textarea
+        id="finalTags"
+        class="tt-hg-textarea"
+        placeholder="Generated hashtags will appear here for easy copying…"
+        readonly
+      ></textarea>
+
+      <!-- Counter pills -->
+      <div class="hg-counter" id="counterRow" style="display:none">
+        <div class="hg-counter-pill">Tags: <span id="tagCount">0</span></div>
+        <div class="hg-counter-pill">Characters: <span id="charCount">0</span></div>
+      </div>
+
+      <!-- Copy button -->
+      <button class="copy-btn" id="copyBtn" onclick="copyTags()">
+        📋 Copy Hashtags
+      </button>
+    </div>
+
+    <!-- RIGHT: Sidebar -->
+    <div>
+      <div class="info-box">
+        <h3>💡 How to Use</h3>
+        <ul>
+          <li><span class="blt">1</span> Type your keyword or video title</li>
+          <li><span class="blt">2</span> Select your target platform</li>
+          <li><span class="blt">3</span> Click "Generate"</li>
+          <li><span class="blt">4</span> Click "Copy Hashtags"</li>
+          <li><span class="blt">5</span> Paste into your post or description</li>
+        </ul>
+      </div>
+
+      <div class="info-box">
+        <h3>📊 Platform Hashtag Limits</h3>
+        <ul>
+          <li><span class="blt">YT Video</span> 3–5 focused tags</li>
+          <li><span class="blt">YT Shorts</span> 3 relevant tags</li>
+          <li><span class="blt">IG Post</span> Best with 10–15</li>
+          <li><span class="blt">IG Reels</span> 5–10 tags</li>
+          <li><span class="blt">TikTok</span> 4–6 short tags</li>
+          <li><span class="blt">Twitter</span> 1–2 max</li>
+        </ul>
+      </div>
+
+      <div class="info-box">
+        <h3>✅ Why Use This Tool?</h3>
+        <ul>
+          <li><span class="blt">✓</span> Tags based on your exact keyword</li>
+          <li><span class="blt">✓</span> Platform-aware tag counts</li>
+          <li><span class="blt">✓</span> No unrelated or spammy tags</li>
+          <li><span class="blt">✓</span> No signup or login required</li>
+          <li><span class="blt">✓</span> 100% browser-based, private</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- ═══════════════ SEO ARTICLE ═══════════════ -->
+<section class="tt-article">
+
+  <h2>Hashtag Generator by TechTools – Relevant Tags for Every Platform</h2>
+  <p>Finding the right hashtags has become harder than ever. Most generators promise viral results but deliver random, outdated, or mismatched tags that can actually hurt your reach. The <strong>Hashtag Generator by TechTools</strong> takes a different approach — it generates tags directly from what you type, keeping them relevant and platform-aware.</p>
+
+  <h2>How It Works</h2>
+  <p>Enter your keyword or video title, select your target platform, and the tool instantly generates hashtag variations built around your exact input. It expands your keyword naturally — joined words, underscore formats, and phrase-based variations — mirroring how people actually search and tag on each platform. No guesswork, no irrelevant categories injected.</p>
+
+  <h2>Platform-Aware Tag Counts</h2>
+  <p>Every platform treats hashtags differently. YouTube videos perform best with just 3–5 focused tags, while Instagram posts work well with 10–15. Shorts and TikTok favor small, punchy sets. Twitter (X) works with 1–2 at most. This tool automatically adjusts the number of generated tags based on your selected platform so you never over-tag or under-tag.</p>
+
+  <h2>Why Relevance Beats Quantity</h2>
+  <p>Platforms like YouTube and Instagram heavily weigh relevance. Tags that don't match your content confuse the algorithm and reduce visibility — especially damaging for new or growing accounts. By anchoring every tag to your input, this tool keeps your hashtag set clean, safe, and effective for long-term growth.</p>
+
+  <h2>Who Is This Tool For?</h2>
+  <p>Whether you run a YouTube channel, post Instagram Reels, upload TikToks, or share content across multiple platforms, this tool helps you tag more accurately. It's especially useful for new creators who can't afford to waste reach on irrelevant hashtags, and for anyone tired of spammy, one-size-fits-all hashtag tools.</p>
+
+  <!-- FAQ -->
+  <h2 style="margin-top:40px">Frequently Asked Questions</h2>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">What does this hashtag generator actually do? <span class="faq-icon">▼</span></div>
+    <div class="faq-a">It creates hashtags directly from the keyword or title you enter. Instead of adding unrelated trending words, it builds relevant variations tied strictly to your input — keeping tags accurate and aligned with your content.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">Is this hashtag generator free to use? <span class="faq-icon">▼</span></div>
+    <div class="faq-a">Yes, completely free. No signup, no login, no personal information required. Everything runs instantly in your browser.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">Which platforms are supported? <span class="faq-icon">▼</span></div>
+    <div class="faq-a">YouTube Videos, YouTube Shorts, Instagram Posts, Instagram Reels, TikTok, and Twitter (X). Each platform has different hashtag behavior and the generator adjusts the output accordingly.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">How many hashtags should I use? <span class="faq-icon">▼</span></div>
+    <div class="faq-a">It depends on the platform. Short-form platforms perform better with fewer, highly relevant tags. This tool automatically keeps the count within the safe, effective range for your chosen platform.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">Does this tool store my search data? <span class="faq-icon">▼</span></div>
+    <div class="faq-a">No. The generator runs entirely on your device. No keywords, searches, or results are saved or sent to any server. Your data stays private.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">Will these hashtags guarantee more views? <span class="faq-icon">▼</span></div>
+    <div class="faq-a">Hashtags alone don't guarantee views, but relevant hashtags help platforms correctly categorize your content — improving discoverability especially for new and growing accounts.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">Does this tool work on mobile devices? <span class="faq-icon">▼</span></div>
+    <div class="faq-a">Yes, TechTools is fully responsive and works smoothly on mobile phones, tablets, and desktop browsers.</div>
+  </div>
+
+</section>
+
+<!-- Toast -->
+<div id="tt-toast" role="alert" aria-live="polite"></div>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer class="site-footer">
+  <div class="footer-in">
+    <div class="footer-top">
+
+      <div>
+        <div class="ft-logo">
+          <div class="ft-logo-box">
+            <img src="img/logo.png" alt="TechTools"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+            <span class="lf">T</span>
+          </div>
+          TechTools
+        </div>
+        <p class="ft-desc">Free online tools for YouTube creators, students, and developers. Built by Prahlad Yadav from India. No signup, no cost, always free.</p>
+        <div class="ft-chips">
+          <span class="ft-chip">🔒 No File Storage</span>
+          <span class="ft-chip">✅ No Login</span>
+          <span class="ft-chip">⚡ 100% Free</span>
+        </div>
+      </div>
+
+      <div class="ft-col">
+        <h4>Tools</h4>
+        <ul>
+          <li><a href="youtube-tags.html">🎯 YouTube Tags</a></li>
+          <li><a href="youtube-thumbnail-download.html">🖼️ Thumbnail Downloader</a></li>
+          <li><a href="qr-generator.html">📱 QR Code Generator</a></li>
+          <li><a href="hastag-generator.html">#️⃣ Hashtag Generator</a></li>
+          <li><a href="payslip.html">💼 Payslip Generator</a></li>
+          <li><a href="image-resizer.html">🖼 Image Resizer</a></li>
+        </ul>
+      </div>
+
+      <div class="ft-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">👤 About Us</a></li>
+          <li><a href="contact.html">✉️ Contact</a></li>
+          <li><a href="disclaimer.html">📄 Disclaimer</a></li>
+        </ul>
+      </div>
+
+      <div class="ft-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="privacy.html">🔒 Privacy Policy</a></li>
+          <li><a href="terms.html">📋 Terms of Service</a></li>
+          <li><a href="disclaimer.html">⚠️ Disclaimer</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 TechTools by <a href="about.html">Prahlad Yadav</a>. All Rights Reserved.</span>
+      <div class="fbl">
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+        <a href="contact.html">Contact</a>
+        <a href="about.html">About</a>
+      </div>
+    </div>
+    <p class="ads-note">This site may display ads via Google AdSense. See our <a href="privacy.html">Privacy Policy</a> for details.</p>
+  </div>
+</footer>
+
+<!-- ADSENSE -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3666396936157058" crossorigin="anonymous"></script>
+
+<!-- NAV + LOADER + FAQ + CORE LOGIC -->
+<script>
+/* ── Nav ── */
+var hbg    = document.getElementById('hbg');
+var mobNav = document.getElementById('mobNav');
+hbg.addEventListener('click', function() {
+  var open = mobNav.classList.toggle('show');
+  hbg.classList.toggle('open', open);
+  hbg.setAttribute('aria-expanded', String(open));
+});
+
+/* ── Loader ── */
+window.addEventListener('load', function() {
+  var l = document.getElementById('loader');
+  if (l) { l.style.opacity = '0'; setTimeout(function(){ l.remove(); }, 450); }
+});
+
+/* ── FAQ ── */
+function toggleFaq(el) {
+  var item = el.parentElement;
+  document.querySelectorAll('.faq-item').forEach(function(i) {
+    if (i !== item) i.classList.remove('open');
+  });
+  item.classList.toggle('open');
+}
+
+/* ── Toast ── */
+var _toastTimer;
+function showToast(msg, type) {
+  var t = document.getElementById('tt-toast');
+  t.textContent = msg;
+  t.className = 'show ' + (type || 'info');
+  clearTimeout(_toastTimer);
+  _toastTimer = setTimeout(function() { t.className = ''; }, 3000);
+}
+
+/* ── Platform config — max = how many tags to output ── */
+var PLATFORMS = {
+  youtube:   { label: 'YouTube Video',   max: 15 },
+  shorts:    { label: 'YouTube Shorts',  max: 8  },
+  instagram: { label: 'Instagram Post',  max: 30 },
+  reels:     { label: 'Instagram Reels', max: 20 },
+  tiktok:    { label: 'TikTok',          max: 20 },
+  twitter:   { label: 'Twitter (X)',     max: 5  }
+};
+
+/* ── Tag generation ── */
+function buildTags(base, platform) {
+  var cfg  = PLATFORMS[platform] || PLATFORMS.youtube;
+  var slug = base.trim().toLowerCase().replace(/\s+/g, '');
+  var slug_ = base.trim().toLowerCase().replace(/\s+/g, '_');
+  var words = base.trim().toLowerCase().split(/\s+/);
+
+  var pool = [];
+
+  // base forms
+  pool.push(slug);
+  if (slug !== slug_) pool.push(slug_);
+
+  // common suffixes
+  var suffixes = ['video','shorts','status','lyrics','edit','reel','song',
+                  'music','viral','trending','new','official','2024','2025'];
+  suffixes.forEach(function(s) {
+    pool.push(slug + s);
+    pool.push(slug + '_' + s);
+  });
+
+  // alphabet expand (a–z prefix)
+  'abcdefghijklmnopqrstuvwxyz'.split('').forEach(function(c) {
+    pool.push(slug + c);
+  });
+
+  // multi-word: individual words + joined pairs
+  if (words.length > 1) {
+    words.forEach(function(w) { if (w.length > 2) pool.push(w); });
+    for (var i = 0; i < words.length - 1; i++) {
+      pool.push(words[i] + words[i+1]);
+      pool.push(words[i] + '_' + words[i+1]);
+    }
+  }
+
+  // dedupe, add #, limit
+  var seen = {};
+  var tags = [];
+  pool.forEach(function(t) {
+    var clean = t.replace(/[^a-z0-9_]/g, '');
+    if (clean && !seen[clean]) {
+      seen[clean] = true;
+      tags.push('#' + clean);
+    }
+  });
+
+  return tags.slice(0, cfg.max * 6).slice(0, cfg.max);
+}
+
+/* ── Render chips ── */
+function renderChips(tags) {
+  var result = document.getElementById('result');
+  var empty  = document.getElementById('emptyState');
+  if (empty) empty.style.display = 'none';
+
+  result.innerHTML = '';
+  tags.forEach(function(tag) {
+    var chip = document.createElement('span');
+    chip.className = 'tag-chip';
+    chip.textContent = tag;
+    result.appendChild(chip);
+  });
+}
+
+/* ── Main generate ── */
+function generate() {
+  var kwEl    = document.getElementById('keyword');
+  var platEl  = document.getElementById('platform');
+  var base    = kwEl ? kwEl.value.trim() : '';
+  var platform = platEl ? platEl.value : 'youtube';
+  var cfg     = PLATFORMS[platform] || PLATFORMS.youtube;
+
+  if (!base) {
+    showToast('⚠️ Please enter a keyword first', 'warn');
+    return;
+  }
+
+  var tags = buildTags(base, platform);
+
+  // render chips
+  renderChips(tags);
+
+  // populate textarea
+  var textarea = document.getElementById('finalTags');
+  if (textarea) textarea.value = tags.join(' ');
+
+  // counter
+  var counterRow = document.getElementById('counterRow');
+  var tagCount   = document.getElementById('tagCount');
+  var charCount  = document.getElementById('charCount');
+  var infoEl     = document.getElementById('info');
+  if (counterRow) counterRow.style.display = 'flex';
+  if (tagCount)   tagCount.textContent   = tags.length;
+  if (charCount)  charCount.textContent  = tags.join(' ').length;
+  if (infoEl)     infoEl.textContent     = 'Total hashtags: ' + tags.length + ' / ' + cfg.max;
+
+  showToast('✅ ' + tags.length + ' hashtags generated!', 'success');
+}
+
+/* ── Copy ── */
+function copyTags() {
+  var textarea = document.getElementById('finalTags');
+  if (!textarea || !textarea.value.trim()) {
+    showToast('⚠️ No hashtags to copy yet', 'warn');
+    return;
+  }
+  var btn = document.getElementById('copyBtn');
+  navigator.clipboard.writeText(textarea.value.trim()).then(function() {
+    btn.classList.add('copied');
+    btn.textContent = '✅ Copied!';
+    showToast('✅ Hashtags copied to clipboard!', 'success');
+    setTimeout(function() {
+      btn.classList.remove('copied');
+      btn.textContent = '📋 Copy Hashtags';
+    }, 2000);
+  }).catch(function() {
+    textarea.select();
+    document.execCommand('copy');
+    showToast('✅ Hashtags copied!', 'success');
+  });
+}
+</script>
+
+</body>
+</html>

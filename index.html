@@ -1,200 +1,482 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
-<title>Free Online Tools | TechTools</title>
-
-<meta name="description"
-content="Free online tools for PDF, images, calculators and developers. Secure, fast and easy to use tools for everyday needs.">
-
-<meta name="keywords" content="
-online tools,
-free online tools,
-pdf tools,
-image tools,
-calculator tools,
-developer tools,
-web tools,
-seo tools,
-utility tools,
-TechTools,
-TechTools best,
-TechTools online,
-free tools website,
-all in one tools,
-salary slip generate,
-no login tools
-">
-<meta name="author" content="TechTools">
+<title>TechTools – Free YouTube Tag Generator, QR Code, Image Resizer & More</title>
+<meta name="description" content="Free online tools for YouTube creators, students and developers. Generate YouTube tags, hashtags, QR codes, resize images, download thumbnails — no signup, 100% free.">
+<meta name="keywords" content="free online tools, youtube tag generator, hashtag generator, qr code generator, image resizer, youtube thumbnail downloader, payslip generator">
+<meta name="author" content="Prahlad Yadav">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://techtools.best/">
+<meta property="og:title" content="TechTools – Free Online Tools for Creators and Developers">
+<meta property="og:description" content="Generate YouTube tags, hashtags, QR codes, resize images and more — free, no signup.">
+<meta property="og:image" content="https://techtools.best/img/logo.png">
+<meta property="og:url" content="https://techtools.best/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","name":"TechTools","url":"https://techtools.best","description":"Free online tools for YouTube creators, students and developers","author":{"@type":"Person","name":"Prahlad Yadav"}}
+</script>
 <link rel="icon" href="img/logo.png" type="image/png">
-<link rel="preconnect" href="https://cdn.jsdelivr.net">
-<link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style1.css">
+<style>
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-<link rel="stylesheet" href="css/style.css">
+</style>
 </head>
-
 <body>
 
 <!-- LOADER -->
-<div id="loader">
-<div class="spinner"></div>
-</div>
+<div id="loader"><div class="ring"></div></div>
 
+<!-- ═══════════════════════════
+     NAVBAR
+═══════════════════════════ -->
+<nav class="navbar" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
 
-<!-- NAVBAR -->
-<nav class="navbar navbar-dark bg-primary fixed-top">
-<div class="container">
+    <!-- Logo -->
+    <a href="/" class="nav-logo" aria-label="TechTools home">
+      <div class="logo-box">
+        <img src="img/logo.png" alt="TechTools" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+        <span class="lf" style="display:none">T</span>
+      </div>
+      <div class="logo-text">Tech<b>Tools</b></div>
+    </a>
 
-<a class="navbar-brand fw-bold" href="/"><img src="img/logo.png" alt="" style="width: 30px;"> TechTools</a>
+    <!-- Desktop menu -->
+    <ul class="nav-menu" role="list">
 
-<button class="navbar-toggler" type="button" 
-data-bs-toggle="offcanvas" 
-data-bs-target="#mobileMenu">
+      <li><a href="/" class="curr" aria-current="page">Home</a></li>
 
-<span class="navbar-toggler-icon"></span>
-</button>
+      <!-- TOOLS DROPDOWN -->
+      <li class="has-drop">
+        <a href="#" onclick="return false" aria-haspopup="true" aria-expanded="false">
+          Tools <span class="arrow">▼</span>
+        </a>
+        <div class="drop-menu" role="menu">
+          <a href="youtube-tags.html" role="menuitem">
+            <div class="drop-icon" style="background:#fef2f2">🎯</div>YouTube Tag Generator
+          </a>
+          <a href="youtube-thumbnail-download.html" role="menuitem">
+            <div class="drop-icon" style="background:#fffbeb">🖼️</div>Thumbnail Downloader
+          </a>
+          <a href="qr-generator.html" role="menuitem">
+            <div class="drop-icon" style="background:#f0fdf4">📱</div>QR Code Generator
+          </a>
+          <a href="hastag-generator.html" role="menuitem">
+            <div class="drop-icon" style="background:#eff6ff">#️⃣</div>Hashtag Generator
+          </a>
+          <a href="payslip.html" role="menuitem">
+            <div class="drop-icon" style="background:#fdf4ff">💼</div>Payslip Generator
+          </a>
+          <a href="image-resizer.html" role="menuitem">
+            <div class="drop-icon" style="background:#f0fdfa">🖼</div>Image Resizer
+          </a>
+        </div>
+      </li>
 
-</div>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="privacy.html">Privacy</a></li>
+      <li><a href="terms.html">Terms</a></li>
+      <li><a href="contact.html" class="nav-cta">Get Help →</a></li>
+    </ul>
+
+    <!-- Hamburger -->
+    <button class="hbg" id="hbg" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </nav>
 
-
-<!-- DRAWER -->
-<div class="offcanvas offcanvas-end" id="mobileMenu">
-
-<div class="offcanvas-header bg-primary text-white">
-
-<h5 class="offcanvas-title">Menu</h5>
-
-<button type="button" class="btn-close btn-close-white"
-data-bs-dismiss="offcanvas"></button>
-
-</div>
-
-<div class="offcanvas-body">
-
-<ul class="navbar-nav">
-
-<li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-<li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-<li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-<li class="nav-item"><a class="nav-link" href="disclaimer.html">Disclaimer</a></li>
-<li class="nav-item"><a class="nav-link" href="privacy.html">Privacy</a></li>
-<li class="nav-item"><a class="nav-link" href="terms.html">Terms</a></li>
-
-</ul>
-
-</div>
-
-</div>
-
-
-<!-- HERO -->
-<section class="hero mt-5 pt-4">
-
-<h1>Free Online Tools for Everyone</h1>
-
-<p>Fast • Secure • Simple • 100% Free</p>
-
-</section>
-
-
-<!-- INFO (ADSENSE CONTENT) -->
-<section class="container">
-
-<div class="info-box text-center">
-
-<h2>Why Choose TechTools?</h2>
-
-<p class="mt-3">
-
-TechTools provides high-quality online tools for students, professionals, and developers.
-Our platform is designed to help users convert files, calculate values, generate documents,
-and perform technical tasks easily without installing any software.
-
-</p>
-
-<p>
-
-All tools are free to use, privacy-focused, and optimized for speed.
-We do not store your personal files and respect your data security.
-
-</p>
-
-</div>
-
-</section>
-
-
-<!-- TOOLS -->
-<section class="container mt-5">
-
-<div class="row mb-4">
-
-<div class="col-md-6 mx-auto">
-
-<input type="search"
-id="searchTool"
-class="form-control form-control-lg shadow-sm"
-placeholder="🔍 Search tools... (PDF, Image, Calculator)">
-
-</div>
-
-</div>
-<h2 class="text-center mb-4">All Tools</h2>
-
-
-<div class="row g-4" id="toolsArea"></div>
-<!-- PAGINATION -->
-<div class="d-flex justify-content-center mt-4">
-<nav>
-<ul class="pagination" id="pagination"></ul>
+<!-- Mobile nav -->
+<nav class="mob-nav" id="mobNav" aria-label="Mobile navigation">
+  <a href="/">🏠 Home</a>
+  <hr class="mob-divider">
+  <a href="youtube-tags.html">🎯 YouTube Tag Generator</a>
+  <a href="youtube-thumbnail-download.html">🖼️ Thumbnail Downloader</a>
+  <a href="qr-generator.html">📱 QR Code Generator</a>
+  <a href="hastag-generator.html">#️⃣ Hashtag Generator</a>
+  <a href="payslip.html">💼 Payslip Generator</a>
+  <a href="image-resizer.html">🖼 Image Resizer</a>
+  <hr class="mob-divider">
+  <a href="about.html">👤 About</a>
+  <a href="contact.html">✉️ Contact</a>
+  <a href="privacy.html">🔒 Privacy Policy</a>
+  <a href="terms.html">📋 Terms of Service</a>
 </nav>
-</div>
 
+<!-- ═══════════════════════════
+     HERO
+═══════════════════════════ -->
+<section class="hero">
+  <div class="hero-pill">✦ Free · No Signup · Privacy First</div>
+  <h1>Free Online Tools for<br><em>Creators &amp; Developers</em></h1>
+  <p class="hero-sub">YouTube tags, QR codes, image resizing, hashtags and more — all free, instant, right in your browser.</p>
+
+  <!-- SEARCH -->
+  <div class="search-wrap">
+    <div class="search-box">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
+      <input
+        type="search" id="sInput" autocomplete="off" spellcheck="false"
+        placeholder="Search tools... try 'YouTube', 'QR', 'Image', 'Salary'"
+        aria-label="Search tools"
+        oninput="runSearch(this.value)"
+        onkeydown="searchKey(event)"
+      >
+      <button onclick="goFirst()" aria-label="Search">Search</button>
+    </div>
+
+    <!-- POPUP -->
+    <div class="s-popup" id="sPopup" role="listbox">
+      <div class="s-popup-hdr" id="sHdr">Results</div>
+      <div id="sBody"></div>
+    </div>
+  </div>
 </section>
 
+
+
+<!-- MAIN -->
+<main class="page">
+
+  <div class="info-card">
+    <h2>Why Choose TechTools?</h2>
+    <p>High-quality free tools for YouTube creators, students, professionals and developers. No software to install, no account required — Our platform is designed to help users convert files, calculate values, generate documents, and perform technical tasks easily without installing any software.</p>
+    <p>We never store your files, track your data, or show intrusive popups. Fast, secure, and always 100% free.</p>
+  </div>
+
+  <!-- Hidden SEO nav -->
+  <nav class="seo-links" aria-label="All tools">
+    <a href="youtube-tags.html">YouTube Tag Generator</a>
+    <a href="youtube-thumbnail-download.html">YouTube Thumbnail Downloader</a>
+    <a href="qr-generator.html">QR Code Generator</a>
+    <a href="hastag-generator.html">Hashtag Generator</a>
+    <a href="payslip.html">Payslip Generator</a>
+    <a href="image-resizer.html">Image Resizer</a>
+  </nav>
+
+  <div class="sec-top">
+    <h2>All Tools</h2>
+    <span class="sec-badge">6 tools available</span>
+  </div>
+
+  <div class="grid" role="list">
+
+    <a href="youtube-tags.html" class="card c1" role="listitem">
+      <span class="card-badge bh">🔥 Popular</span>
+      <div class="card-icon" style="background:#fef2f2">🎯</div>
+      <p class="card-name">YouTube Tag Generator</p>
+      <p class="card-desc">Generate real ranking tags using YouTube autocomplete. Find low-competition keywords and grow your channel faster.</p>
+      <span class="card-cta">Use Tool →</span>
+    </a>
+
+    <a href="youtube-thumbnail-download.html" class="card c2" role="listitem">
+      <span class="card-badge bn">⭐ New</span>
+      <div class="card-icon" style="background:#fffbeb">🖼️</div>
+      <p class="card-name">YouTube Thumbnail Downloader</p>
+      <p class="card-desc">Download any YouTube video thumbnail in Full HD, SD and all available qualities. One click, instant save.</p>
+      <span class="card-cta">Use Tool →</span>
+    </a>
+
+    <a href="qr-generator.html" class="card c3" role="listitem">
+      <span class="card-badge bh">🔥 Popular</span>
+      <div class="card-icon" style="background:#f0fdf4">📱</div>
+      <p class="card-name">QR Code Generator</p>
+      <p class="card-desc">Create custom QR codes for URLs, text, WiFi, email and SMS. Customize colors and download as PNG instantly.</p>
+      <span class="card-cta">Use Tool →</span>
+    </a>
+
+    <a href="hastag-generator.html" class="card c4" role="listitem">
+      <span class="card-badge bn">⭐ New</span>
+      <div class="card-icon" style="background:#eff6ff">#️⃣</div>
+      <p class="card-name">Hashtag Generator</p>
+      <p class="card-desc">Generate platform-specific hashtags for YouTube, Instagram, TikTok, Facebook and Twitter in seconds.</p>
+      <span class="card-cta">Use Tool →</span>
+    </a>
+
+    <a href="payslip.html" class="card c5" role="listitem">
+      <span class="card-badge bf">✔ Free</span>
+      <div class="card-icon" style="background:#fdf4ff">💼</div>
+      <p class="card-name">Payslip Generator</p>
+      <p class="card-desc">Create professional salary slips in PDF or Word format. Ideal for HR teams, freelancers and small businesses.</p>
+      <span class="card-cta">Use Tool →</span>
+    </a>
+
+    <a href="image-resizer.html" class="card c6" role="listitem">
+      <span class="card-badge bf">✔ Free</span>
+      <div class="card-icon" style="background:#f0fdfa">🖼</div>
+      <p class="card-name">Image Resizer</p>
+      <p class="card-desc">Resize JPG, PNG and WEBP images without quality loss. Custom dimensions, DPI and format support.</p>
+      <span class="card-cta">Use Tool →</span>
+    </a>
+
+  </div>
+
+  <!-- STATS -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat"><div class="stat-num">6+</div><div class="stat-lbl">Free Tools</div></div>
+    <div class="stat"><div class="stat-num">0</div><div class="stat-lbl">Signups Needed</div></div>
+    <div class="stat"><div class="stat-num">100%</div><div class="stat-lbl">Browser-Based</div></div>
+    <div class="stat"><div class="stat-num">🔒</div><div class="stat-lbl">Privacy First</div></div>
+  </div>
+</div>
+
+  <div class="feats">
+    <div class="feat"><div class="fi">⚡</div><div class="ft">Instant Results</div><div class="fd">No waiting, ever</div></div>
+    <div class="feat"><div class="fi">🔒</div><div class="ft">Privacy First</div><div class="fd">Zero file storage</div></div>
+    <div class="feat"><div class="fi">📱</div><div class="ft">Mobile Ready</div><div class="fd">Any device, any screen</div></div>
+    <div class="feat"><div class="fi">💸</div><div class="ft">Always Free</div><div class="fd">No hidden costs</div></div>
+  </div>
+
+</main>
 
 <!-- FOOTER -->
-<footer>
+<footer class="footer">
+  <div class="footer-in">
+    <div class="footer-top">
 
-<p>© 2026 TechTools. All Rights Reserved.</p>
+      <div>
+        <div class="ft-logo">
+          <div class="ft-logo-box">
+            <img src="img/logo.png" alt="TechTools" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+            <span class="lf" style="display:none">T</span>
+          </div>
+          TechTools
+        </div>
+        <p class="ft-desc">Free online tools for YouTube creators, students, and developers. Built with care by Prahlad Yadav from India. No signup, no cost, always free.</p>
+        <div class="chips">
+          <span class="chip">🔒 No File Storage</span>
+          <span class="chip">✅ No Login</span>
+          <span class="chip">⚡ 100% Free</span>
+        </div>
+      </div>
 
-<p>
-<a href="privacy.html">Privacy Policy</a> |
-<a href="terms.html">Terms of Service</a> |
-<a href="contact.html">Contact Us</a>
-</p>
+      <div class="ft-col">
+        <h4>Tools</h4>
+        <ul>
+          <li><a href="youtube-tags.html">🎯 YouTube Tags</a></li>
+          <li><a href="youtube-thumbnail-download.html">🖼️ Thumbnail Downloader</a></li>
+          <li><a href="qr-generator.html">📱 QR Code Generator</a></li>
+          <li><a href="hastag-generator.html">#️⃣ Hashtag Generator</a></li>
+          <li><a href="payslip.html">💼 Payslip Generator</a></li>
+          <li><a href="image-resizer.html">🖼 Image Resizer</a></li>
+        </ul>
+      </div>
 
-<p class="mt-2">
-TechTools is committed to providing reliable and secure online utilities for daily use.
-</p>
+      <div class="ft-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">👤 About Us</a></li>
+          <li><a href="contact.html">✉️ Contact</a></li>
+          <li><a href="disclaimer.html">📄 Disclaimer</a></li>
+        </ul>
+      </div>
 
+      <div class="ft-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="privacy.html">🔒 Privacy Policy</a></li>
+          <li><a href="terms.html">📋 Terms of Service</a></li>
+          <li><a href="disclaimer.html">⚠️ Disclaimer</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 TechTools by <a href="about.html">Prahlad Yadav</a>. All Rights Reserved.</span>
+      <div class="fbl">
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+        <a href="contact.html">Contact</a>
+        <a href="about.html">About</a>
+      </div>
+    </div>
+
+    <!-- <p class="ads-note">This site may display ads via Google AdSense to support free tool development. See our <a href="privacy.html">Privacy Policy</a> for details.</p> -->
+  </div>
 </footer>
 
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3666396936157058"
-     crossorigin="anonymous"></script>
-<!-- JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" defer></script>
-<script src="js/tools-data.js" defer></script>
-<script src="js/main.js"></script>
-  <script>
-    /* LOADER */
-window.addEventListener("load", ()=>{
-document.getElementById("loader").style.display="none";
+<!-- ADSENSE -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3666396936157058" crossorigin="anonymous"></script>
+
+<script>
+// ═══════════════════════════════════════
+// SEARCH DATA
+// ═══════════════════════════════════════
+var TOOLS = [
+  {
+    name: "YouTube Tag Generator",
+    desc: "Generate real ranking tags using YouTube autocomplete data.",
+    link: "youtube-tags.html",
+    icon: "🎯",
+    bg:   "#fef2f2",
+    tags: ["youtube","tag","tags","seo","video","ranking","keyword","channel","shorts","creator","tube"]
+  },
+  {
+    name: "YouTube Thumbnail Downloader",
+    desc: "Download any YouTube video thumbnail in Full HD quality.",
+    link: "youtube-thumbnail-download.html",
+    icon: "🖼️",
+    bg:   "#fffbeb",
+    tags: ["youtube","thumbnail","download","hd","video","image","cover","picture","photo","tube"]
+  },
+  {
+    name: "QR Code Generator",
+    desc: "Create custom QR codes for URLs, WiFi, email and SMS.",
+    link: "qr-generator.html",
+    icon: "📱",
+    bg:   "#f0fdf4",
+    tags: ["qr","qrcode","barcode","link","url","wifi","scan","code","generate","create"]
+  },
+  {
+    name: "Hashtag Generator",
+    desc: "Generate hashtags for YouTube, Instagram, TikTok and Twitter.",
+    link: "hastag-generator.html",
+    icon: "#️⃣",
+    bg:   "#eff6ff",
+    tags: ["hashtag","hash","instagram","tiktok","twitter","facebook","social","reels","shorts","trending"]
+  },
+  {
+    name: "Payslip Generator",
+    desc: "Create professional salary slips in PDF or Word format.",
+    link: "payslip.html",
+    icon: "💼",
+    bg:   "#fdf4ff",
+    tags: ["payslip","salary","slip","hr","employee","pdf","word","pay","wage","document","download"]
+  },
+  {
+    name: "Image Resizer",
+    desc: "Resize JPG, PNG and WEBP images without quality loss.",
+    link: "image-resizer.html",
+    icon: "🖼",
+    bg:   "#f0fdfa",
+    tags: ["image","resize","photo","jpg","png","webp","compress","size","picture","convert","dimension"]
+  }
+];
+
+// Escape regex special chars
+function esc(s) {
+  return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+// Highlight matched text
+function highlight(text, q) {
+  if (!q) return text;
+  return text.replace(new RegExp('(' + esc(q) + ')', 'gi'), '<mark>$1</mark>');
+}
+
+// ── MAIN SEARCH FUNCTION ──
+function runSearch(val) {
+  var q       = val.trim().toLowerCase();
+  var popup   = document.getElementById('sPopup');
+  var header  = document.getElementById('sHdr');
+  var body    = document.getElementById('sBody');
+
+  // Hide popup if empty query
+  if (!q) {
+    popup.classList.remove('open');
+    return;
+  }
+
+  // Filter tools
+  var results = TOOLS.filter(function(t) {
+    if (t.name.toLowerCase().indexOf(q) !== -1) return true;
+    if (t.desc.toLowerCase().indexOf(q) !== -1) return true;
+    for (var i = 0; i < t.tags.length; i++) {
+      if (t.tags[i].indexOf(q) !== -1) return true;
+    }
+    return false;
+  });
+
+  // Show popup
+  popup.classList.add('open');
+
+  // No results
+  if (results.length === 0) {
+    header.textContent = 'No results found';
+    body.innerHTML =
+      '<div class="s-empty">' +
+        '😕 No tools match <strong>"' + val + '"</strong><br>' +
+        '<small style="color:#9ca3af;font-size:.76rem">Try: YouTube, QR, Image, Hashtag, Salary</small>' +
+      '</div>';
+    return;
+  }
+
+  // Render results
+  header.textContent = results.length + ' tool' + (results.length > 1 ? 's' : '') + ' found';
+
+  var html = '';
+  for (var i = 0; i < results.length; i++) {
+    var t = results[i];
+    html +=
+      '<a href="' + t.link + '" class="s-row">' +
+        '<div class="s-row-icon" style="background:' + t.bg + '">' + t.icon + '</div>' +
+        '<div class="s-row-info">' +
+          '<div class="s-row-name">' + highlight(t.name, val.trim()) + '</div>' +
+          '<div class="s-row-desc">' + t.desc + '</div>' +
+        '</div>' +
+        '<span class="s-row-arr">→</span>' +
+      '</a>';
+  }
+  body.innerHTML = html;
+}
+
+// Go to first result on Enter / button click
+function goFirst() {
+  var q = document.getElementById('sInput').value.trim().toLowerCase();
+  if (!q) return;
+  for (var i = 0; i < TOOLS.length; i++) {
+    var t = TOOLS[i];
+    if (t.name.toLowerCase().indexOf(q) !== -1) { window.location.href = t.link; return; }
+    for (var j = 0; j < t.tags.length; j++) {
+      if (t.tags[j].indexOf(q) !== -1) { window.location.href = t.link; return; }
+    }
+  }
+}
+
+// Keyboard shortcuts
+function searchKey(e) {
+  if (e.key === 'Enter') { goFirst(); }
+  if (e.key === 'Escape') { document.getElementById('sPopup').classList.remove('open'); }
+}
+
+// Close popup on outside click
+document.addEventListener('click', function(e) {
+  var wrap = document.querySelector('.search-wrap');
+  if (wrap && !wrap.contains(e.target)) {
+    document.getElementById('sPopup').classList.remove('open');
+  }
+});
+
+// ═══════════════════════════════════════
+// HAMBURGER
+// ═══════════════════════════════════════
+var hbg    = document.getElementById('hbg');
+var mobNav = document.getElementById('mobNav');
+hbg.addEventListener('click', function() {
+  var open = mobNav.classList.toggle('show');
+  hbg.classList.toggle('open', open);
+  hbg.setAttribute('aria-expanded', String(open));
+});
+
+// ═══════════════════════════════════════
+// LOADER
+// ═══════════════════════════════════════
+window.addEventListener('load', function() {
+  var l = document.getElementById('loader');
+  l.style.opacity = '0';
+  setTimeout(function() { l.remove(); }, 450);
 });
 </script>
 
-
 </body>
 </html>
-
-
-
-

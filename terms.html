@@ -1,216 +1,339 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
 <title>Disclaimer | TechTools</title>
-
-<meta name="description"
-content="Free online tools for PDF, images, calculators and developers. Secure, fast and easy to use tools for everyday needs.">
-
-<meta name="keywords" content="online tools, pdf tools, image tools, calculator, developer tools, free tools">
-
-<meta name="author" content="TechTools">
+<meta name="description" content="Read the TechTools Disclaimer. All tools and content are provided as-is. Learn about our limitations of liability and terms of use.">
+<meta name="keywords" content="techtools disclaimer, terms and conditions, techtools terms, free tools disclaimer">
+<meta name="author" content="Prahlad Yadav">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://techtools.best/disclaimer.html">
 <link rel="icon" href="img/logo.png" type="image/png">
-<link rel="preconnect" href="https://cdn.jsdelivr.net">
-<link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style1.css">
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+/* ── Legal page specific styles ── */
+.legal-wrap {
+  max-width: 820px; margin: 0 auto;
+  padding: 48px 24px 80px;
+}
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+/* Page header card */
+.legal-header {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 36px 40px 28px;
+  margin-bottom: 32px;
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+.legal-header .legal-icon {
+  font-size: 2.4rem; display: block; margin-bottom: 12px;
+}
+.legal-header h1 {
+  font-size: 1.6rem; font-weight: 900;
+  letter-spacing: -.025em; margin-bottom: 8px;
+}
+.legal-header .legal-meta {
+  font-size: .8rem; color: var(--sub); font-weight: 600;
+}
 
-<link rel="stylesheet" href="css/style.css">
+/* Legal content card */
+.legal-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 36px 40px;
+  box-shadow: var(--shadow);
+}
+@media (max-width: 600px) {
+  .legal-card { padding: 24px 20px; }
+  .legal-header { padding: 28px 20px 20px; }
+}
+
+/* Section styling */
+.legal-card h2 {
+  font-size: 1rem; font-weight: 800;
+  color: var(--text); margin: 28px 0 10px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--blue-l);
+  letter-spacing: -.01em;
+}
+.legal-card h2:first-child { margin-top: 0; }
+
+.legal-card p {
+  font-size: .88rem; color: #374151;
+  line-height: 1.85; margin-bottom: 12px;
+}
+.legal-card ul {
+  margin: 8px 0 14px 0; padding: 0;
+  list-style: none;
+}
+.legal-card ul li {
+  display: flex; gap: 10px; align-items: flex-start;
+  font-size: .88rem; color: #374151;
+  line-height: 1.8; padding: 5px 0;
+  border-bottom: 1px solid #f9fafb;
+}
+.legal-card ul li:last-child { border-bottom: none; }
+.legal-card ul li::before {
+  content: "→";
+  color: var(--blue); font-weight: 900;
+  flex-shrink: 0; margin-top: 1px;
+}
+.legal-card a { color: var(--blue); font-weight: 600; }
+.legal-card a:hover { text-decoration: underline; }
+
+/* Contact box */
+.contact-box {
+  background: var(--blue-l);
+  border: 1px solid var(--blue-p);
+  border-radius: 12px;
+  padding: 18px 22px; margin-top: 8px;
+}
+.contact-box p {
+  margin: 0 0 6px; font-size: .86rem; color: var(--text); font-weight: 500;
+}
+.contact-box p:last-child { margin-bottom: 0; }
+.contact-box a { color: var(--blue); font-weight: 700; }
+
+/* Breadcrumb */
+.breadcrumb {
+  display: flex; align-items: center; gap: 7px;
+  font-size: .78rem; color: var(--sub);
+  margin-bottom: 24px; flex-wrap: wrap;
+}
+.breadcrumb a { color: var(--blue); font-weight: 600; }
+.breadcrumb a:hover { text-decoration: underline; }
+.breadcrumb span { color: var(--sub); }
+</style>
 </head>
 
 <body>
 
 <!-- LOADER -->
-<div id="loader">
-<div class="spinner"></div>
-</div>
+<div id="loader"><div class="ring"></div></div>
 
+<!-- ═══════════════ NAVBAR ═══════════════ -->
+<nav class="navbar" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo" aria-label="TechTools Home">
+      <div class="logo-box">
+        <img src="img/logo.png" alt="TechTools"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+        <span class="lf">T</span>
+      </div>
+      <div class="logo-text">Tech<b>Tools</b></div>
+    </a>
 
-<!-- NAVBAR -->
-<nav class="navbar navbar-dark bg-primary fixed-top">
-<div class="container">
+    <ul class="nav-menu" role="list">
+      <li><a href="/">Home</a></li>
+      <li class="has-drop">
+        <a href="#" onclick="return false" aria-haspopup="true">
+          Tools <span class="arrow">▼</span>
+        </a>
+        <div class="drop-menu">
+          <a href="youtube-tags.html"><div class="drop-icon" style="background:#fef2f2">🎯</div>YouTube Tag Generator</a>
+          <a href="youtube-thumbnail-download.html"><div class="drop-icon" style="background:#fffbeb">🖼️</div>Thumbnail Downloader</a>
+          <a href="qr-generator.html"><div class="drop-icon" style="background:#f0fdf4">📱</div>QR Code Generator</a>
+          <a href="hastag-generator.html"><div class="drop-icon" style="background:#eff6ff">#️⃣</div>Hashtag Generator</a>
+          <a href="payslip.html"><div class="drop-icon" style="background:#fdf4ff">💼</div>Payslip Generator</a>
+          <a href="image-resizer.html"><div class="drop-icon" style="background:#f0fdfa">🖼</div>Image Resizer</a>
+        </div>
+      </li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="privacy.html">Privacy</a></li>
+      <li><a href="terms.html" class="curr" >Terms</a></li>
+      <li><a href="contact.html" class="nav-cta">Get Help →</a></li>
+    </ul>
 
-<a class="navbar-brand fw-bold" href="/"><img src="img/logo.png" alt="" style="width: 30px;"> TechTools</a>
-
-<button class="navbar-toggler" type="button" 
-data-bs-toggle="offcanvas" 
-data-bs-target="#mobileMenu">
-
-<span class="navbar-toggler-icon"></span>
-</button>
-
-</div>
+    <button class="hbg" id="hbg" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </nav>
 
+<!-- Mobile nav -->
+<nav class="mob-nav" id="mobNav">
+  <a href="/">🏠 Home</a>
+  <hr class="mob-divider">
+  <a href="youtube-tags.html">🎯 YouTube Tag Generator</a>
+  <a href="youtube-thumbnail-download.html">🖼️ Thumbnail Downloader</a>
+  <a href="qr-generator.html">📱 QR Code Generator</a>
+  <a href="hastag-generator.html">#️⃣ Hashtag Generator</a>
+  <a href="payslip.html">💼 Payslip Generator</a>
+  <a href="image-resizer.html">🖼 Image Resizer</a>
+  <hr class="mob-divider">
+  <a href="about.html">👤 About</a>
+  <a href="contact.html">✉️ Contact</a>
+  <a href="privacy.html">🔒 Privacy Policy</a>
+  <a href="terms.html">📋 Terms of Service</a>
+</nav>
 
-<!-- DRAWER -->
-<div class="offcanvas offcanvas-end" id="mobileMenu">
+<!-- ═══════════════ HERO ═══════════════ -->
+<section class="hero" style="padding:48px 24px 40px">
+  <div class="hero-pill">📄 Legal · Last Updated Feb 2026</div>
+  <h1 style="font-size:clamp(1.6rem,3vw,2.2rem)">Disclaimer &amp;<br><em>Terms and Conditions</em></h1>
+  <p class="hero-sub" style="margin-bottom:0">Please read carefully before using TechTools.</p>
+</section>
 
-<div class="offcanvas-header bg-primary text-white">
+<!-- ═══════════════ CONTENT ═══════════════ -->
+<div class="legal-wrap">
 
-<h5 class="offcanvas-title">Menu</h5>
+  <!-- Breadcrumb -->
+  <div class="breadcrumb">
+    <a href="/">Home</a>
+    <span>›</span>
+    <span>Terms</span>
+  </div>
 
-<button type="button" class="btn-close btn-close-white"
-data-bs-dismiss="offcanvas"></button>
+  <!-- Page header -->
+  <div class="legal-header">
+    <span class="legal-icon">📋</span>
+    <h1>Terms and Conditions</h1>
+    <p class="legal-meta">Last updated: February 04, 2026 &nbsp;·&nbsp; Effective immediately</p>
+  </div>
 
-</div>
+  <!-- Legal content -->
+  <div class="legal-card">
 
-<div class="offcanvas-body">
+    <p>Welcome to TechTools. By accessing and using this website, you agree to comply with and be bound by the following Terms and Conditions. If you do not agree, please do not use our website.</p>
 
-<ul class="navbar-nav">
+    <h2>Use of Our Website</h2>
+    <p>TechTools provides free online tools for general use. You agree to use this website only for lawful purposes and in a way that does not harm, disrupt, or interfere with other users or our services.</p>
 
-<li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-<li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-<li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-<li class="nav-item"><a class="nav-link" href="disclaimer.html">Disclaimer</a></li>
-<li class="nav-item"><a class="nav-link" href="privacy.html">Privacy</a></li>
-<li class="nav-item"><a class="nav-link" href="terms.html">Terms</a></li>
+    <h2>Intellectual Property</h2>
+    <p>All content, tools, designs, logos, and materials on this website are the property of TechTools, unless otherwise stated. Unauthorized copying or redistribution is prohibited without prior written permission.</p>
 
-</ul>
+    <h2>User Responsibilities</h2>
+    <ul>
+      <li>You agree not to misuse our tools or services in any way</li>
+      <li>You agree not to attempt unauthorized access to our systems</li>
+      <li>You agree not to upload harmful code or malicious content</li>
+      <li>You agree not to use automated systems to overload our servers</li>
+      <li>You agree to provide accurate information where required</li>
+    </ul>
 
-</div>
+    <h2>Third-Party Services</h2>
+    <p>We may display third-party advertisements (including Google AdSense) and links to external sites. TechTools is not responsible for the content, privacy practices, or services of any third parties. Clicking third-party links is done at your own risk.</p>
 
-</div>
+    <h2>Service Availability</h2>
+    <p>We strive to keep our website available at all times. However, we do not guarantee uninterrupted or error-free service. We may modify, suspend, or discontinue any part of the website at any time without prior notice.</p>
 
-<div class="page-box mt-5 ">
+    <h2>Disclaimer of Warranties</h2>
+    <p>All tools and content are provided <strong>"as is"</strong> without warranties of any kind, either express or implied. We do not guarantee the accuracy, reliability, completeness, or suitability of any tool or content for any specific purpose. Your use of our tools is entirely at your own risk.</p>
 
-<h3 class="text-center">Terms and Conditions</h3>
+    <h2>Limitation of Liability</h2>
+    <p>TechTools and its owner (Prahlad Yadav) shall not be liable for any direct, indirect, incidental, consequential, or special damages arising from the use or inability to use this website, its tools, or any content available on it.</p>
 
-<hr>
-<div class="container">
+    <h2>Privacy Policy</h2>
+    <p>Your use of this website is also governed by our <a href="privacy.html">Privacy Policy</a>. Please review it to understand how we collect, use, and protect your information.</p>
 
+    <h2>Google AdSense</h2>
+    <p>This site participates in Google AdSense. Google may use cookies to serve relevant ads based on your visits to this and other websites. You can opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener">Google Ad Settings</a>.</p>
 
+    <h2>Governing Law</h2>
+    <p>These Terms and Conditions shall be governed by and interpreted in accordance with the laws of India. Any disputes shall be subject to the jurisdiction of courts in India.</p>
 
-<p>Last updated: February 04, 2026</p>
+    <h2>Changes to These Terms</h2>
+    <p>We reserve the right to update these Terms at any time without prior notice. Changes will be posted on this page with a revised date. Continued use of the website after changes constitutes your acceptance of the updated Terms.</p>
 
-<p>
-Welcome to TechTools. By accessing and using this website, you agree to comply with
-and be bound by the following Terms and Conditions. If you do not agree, please do not use our website.
-</p>
+    <h2>Termination</h2>
+    <p>We may restrict or terminate access to users who violate these Terms, misuse our tools, or engage in any activity that harms other users or our platform.</p>
 
-<h3>Use of Our Website</h3>
+    <h2>Contact Us</h2>
+    <p>If you have any questions about these Terms and Conditions, please contact us:</p>
+    <div class="contact-box">
+      <p>✉️ <strong>Email:</strong> <a href="mailto:prahladyadavcktd100@gmail.com">prahladyadavcktd100@gmail.com</a></p>
+      <p>🌐 <strong>Website:</strong> <a href="/contact.html">techtools.best/contact.html</a></p>
+    </div>
 
-<p>
-TechTools provides free online tools for general use.
-You agree to use this website only for lawful purposes and in a way that does not harm,
-disrupt, or interfere with other users.
-</p>
+  </div><!-- /legal-card -->
 
-<h3>Intellectual Property</h3>
+</div><!-- /legal-wrap -->
 
-<p>
-All content, tools, designs, logos, and materials on this website are the property of TechTools,
-unless otherwise stated. Unauthorized copying or redistribution is prohibited.
-</p>
-
-<h3>User Responsibilities</h3>
-
-<ul>
-<li>You agree not to misuse our tools or services.</li>
-<li>You agree not to attempt unauthorized access to our systems.</li>
-<li>You agree not to upload harmful code or malicious content.</li>
-<li>You agree not to use automated systems to overload our servers.</li>
-</ul>
-
-<h3>Third-Party Services</h3>
-
-<p>
-We may display third-party advertisements and links.
-TechTools is not responsible for the content, privacy practices, or services of third parties.
-</p>
-
-<h3>Service Availability</h3>
-
-<p>
-We strive to keep our website available at all times.
-However, we do not guarantee uninterrupted or error-free service.
-We may modify, suspend, or discontinue any part of the website at any time.
-</p>
-
-<h3>Disclaimer</h3>
-
-<p>
-All tools and content are provided "as is" without warranties of any kind.
-We do not guarantee accuracy, reliability, or suitability for any purpose.
-</p>
-
-<h3>Limitation of Liability</h3>
-
-<p>
-TechTools shall not be liable for any direct, indirect, incidental, consequential,
-or special damages arising from the use or inability to use our website.
-</p>
-
-<h3>Privacy Policy</h3>
-
-<p>
-Your use of this website is also governed by our Privacy Policy.
-Please review it to understand how we handle information.
-</p>
-
-<h3>Governing Law</h3>
-
-<p>
-These Terms shall be governed by and interpreted in accordance with the laws of India.
-</p>
-
-<h3>Changes to These Terms</h3>
-
-<p>
-We reserve the right to update these Terms at any time.
-Changes will be posted on this page with a revised date.
-</p>
-
-<h3>Termination</h3>
-
-<p>
-We may restrict or terminate access to users who violate these Terms.
-</p>
-
-<h3>Contact Information</h3>
-
-<p>
-If you have any questions about these Terms and Conditions, please contact us:
-</p>
-
-<ul>
-<li>Email: prahladyadavcktd100@gmail.com</li>
-<li>Website: <a href="/contact.html">https://techtools.best/contact.html</a></li>
-</ul>
-
-
-</div>
-</div>
-
-<!-- FOOTER -->
-<footer>
-
-<p>© 2026 TechTools. All Rights Reserved.</p>
-
-<p>
-<a href="privacy.html">Privacy Policy</a> |
-<a href="terms.html">Terms of Service</a> |
-<a href="contact.html">Contact Us</a>
-</p>
-
-<p class="mt-2">
-TechTools is committed to providing reliable and secure online utilities for daily use.
-</p>
-
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer class="site-footer">
+  <div class="footer-in">
+    <div class="footer-top">
+      <div>
+        <div class="ft-logo">
+          <div class="ft-logo-box">
+            <img src="img/logo.png" alt="TechTools"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+            <span class="lf">T</span>
+          </div>
+          TechTools
+        </div>
+        <p class="ft-desc">Free online tools for YouTube creators, students, and developers. Built by Prahlad Yadav from India. No signup, no cost, always free.</p>
+        <div class="ft-chips">
+          <span class="ft-chip">🔒 No File Storage</span>
+          <span class="ft-chip">✅ No Login</span>
+          <span class="ft-chip">⚡ 100% Free</span>
+        </div>
+      </div>
+      <div class="ft-col">
+        <h4>Tools</h4>
+        <ul>
+          <li><a href="youtube-tags.html">🎯 YouTube Tags</a></li>
+          <li><a href="youtube-thumbnail-download.html">🖼️ Thumbnail Downloader</a></li>
+          <li><a href="qr-generator.html">📱 QR Code Generator</a></li>
+          <li><a href="hastag-generator.html">#️⃣ Hashtag Generator</a></li>
+          <li><a href="payslip.html">💼 Payslip Generator</a></li>
+          <li><a href="image-resizer.html">🖼 Image Resizer</a></li>
+        </ul>
+      </div>
+      <div class="ft-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">👤 About Us</a></li>
+          <li><a href="contact.html">✉️ Contact</a></li>
+          <li><a href="disclaimer.html">📄 Disclaimer</a></li>
+        </ul>
+      </div>
+      <div class="ft-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="privacy.html">🔒 Privacy Policy</a></li>
+          <li><a href="terms.html">📋 Terms of Service</a></li>
+          <li><a href="disclaimer.html">⚠️ Disclaimer</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 TechTools by <a href="about.html">Prahlad Yadav</a>. All Rights Reserved.</span>
+      <div class="fbl">
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+        <a href="contact.html">Contact</a>
+        <a href="about.html">About</a>
+      </div>
+    </div>
+    <!-- <p class="ads-note">This site may display ads via Google AdSense. See our <a href="privacy.html">Privacy Policy</a> for details.</p> -->
+  </div>
 </footer>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" defer></script>
+
+<!-- ADSENSE -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3666396936157058" crossorigin="anonymous"></script>
+
 <script>
-    /* LOADER */
-window.addEventListener("load", ()=>{
-document.getElementById("loader").style.display="none";
+var hbg    = document.getElementById('hbg');
+var mobNav = document.getElementById('mobNav');
+hbg.addEventListener('click', function() {
+  var open = mobNav.classList.toggle('show');
+  hbg.classList.toggle('open', open);
+  hbg.setAttribute('aria-expanded', String(open));
+});
+window.addEventListener('load', function() {
+  var l = document.getElementById('loader');
+  if (l) { l.style.opacity = '0'; setTimeout(function(){ l.remove(); }, 450); }
 });
 </script>
+
 </body>
 </html>
-

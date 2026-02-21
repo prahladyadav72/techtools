@@ -1,365 +1,405 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
-<title>QR Code Generator | TechTools</title>
-
-<meta name="description"
-content="Generate free QR codes online for URLs, WiFi, Email, SMS, and Text. Customize size and colors. Download high-quality QR codes instantly with TechTools.">
-
-<meta name="keywords"
-content="qr code generator, free qr generator, online qr code maker, wifi qr code, url qr code generator, qr code creator, techtools qr">
-
-<meta name="author" content="TechTools">
-
+<title>QR Code Generator – Free Custom QR Codes Online | TechTools</title>
+<meta name="description" content="Generate free QR codes for URLs, WiFi, Email, SMS and Text. Customize colors and size. Download high-quality PNG instantly. No signup required.">
+<meta name="keywords" content="qr code generator, free qr generator, online qr code maker, wifi qr code, url qr code generator, qr code creator, techtools qr">
+<meta name="author" content="Prahlad Yadav">
 <meta name="robots" content="index, follow">
+<link rel="canonical" href="https://techtools.best/qr-generator.html">
+<meta property="og:title" content="QR Code Generator – Free Custom QR Codes | TechTools">
+<meta property="og:description" content="Generate QR codes for URLs, WiFi, Email, SMS. Customize and download free.">
+<meta property="og:url" content="https://techtools.best/qr-generator.html">
+<meta property="og:type" content="website">
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebApplication",
+  "name":"QR Code Generator",
+  "url":"https://techtools.best/qr-generator.html",
+  "description":"Free online QR code generator for URLs, WiFi, Email, SMS and Text.",
+  "applicationCategory":"UtilitiesApplication",
+  "operatingSystem":"All",
+  "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+}
+</script>
+<link rel="icon" href="img/logo.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style1.css">
 
-<link rel="icon" href="img/logo.png">
-<link rel="stylesheet" href="css/style.css">
-
-<!-- Bootstrap CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
-<!-- Google Font -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-
-<!-- QR Library -->
+<!-- QR Libraries -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
-
+<style>
+/* Label input row */
+.qr-label-row {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+.qr-label-row .tt-label {
+  display: flex; align-items: center; gap: 6px;
+}
+.qr-label-row .tt-label span {
+  font-size: .68rem; font-weight: 700;
+  background: var(--blue-l); color: var(--blue);
+  border: 1px solid var(--blue-p);
+  padding: 2px 8px; border-radius: 99px;
+  text-transform: none; letter-spacing: 0;
+}
+</style>
 </head>
 
 <body>
-<div id="loader">
-<div class="spinner"></div>
-</div>
-<!-- NAVBAR -->
-<nav class="navbar navbar-dark bg-primary fixed-top">
-<div class="container">
 
-<a class="navbar-brand fw-bold" href="/">
-<img src="img/logo.png" width="30"> TechTools
-</a>
+<!-- LOADER -->
+<div id="loader"><div class="ring"></div></div>
 
-<button class="navbar-toggler" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu">
-<span class="navbar-toggler-icon"></span>
-</button>
-
-</div>
+<!-- ═══════════════ NAVBAR ═══════════════ -->
+<nav class="navbar" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo" aria-label="TechTools Home">
+      <div class="logo-box">
+        <img src="img/logo.png" alt="TechTools" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+        <span class="lf">T</span>
+      </div>
+      <div class="logo-text">Tech<b>Tools</b></div>
+    </a>
+    <ul class="nav-menu" role="list">
+      <li><a href="/">Home</a></li>
+      <li class="has-drop">
+        <a href="#" onclick="return false" aria-haspopup="true">Tools <span class="arrow">▼</span></a>
+        <div class="drop-menu">
+          <a href="youtube-tags.html"><div class="drop-icon" style="background:#fef2f2">🎯</div>YouTube Tag Generator</a>
+          <a href="youtube-thumbnail-download.html"><div class="drop-icon" style="background:#fffbeb">🖼️</div>Thumbnail Downloader</a>
+          <a href="qr-generator.html" class="curr"><div class="drop-icon" style="background:#f0fdf4">📱</div>QR Code Generator</a>
+          <a href="hastag-generator.html"><div class="drop-icon" style="background:#eff6ff">#️⃣</div>Hashtag Generator</a>
+          <a href="payslip.html"><div class="drop-icon" style="background:#fdf4ff">💼</div>Payslip Generator</a>
+          <a href="image-resizer.html"><div class="drop-icon" style="background:#f0fdfa">🖼</div>Image Resizer</a>
+        </div>
+      </li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="privacy.html">Privacy</a></li>
+      <li><a href="terms.html">Terms</a></li>
+      <li><a href="contact.html" class="nav-cta">Get Help →</a></li>
+    </ul>
+    <button class="hbg" id="hbg" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </nav>
 
-
-<!-- MOBILE MENU -->
-<div class="offcanvas offcanvas-end" id="mobileMenu">
-
-<div class="offcanvas-header bg-primary text-white">
-
-<h5>Menu</h5>
-
-<button class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
-
-</div>
-
-<div class="offcanvas-body">
-
-<ul class="navbar-nav">
-
-<li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-<li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-<li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-<li class="nav-item"><a class="nav-link" href="disclaimer.html">Disclaimer</a></li>
-<li class="nav-item"><a class="nav-link" href="privacy.html">Privacy</a></li>
-<li class="nav-item"><a class="nav-link" href="terms.html">Terms</a></li>
-
-</ul>
-
-</div>
-</div>
-
-
-<!-- MAIN -->
-<div class="container margintop ">
-
-<div class="row mt-3 g-4">
-
-
-<!-- LEFT -->
-<div class="col-lg-8">
-
-<div class="card  cardcustom p-4">
-
-<h5>⚡ Generate QR Code</h5>
-
-
-<!-- TYPE BUTTONS -->
-<div class="mb-3">
-
-<button class=" option-btn btn btn-primary active" onclick="selectType('url',this)">URL</button>
-<button class=" option-btn btn btn-primary" onclick="selectType('text',this)">Text</button>
-<button class=" option-btn btn btn-primary" onclick="selectType('wifi',this)">WiFi</button>
-<button class=" option-btn btn btn-primary" onclick="selectType('email',this)">Email</button>
-<button class=" option-btn btn btn-primary" onclick="selectType('sms',this)">SMS</button>
-
-</div>
-
-
-<!-- TEXT -->
-<div id="textBox" class="mb-3">
-
-<label id="mainLabel">Website URL</label>
-
-<input id="mainInput" class="form-control controlcustom" placeholder="https://example.com">
-
-</div>
-
-
-<!-- WIFI -->
-<div id="wifiBox" class="mb-3 hidden">
-
-<input id="wifiName" class="form-control controlcustom mb-2" placeholder="SSID">
-
-<input id="wifiPass" class="form-control controlcustom mb-2" placeholder="Password">
-
-<select id="wifiType" class="form-control controlcustom">
-
-<option value="WPA">WPA/WPA2</option>
-<option value="WEP">WEP</option>
-<option value="nopass">No Password</option>
-
-</select>
-
-</div>
-
-
-<!-- EMAIL -->
-<div id="emailBox" class="mb-3 hidden">
-
-<input id="emailTo" class="form-control controlcustom mb-2" placeholder="Email">
-
-<input id="emailSub" class="form-control controlcustom mb-2" placeholder="Subject">
-
-<textarea id="emailMsg" class="form-control controlcustom" placeholder="Message"></textarea>
-
-</div>
-
-
-<!-- SMS -->
-<div id="smsBox" class="mb-3 hidden">
-
-<input id="smsNum" class="form-control controlcustom mb-2" placeholder="Phone">
-
-<textarea id="smsMsg" class="form-control controlcustom" placeholder="Message"></textarea>
-
-</div>
-
-
-<!-- CUSTOMIZE -->
-<h6>Customize</h6>
-
-<div class="row">
-
-<div class="col-6 mb-3">
-
-<label>QR Color</label>
-
-<input id="qrColor" type="color" class="form-control controlcustom form-control-color">
-
-</div>
-
-<div class="col-6 mb-3">
-
-<label>Background</label>
-
-<input id="bgColor" type="color" class="form-control controlcustom form-control-color" value="#ffffff">
-
-</div>
-
-</div>
-
-
-<!-- SIZE -->
-<div class="mb-3">
-
-<label>
-Size: <span id="sizeLabel">256</span>px
-</label>
-
-<input id="qrSize" type="range" min="150" max="400" value="256" class="form-range">
-
-</div>
-
-
-<button onclick="generateQR()" class="btn btn-purple w-100">
-Generate QR
-</button>
-
-</div>
-</div>
-
-
-
-<!-- RIGHT -->
-<div class="col-lg-4">
-
-<div  class="card cardcustom p-0 text-center">
-
-<div id="qr" class="qr-box mb-3 p-3">
-
-<div id="qrcode"></div>
-
-</div>
-
-
-<button onclick="downloadQR()" class="btn btn-purple  w-100 mb-2">
-Download PNG
-</button>
-
-<button onclick="clearQR()" class="btn text-info w-100">
-Clear
-</button>
-
-</div>
-</div>
-
-
-</div>
-</div>
-<div class="container content-section mt-4">
-    <div class="row">
-        <article>
-
-<h2>Free Online QR Code Generator – Create Custom QR Codes Easily | TechTools</h2>
-
-<p>
-QR codes have become an essential part of modern digital communication. From sharing website links to connecting users with WiFi networks, QR codes make information access fast and convenient. The <strong>TechTools QR Code Generator</strong> is a free online tool that helps you create professional and customizable QR codes in just a few clicks.
-</p>
-
-<h3>What is a QR Code Generator?</h3>
-
-<p>
-A QR Code Generator is an online tool that converts text, links, contact details, and other information into a scannable QR code. When users scan the code using their smartphone camera, they are instantly redirected to the stored content. This makes QR codes useful for marketing, education, business, and personal use.
-</p>
-
-<h3>Features of TechTools QR Code Generator</h3>
-
-<ul>
-<li>Create QR codes for URLs, Text, WiFi, Email, and SMS</li>
-<li>Customize QR color and background</li>
-<li>Adjust size for printing and digital use</li>
-<li>High-quality PNG download</li>
-<li>Mobile-friendly and responsive design</li>
-<li>No registration required</li>
-<li>100% free and secure</li>
-</ul>
-
-<h3>How to Use the QR Code Generator</h3>
-
-<p>
-Using the TechTools QR Generator is simple and user-friendly. Follow these easy steps:
-</p>
-
-<ol>
-<li>Select the type of QR code you want to generate.</li>
-<li>Enter the required information in the input fields.</li>
-<li>Customize the color, background, and size.</li>
-<li>Click on the “Generate QR” button.</li>
-<li>Preview your QR code and download it.</li>
-</ol>
-
-<p>
-Within seconds, your QR code will be ready to use for websites, posters, business cards, or digital campaigns.
-</p>
-
-<h3>Benefits of Using Online QR Codes</h3>
-
-<p>
-QR codes help businesses and individuals share information quickly without typing long URLs or details. They improve user experience and save time. With TechTools, you can generate reliable and high-quality QR codes that work on all devices.
-</p>
-
-<ul>
-<li>Faster information sharing</li>
-<li>Improved customer engagement</li>
-<li>Easy marketing integration</li>
-<li>Contactless data sharing</li>
-<li>Cost-effective promotion tool</li>
-</ul>
-
-<h3>Why Choose TechTools?</h3>
-
-<p>
-TechTools is dedicated to providing fast, secure, and easy-to-use online tools. Our QR Code Generator works directly in your browser, ensuring privacy and data protection. We do not store user information, making our platform safe and trustworthy.
-</p>
-
-<p>
-Whether you are a student, developer, marketer, or business owner, TechTools helps you create QR codes efficiently without technical knowledge.
-</p>
-
-<h3>Mobile-Friendly and Secure Platform</h3>
-
-<p>
-The TechTools QR Generator is optimized for mobile devices, tablets, and desktops. You can generate and download QR codes anytime, anywhere. All processing happens locally in your browser, ensuring maximum security and privacy.
-</p>
-
-<h2>Frequently Asked Questions (FAQ)</h2>
-
-<h4>Is the QR Code Generator free?</h4>
-<p>
-Yes, the tool is completely free and does not require any registration.
-</p>
-
-<h4>Can I use QR codes for commercial purposes?</h4>
-<p>
-Yes, you can use generated QR codes for business, marketing, and commercial projects.
-</p>
-
-<h4>Do I need to install any software?</h4>
-<p>
-No installation is required. Everything works online in your web browser.
-</p>
-
-<h3>Conclusion</h3>
-
-<p>
-The TechTools QR Code Generator is a reliable and efficient solution for creating high-quality QR codes online. With customization options, instant downloads, and a secure platform, it is suitable for all users. Start using our QR Generator today and simplify your digital communication.
-</p>
-
-</article>
-
+<!-- Mobile nav -->
+<nav class="mob-nav" id="mobNav">
+  <a href="/">🏠 Home</a>
+  <hr class="mob-divider">
+  <a href="youtube-tags.html">🎯 YouTube Tag Generator</a>
+  <a href="youtube-thumbnail-download.html">🖼️ Thumbnail Downloader</a>
+  <a href="qr-generator.html" style="color:#60a5fa">📱 QR Code Generator</a>
+  <a href="hastag-generator.html">#️⃣ Hashtag Generator</a>
+  <a href="payslip.html">💼 Payslip Generator</a>
+  <a href="image-resizer.html">🖼 Image Resizer</a>
+  <hr class="mob-divider">
+  <a href="about.html">👤 About</a>
+  <a href="contact.html">✉️ Contact</a>
+  <a href="privacy.html">🔒 Privacy Policy</a>
+  <a href="terms.html">📋 Terms of Service</a>
+</nav>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<section class="hero">
+  <div class="hero-pill">📱 QR Tool · Free · No Signup</div>
+  <h1>QR Code Generator<br><em>Custom QR Codes, Instantly Free</em></h1>
+  <p class="hero-sub">Create QR codes for URLs, WiFi, Email, SMS and Text. Customize colors, size and label text, then download as high-quality PNG.</p>
+</section>
+
+<!-- ═══════════════ MAIN TOOL ═══════════════ -->
+<main class="page-wrap">
+  <div class="qr-layout">
+
+    <!-- LEFT: Controls -->
+    <div class="tt-card">
+      <h2 class="tt-card-title">⚡ Generate QR Code</h2>
+
+      <!-- Type buttons -->
+      <div class="type-row">
+        <button class="option-btn active" onclick="selectType('url',this)">🔗 URL</button>
+        <button class="option-btn" onclick="selectType('text',this)">📝 Text</button>
+        <button class="option-btn" onclick="selectType('wifi',this)">📶 WiFi</button>
+        <button class="option-btn" onclick="selectType('email',this)">✉️ Email</button>
+        <button class="option-btn" onclick="selectType('sms',this)">💬 SMS</button>
+      </div>
+
+      <!-- URL / Text -->
+      <div id="textBox" class="mb-3">
+        <label class="tt-label" id="mainLabel">Website URL</label>
+        <input type="text" id="mainInput" placeholder="https://example.com" autocomplete="off">
+      </div>
+
+      <!-- WiFi -->
+      <div id="wifiBox" class="hidden mb-3">
+        <label class="tt-label">Network Name (SSID)</label>
+        <input type="text" id="wifiName" placeholder="Your WiFi Name" class="mb-2">
+        <label class="tt-label">Password</label>
+        <input type="password" id="wifiPass" placeholder="WiFi Password" class="mb-2">
+        <label class="tt-label">Security Type</label>
+        <select id="wifiType">
+          <option value="WPA">WPA / WPA2</option>
+          <option value="WEP">WEP</option>
+          <option value="nopass">No Password</option>
+        </select>
+      </div>
+
+      <!-- Email -->
+      <div id="emailBox" class="hidden mb-3">
+        <label class="tt-label">To (Email Address)</label>
+        <input type="email" id="emailTo" placeholder="recipient@example.com" class="mb-2">
+        <label class="tt-label">Subject</label>
+        <input type="text" id="emailSub" placeholder="Email subject" class="mb-2">
+        <label class="tt-label">Message</label>
+        <textarea id="emailMsg" placeholder="Email message…"></textarea>
+      </div>
+
+      <!-- SMS -->
+      <div id="smsBox" class="hidden mb-3">
+        <label class="tt-label">Phone Number</label>
+        <input type="tel" id="smsNum" placeholder="+91 98765 43210" class="mb-2">
+        <label class="tt-label">Message</label>
+        <textarea id="smsMsg" placeholder="SMS message…"></textarea>
+      </div>
+
+      <!-- Customize section -->
+      <p class="sec-label">Customize</p>
+
+      <div class="color-row">
+        <div class="color-group">
+          <label>QR Color</label>
+          <input type="color" id="qrColor" value="#000000">
+        </div>
+        <div class="color-group">
+          <label>Background</label>
+          <input type="color" id="bgColor" value="#ffffff">
+        </div>
+      </div>
+
+      <!-- Size slider -->
+      <div class="slider-row">
+        <div class="slider-top">
+          <label>QR Size</label>
+          <span><span id="sizeLabel">256</span> px</span>
+        </div>
+        <input type="range" id="qrSize" min="150" max="400" value="256">
+      </div>
+
+      <!-- ── NEW: Label text input ── -->
+      <div class="qr-label-row">
+        <label class="tt-label">
+          Label Text &nbsp;<span>shown below QR · included in download</span>
+        </label>
+        <input
+          type="text"
+          id="qrLabel"
+          placeholder="e.g. Scan to visit our website"
+          autocomplete="off"
+          style="margin-top:6px;"
+        >
+      </div>
+
+      <!-- Generate button -->
+      <button class="tt-btn tt-btn-primary tt-btn-block" onclick="generateQR()" style="margin-top:20px;">
+        Generate QR Code
+      </button>
     </div>
-</div>
 
-<!-- FOOTER -->
-<footer>
+    <!-- RIGHT: Preview card -->
+    <div>
+      <div class="qr-preview-card">
+        <!-- id="qr" wraps preview for html2canvas capture -->
+        <div id="qr" class="qr-preview-top" style="flex-direction:column; padding:20px; gap:0;">
+          <!-- id="qrcode" is where QRCode library renders -->
+          <div id="qrcode">
+            <div class="qr-empty">
+              <span class="qr-empty-icon">📱</span>
+              <span>Your QR code<br>will appear here</span>
+            </div>
+          </div>
+          <!-- Label rendered here by JS -->
+        </div>
+        <div class="qr-preview-actions">
+          <button class="tt-btn tt-btn-success tt-btn-block" onclick="downloadQR()">
+            ⬇ Download PNG
+          </button>
+          <button class="tt-btn tt-btn-outline tt-btn-block" onclick="clearQR()">
+            ✕ Clear
+          </button>
+        </div>
+      </div>
 
-<p>© 2026 TechTools. All Rights Reserved.</p>
+      <div class="info-box mt-3">
+        <h3>📋 Steps</h3>
+        <ul>
+          <li><span class="blt">1</span> Choose QR type</li>
+          <li><span class="blt">2</span> Fill in details</li>
+          <li><span class="blt">3</span> Customize color &amp; size</li>
+          <li><span class="blt">4</span> Add label text (optional)</li>
+          <li><span class="blt">5</span> Click Generate &amp; Download</li>
+        </ul>
+      </div>
+    </div>
 
-<p>
-<a href="privacy.html">Privacy Policy</a> |
-<a href="terms.html">Terms of Service</a> |
-<a href="contact.html">Contact Us</a>
-</p>
+  </div>
+</main>
 
-<p class="mt-2">
-TechTools is committed to providing reliable and secure online utilities for daily use.
-</p>
+<!-- ═══════════════ SEO ARTICLE ═══════════════ -->
+<section class="tt-article">
 
+  <h2>Free Online QR Code Generator – Create Custom QR Codes | TechTools</h2>
+  <p>QR codes have become an essential part of modern digital communication. From sharing website links to connecting users with WiFi networks, QR codes make information access fast and convenient. The <strong>TechTools QR Code Generator</strong> is a free online tool that creates professional, customizable QR codes in seconds.</p>
+
+  <h2>Supported QR Code Types</h2>
+  <ul>
+    <li><strong>URL</strong> — Link to any website or webpage</li>
+    <li><strong>Text</strong> — Any plain text message</li>
+    <li><strong>WiFi</strong> — Share network credentials for instant connection</li>
+    <li><strong>Email</strong> — Pre-filled email with subject and message</li>
+    <li><strong>SMS</strong> — Pre-filled text message to any number</li>
+  </ul>
+
+  <h2>How to Use</h2>
+  <p>Select your QR type, fill in the required details, customize the color, background and size, then click Generate. Add optional label text to display below the QR code — great for printed materials like business cards and flyers. Click Download PNG to save a high-quality image with the label baked in.</p>
+
+  <h2>Why Choose TechTools?</h2>
+  <ul>
+    <li>100% free — no registration required</li>
+    <li>All processing happens in your browser — no data sent to servers</li>
+    <li>Custom label text printed below the QR code</li>
+    <li>High-quality PNG download at up to 400×400 px</li>
+    <li>Fully mobile responsive</li>
+    <li>Custom colors for branding</li>
+  </ul>
+
+  <!-- FAQ -->
+  <h2 style="margin-top:40px">Frequently Asked Questions</h2>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">Is the QR Code Generator free? <span class="faq-icon">▼</span></div>
+    <div class="faq-a">Yes, completely free with no registration required. Use it as many times as you need.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">Can I add text below the QR code? <span class="faq-icon">▼</span></div>
+    <div class="faq-a">Yes. Enter your label text in the "Label Text" field before generating. The text appears below the QR code on a white background and is baked into the downloaded PNG file.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">Can I use QR codes commercially? <span class="faq-icon">▼</span></div>
+    <div class="faq-a">Yes, generated QR codes can be used for business, marketing, and commercial projects.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">Do I need to install software? <span class="faq-icon">▼</span></div>
+    <div class="faq-a">No installation required. Everything works in your browser — on desktop, tablet and mobile.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">Is my data safe? <span class="faq-icon">▼</span></div>
+    <div class="faq-a">Yes. All QR generation happens locally in your browser. We never store or transmit your input data.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">What format is the downloaded QR code? <span class="faq-icon">▼</span></div>
+    <div class="faq-a">QR codes are downloaded as high-quality PNG images — compatible with all printers, design tools and platforms.</div>
+  </div>
+
+</section>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer class="site-footer">
+  <div class="footer-in">
+    <div class="footer-top">
+      <div>
+        <div class="ft-logo">
+          <div class="ft-logo-box">
+            <img src="img/logo.png" alt="TechTools" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+            <span class="lf">T</span>
+          </div>
+          TechTools
+        </div>
+        <p class="ft-desc">Free online tools for YouTube creators, students, and developers. Built by Prahlad Yadav from India. No signup, no cost, always free.</p>
+        <div class="ft-chips">
+          <span class="ft-chip">🔒 No File Storage</span>
+          <span class="ft-chip">✅ No Login</span>
+          <span class="ft-chip">⚡ 100% Free</span>
+        </div>
+      </div>
+      <div class="ft-col">
+        <h4>Tools</h4>
+        <ul>
+          <li><a href="youtube-tags.html">🎯 YouTube Tags</a></li>
+          <li><a href="youtube-thumbnail-download.html">🖼️ Thumbnail Downloader</a></li>
+          <li><a href="qr-generator.html">📱 QR Code Generator</a></li>
+          <li><a href="hastag-generator.html">#️⃣ Hashtag Generator</a></li>
+          <li><a href="payslip.html">💼 Payslip Generator</a></li>
+          <li><a href="image-resizer.html">🖼 Image Resizer</a></li>
+        </ul>
+      </div>
+      <div class="ft-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">👤 About Us</a></li>
+          <li><a href="contact.html">✉️ Contact</a></li>
+          <li><a href="disclaimer.html">📄 Disclaimer</a></li>
+        </ul>
+      </div>
+      <div class="ft-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="privacy.html">🔒 Privacy Policy</a></li>
+          <li><a href="terms.html">📋 Terms of Service</a></li>
+          <li><a href="disclaimer.html">⚠️ Disclaimer</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 TechTools by <a href="about.html">Prahlad Yadav</a>. All Rights Reserved.</span>
+      <div class="fbl">
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+        <a href="contact.html">Contact</a>
+        <a href="about.html">About</a>
+      </div>
+    </div>
+    <!-- <p class="ads-note">This site may display ads via Google AdSense. See our <a href="privacy.html">Privacy Policy</a> for details.</p> -->
+  </div>
 </footer>
 
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- ADSENSE -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3666396936157058" crossorigin="anonymous"></script>
 
-<script src="js/main.js"></script>
-    <script>
-    /* LOADER */
-window.addEventListener("load", ()=>{
-document.getElementById("loader").style.display="none";
+<!-- SHARED NAV + LOADER -->
+<script>
+var hbg    = document.getElementById('hbg');
+var mobNav = document.getElementById('mobNav');
+hbg.addEventListener('click', function() {
+  var open = mobNav.classList.toggle('show');
+  hbg.classList.toggle('open', open);
+  hbg.setAttribute('aria-expanded', String(open));
 });
+window.addEventListener('load', function() {
+  var l = document.getElementById('loader');
+  if (l) { l.style.opacity = '0'; setTimeout(function(){ l.remove(); }, 450); }
+});
+function toggleFaq(el) {
+  var item = el.parentElement;
+  document.querySelectorAll('.faq-item').forEach(function(i) {
+    if (i !== item) i.classList.remove('open');
+  });
+  item.classList.toggle('open');
+}
 </script>
+
+<!-- QR LOGIC -->
+<script src="js/main.js"></script>
 
 </body>
 </html>
-

@@ -1,415 +1,462 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Free Image Resizer: Resize Photos and Logos Online | TechTools</title>
+<title>Free Image Resizer – Resize Photos & Logos Online | TechTools</title>
+<meta name="description" content="Resize images online for free. Supports JPG, PNG and WEBP. Control width, height, DPI, quality and format — no signup, 100% browser-based.">
+<meta name="keywords" content="free image resizer online, resize image free, crop image free, online free image resizer, image tools, TechTools, resize photo online, compress image">
+<meta name="author" content="Prahlad Yadav">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://techtools.best/image-resizer.html">
 
-<meta name="description"
-content="Free Image Resizer: Resize Photos and Logos Online | TechTools
-">
+<meta property="og:title" content="Free Image Resizer – Resize Photos Online | TechTools">
+<meta property="og:description" content="Resize JPG, PNG and WEBP images online. Free, instant, no signup.">
+<meta property="og:url" content="https://techtools.best/image-resizer.html">
+<meta property="og:type" content="website">
 
-<meta name="keywords" content="
-online tools,
-free online tools,
-free image resizer online,
-image tools,
-free image resizer,
-resize image free,
-crop image free,
-free image,
-online free image resizer,
-TechTools,
-TechTools best,
-TechTools online,
-free tools website,
-all in one tools,
-salary slip generate,
-no login tools
-">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Image Resizer",
+  "url": "https://techtools.best/image-resizer.html",
+  "description": "Free online image resizer. Resize JPG, PNG and WEBP images without quality loss.",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "All",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
 
-<meta name="author" content="TechTools">
 <link rel="icon" href="img/logo.png" type="image/png">
-<link rel="preconnect" href="https://cdn.jsdelivr.net">
-<link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- SINGLE SHARED CSS — used by all pages -->
+<link rel="stylesheet" href="css/style1.css">
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
 <!-- LOADER -->
-<div id="loader">
-<div class="spinner"></div>
-</div>
+<div id="loader"><div class="ring"></div></div>
 
+<!-- ═══════════════ NAVBAR ═══════════════ -->
+<nav class="navbar" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
 
-<!-- NAVBAR -->
-<nav class="navbar navbar-dark bg-primary fixed-top">
-<div class="container">
+    <a href="/" class="nav-logo" aria-label="TechTools Home">
+      <div class="logo-box">
+        <img src="img/logo.png" alt="TechTools"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+        <span class="lf">T</span>
+      </div>
+      <div class="logo-text">Tech<b>Tools</b></div>
+    </a>
 
-<a class="navbar-brand fw-bold" href="/"><img src="img/logo.png" alt="" style="width: 30px;"> TechTools</a>
+    <ul class="nav-menu" role="list">
+      <li><a href="/">Home</a></li>
+      <li class="has-drop">
+        <a href="#" onclick="return false" aria-haspopup="true">
+          Tools <span class="arrow">▼</span>
+        </a>
+        <div class="drop-menu">
+          <a href="youtube-tags.html"><div class="drop-icon" style="background:#fef2f2">🎯</div>YouTube Tag Generator</a>
+          <a href="youtube-thumbnail-download.html"><div class="drop-icon" style="background:#fffbeb">🖼️</div>Thumbnail Downloader</a>
+          <a href="qr-generator.html"><div class="drop-icon" style="background:#f0fdf4">📱</div>QR Code Generator</a>
+          <a href="hastag-generator.html"><div class="drop-icon" style="background:#eff6ff">#️⃣</div>Hashtag Generator</a>
+          <a href="payslip.html"><div class="drop-icon" style="background:#fdf4ff">💼</div>Payslip Generator</a>
+          <a href="image-resizer.html" class="curr"><div class="drop-icon" style="background:#f0fdfa">🖼</div>Image Resizer</a>
+        </div>
+      </li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="privacy.html">Privacy</a></li>
+      <li><a href="terms.html">Terms</a></li>
+      <li><a href="contact.html" class="nav-cta">Get Help →</a></li>
+    </ul>
 
-<button class="navbar-toggler" type="button" 
-data-bs-toggle="offcanvas" 
-data-bs-target="#mobileMenu">
-
-<span class="navbar-toggler-icon"></span>
-</button>
-
-</div>
+    <button class="hbg" id="hbg" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </nav>
 
+<!-- Mobile nav -->
+<nav class="mob-nav" id="mobNav">
+  <a href="/">🏠 Home</a>
+  <hr class="mob-divider">
+  <a href="youtube-tags.html">🎯 YouTube Tag Generator</a>
+  <a href="youtube-thumbnail-download.html">🖼️ Thumbnail Downloader</a>
+  <a href="qr-generator.html">📱 QR Code Generator</a>
+  <a href="hastag-generator.html">#️⃣ Hashtag Generator</a>
+  <a href="payslip.html">💼 Payslip Generator</a>
+  <a href="image-resizer.html" style="color:#60a5fa">🖼 Image Resizer</a>
+  <hr class="mob-divider">
+  <a href="about.html">👤 About</a>
+  <a href="contact.html">✉️ Contact</a>
+  <a href="privacy.html">🔒 Privacy Policy</a>
+  <a href="terms.html">📋 Terms of Service</a>
+</nav>
 
-<!-- DRAWER -->
-<div class="offcanvas offcanvas-end" id="mobileMenu">
-
-<div class="offcanvas-header bg-primary text-white">
-
-<h5 class="offcanvas-title">Menu</h5>
-
-<button type="button" class="btn-close btn-close-white"
-data-bs-dismiss="offcanvas"></button>
-
-</div>
-
-<div class="offcanvas-body">
-
-<ul class="navbar-nav">
-
-<li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-<li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-<li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-<li class="nav-item"><a class="nav-link" href="disclaimer.html">Disclaimer</a></li>
-<li class="nav-item"><a class="nav-link" href="privacy.html">Privacy</a></li>
-<li class="nav-item"><a class="nav-link" href="terms.html">Terms</a></li>
-
-</ul>
-
-</div>
-
-</div>
-
-
-<!-- HERO -->
-<section class="hero mt-5 pt-4">
-
-<h1>Free Image Resizer: Resize Photos and Logos Online</h1>
-
-<p>Fast • Secure • Simple • 100% Free</p>
-
+<!-- ═══════════════ HERO ═══════════════ -->
+<section class="hero">
+  <div class="hero-pill">🖼 Image Tool · Free · No Signup</div>
+  <h1>Free Image Resizer<br><em>Resize Photos &amp; Logos Online</em></h1>
+  <p class="hero-sub">Resize JPG, PNG and WEBP images instantly in your browser. Control dimensions, quality and format — no software needed.</p>
 </section>
 
+<!-- ═══════════════ MAIN TOOL ═══════════════ -->
+<main class="page-wrap">
 
+  <div class="tool-layout">
 
+    <!-- ── LEFT: Tool Card ── -->
+    <div class="tt-card">
+      <h2 class="tt-card-title">Image Resizer</h2>
 
-<!-- INFO (ADSENSE CONTENT) -->
-<div class="container py-4">
-<div class="tt-resizer-card">
+      <!-- Upload -->
+      <div class="tt-upload-box mb-3" id="dropZone">
+        <div id="uploadPlaceholder">
+          <span class="upload-ico">📁</span>
+          <strong>Click or Drag &amp; Drop Image</strong>
+          <span>JPG, PNG, WEBP supported</span>
+        </div>
+        <img id="uploadPreview" class="tt-upload-preview" style="display:none">
+        <input type="file" id="upload" accept="image/*" hidden>
+      </div>
 
-<h4 class="text-center mb-4">Image Resizer</h4>
+      <!-- Dimensions -->
+      <div class="mb-3">
+        <div class="dim-row">
+          <div>
+            <label class="tt-label" for="width">Width</label>
+            <input type="number" id="width" value="800" min="1" aria-label="Width">
+          </div>
+          <span class="tt-lock" id="lockBtn" title="Lock aspect ratio">🔒</span>
+          <div>
+            <label class="tt-label" for="height">Height</label>
+            <input type="number" id="height" value="600" min="1" aria-label="Height">
+          </div>
+        </div>
+      </div>
 
-<!-- Upload -->
-<div class="tt-upload-box mb-3" id="dropZone">
-  <div id="uploadPlaceholder">
-    <strong>Click or Drag & Drop Image</strong>
-    <span>JPG, PNG, WEBP supported</span>
+      <!-- Unit -->
+      <div class="mb-3">
+        <label class="tt-label" for="unit">Unit</label>
+        <select id="unit">
+          <option value="px">Pixels (px)</option>
+          <option value="percent">Percent (%)</option>
+          <option value="cm">Centimeters (cm)</option>
+          <option value="in">Inches (in)</option>
+        </select>
+      </div>
+
+      <!-- DPI -->
+      <div class="mb-3">
+        <label class="tt-label" for="dpi">Resolution (DPI)</label>
+        <input type="number" id="dpi" value="72" min="1" max="600">
+      </div>
+
+      <!-- Format & Quality -->
+      <div class="grid-2 mb-4">
+        <div>
+          <label class="tt-label" for="format">Format</label>
+          <select id="format">
+            <option value="image/jpeg">JPG</option>
+            <option value="image/png">PNG</option>
+            <option value="image/webp">WEBP</option>
+          </select>
+        </div>
+        <div>
+          <label class="tt-label" for="quality">Quality (1–100)</label>
+          <input type="number" id="quality" value="90" min="1" max="100">
+        </div>
+      </div>
+
+      <!-- Action button -->
+      <button class="tt-btn tt-btn-primary tt-btn-block" onclick="resizeImage()">
+        Resize Image
+      </button>
+
+      <!-- Result pills (shown after resize) -->
+      <div class="result-strip" id="resultStrip" style="display:none">
+        <span class="result-pill" id="rSize">–</span>
+        <span class="result-pill" id="rDims">–</span>
+        <span class="result-pill" id="rFmt">–</span>
+      </div>
+    </div>
+
+    <!-- ── RIGHT: Tips + Info ── -->
+    <div>
+      <div class="info-box mb-3">
+        <h3>💡 Quick Tips</h3>
+        <ul>
+          <li><span class="blt">→</span> For web use: 1900×1100 px, JPG, 90% quality</li>
+          <li><span class="blt">→</span> For social media: 1080×1080 px, JPG, 85%</li>
+          <li><span class="blt">→</span> For transparent images: use PNG format</li>
+          <li><span class="blt">→</span> For smallest file size: WEBP format</li>
+          <li><span class="blt">→</span> Lock 🔒 keeps your aspect ratio intact</li>
+        </ul>
+      </div>
+
+      <div class="info-box">
+        <h3>🔒 Privacy Guarantee</h3>
+        <ul>
+          <li><span class="blt">✓</span> All processing happens in your browser</li>
+          <li><span class="blt">✓</span> Your image is never uploaded to our servers</li>
+          <li><span class="blt">✓</span> No account or signup required</li>
+          <li><span class="blt">✓</span> 100% free, always</li>
+        </ul>
+      </div>
+    </div>
+
   </div>
 
-  <img id="uploadPreview" class="tt-upload-preview d-none">
-  <input type="file" id="upload" accept="image/*" hidden>
-</div>
+</main>
 
-
-<!-- Size -->
-<div class="row g-2 mb-2">
-  <div class="col-5">
-    <label class="tt-label">Width</label>
-    <input type="number" id="width" class="form-control" value="70">
-  </div>
-
-  <div class="col-2 d-flex align-items-end justify-content-center">
-    <span id="lockBtn" class="tt-lock" title="Lock aspect ratio">🔒</span>
-  </div>
-
-  <div class="col-5">
-    <label class="tt-label">Height</label>
-    <input type="number" id="height" class="form-control" value="70">
+<!-- ═══════════════ PREVIEW MODAL ═══════════════ -->
+<div class="tt-modal-overlay" id="previewModal">
+  <div class="tt-modal">
+    <div class="tt-modal-head">
+      <span>Preview &amp; Download</span>
+      <button class="tt-modal-close" onclick="closeModal()" aria-label="Close">✕</button>
+    </div>
+    <div class="tt-modal-body">
+      <img id="preview" alt="Resized preview">
+      <a id="download" class="tt-btn tt-btn-success tt-btn-block" download>
+        ⬇ Download Image
+      </a>
+    </div>
   </div>
 </div>
 
-<select id="unit" class="form-select mb-3">
-     <option value="px">Pixels</option>
-  <option value="percent">Percent</option>
-  <option value="cm">Centimeters</option>
-  <option value="in">Inches</option>
-</select>
-
-<!-- DPI -->
-<div class="mb-3">
-  <label class="tt-label">Resolution (DPI)</label>
-  <input type="number" id="dpi" class="form-control" value="72">
-</div>
-
-<!-- Format / Quality / BG -->
-<div class="row g-2 mb-4">
-  <div class="col-6">
-    <label class="tt-label">Format</label>
-    <select id="format" class="form-select">
-      <option value="image/jpeg">JPG</option>
-      <option value="image/png">PNG</option>
-      <option value="image/webp">WEBP</option>
-    </select>
-  </div>
-
-  <div class="col-6">
-    <label class="tt-label">Quality</label>
-    <input type="number" id="quality" class="form-control" value="90">
-  </div>
-
- 
-</div>
-
-<button class="btn btn-primary w-100" onclick="resizeImage()">Resize Image</button>
-
-</div>
-</div>
-
-<!-- Preview Modal -->
-<div class="modal fade" id="previewModal">
-<div class="modal-dialog modal-dialog-centered">
-<div class="modal-content">
-<div class="modal-header">
-<h5 class="modal-title">Preview</h5>
-<button class="btn-close" data-bs-dismiss="modal"></button>
-</div>
-<div class="modal-body text-center">
-<img id="preview" class="tt-preview-img mb-3">
-<a id="download" class="btn btn-success" download>Download Image</a>
-</div>
-</div>
-</div>
-</div>
-
-<section class="container content-section my-5">
+<!-- ═══════════════ SEO ARTICLE ═══════════════ -->
+<section class="tt-article" aria-label="About image resizing">
 
   <h2>What Is Image File Size?</h2>
-
-  <p>
-    Image file size is simply the amount of space an image takes on your device or when you upload it online.
-    Every digital image is made up of tiny dots called <strong>pixels</strong>. Each pixel stores color information
-    using red, green, and blue values. When an image has more pixels, it needs more data to store all that color
-    information, which increases the file size.
-  </p>
-
-  <p>
-    Modern smartphones and cameras capture very high-resolution photos. When your phone says it takes
-    10-megapixel photos, it means each image contains about 10 million pixels. While this is great for detail,
-    it also means the image file can be very large, often several megabytes in size.
-  </p>
+  <p>Image file size is the amount of space an image takes on your device or when uploaded online. Every digital image is made up of tiny dots called <strong>pixels</strong>. Each pixel stores color information using red, green, and blue values. More pixels means more data and a larger file.</p>
+  <p>Modern smartphones capture 10–50 megapixel photos. While great for detail, these images can be several megabytes — too large for most web and sharing uses.</p>
 
   <h2>Why Large Images Are Not Always Useful</h2>
-
-  <p>
-    Large image files can cause a few problems. They take longer to upload, longer to download, and use more
-    storage space on your device. Sharing big images through email or messaging apps can be slow, especially
-    if the internet connection is not fast.
-  </p>
-
-  <p>
-    Another important thing to understand is that most screens do not show images at their full original size.
-    Phones, tablets, laptops, and even TVs usually display far fewer pixels than what modern cameras capture.
-    This means that a very large image is often resized automatically when viewed, and much of the extra data
-    is never actually used.
-  </p>
+  <p>Large files upload and download slowly, use more storage, and are hard to share over email or messaging apps. Most screens also display far fewer pixels than cameras capture, so extra data is often unused.</p>
 
   <h2>How to Reduce Image File Size Easily</h2>
-
-  <p>
-    One way to reduce image file size is by <strong>compressing</strong> the image. Compression removes some
-    image data to make the file smaller. As compression increases, file size goes down, but image quality may
-    also decrease slightly. When done carefully, compression can save a lot of space without making the image
-    look bad.
-  </p>
-
-  <p>
-    Another and often better option is <strong>resizing the image</strong>. Resizing reduces the width and height
-    of the image, which lowers the total number of pixels. For most everyday uses, resizing does not reduce
-    visible quality at all, because screens cannot display extremely large images anyway.
-  </p>
+  <p><strong>Compressing</strong> an image removes some data to make the file smaller, which may slightly reduce quality. <strong>Resizing</strong> reduces width and height, lowering total pixels — for most uses this is the best approach with no visible quality loss.</p>
 
   <h2>Why Use the TechTools Image Resizer?</h2>
-
-  <p>
-    The <strong>TechTools Image Resizer</strong> makes resizing images simple and fast. You can adjust image
-    dimensions, control quality, and choose the right format without installing any software. It works directly
-    in your browser and supports common formats like JPG, PNG, and WEBP.
-  </p>
-
-  <p>
-    For most users, resizing images to around <strong>1900 × 1100 pixels</strong> with <strong>JPG format</strong>
-    and about <strong>90% quality</strong> is a great choice. This creates images that look sharp on all screens,
-    load quickly, and are easy to share online.
-  </p>
-
-  <p>
-    Whether you are uploading images to a website, sending photos to friends, or optimizing pictures for social
-    media, using an image resizer helps you save space and time. With TechTools, you can resize images safely
-    without worrying about losing quality.
-  </p>
-
-  <!-- FAQ SECTION -->
-<section style="max-width:860px; margin:40px auto; padding:0 16px;">
-
-  <h2 style="font-size:1.5rem; font-weight:700; margin-bottom:20px;">
-    Frequently Asked Questions – Image Resizer
-  </h2>
-
-  <!-- Q1 -->
-  <div style="background:#fff; border-radius:10px; padding:18px 20px; margin-bottom:12px; box-shadow:0 1px 4px rgba(0,0,0,0.08);">
-    <h3 style="font-size:1rem; font-weight:600; margin-bottom:8px;">
-      What image formats does the TechTools Image Resizer support?
-    </h3>
-    <p style="font-size:0.9rem; color:#444; line-height:1.7; margin:0;">
-      The TechTools Image Resizer supports three widely used image formats: 
-      <strong>JPG</strong>, <strong>PNG</strong>, and <strong>WEBP</strong>. 
-      You can upload an image in any of these formats and also choose to download 
-      the resized image in a different format. For example, you can upload a PNG 
-      and download it as a JPG to reduce file size.
-    </p>
-  </div>
-
-  <!-- Q2 -->
-  <div style="background:#fff; border-radius:10px; padding:18px 20px; margin-bottom:12px; box-shadow:0 1px 4px rgba(0,0,0,0.08);">
-    <h3 style="font-size:1rem; font-weight:600; margin-bottom:8px;">
-      Is my image uploaded to a server when I use this tool?
-    </h3>
-    <p style="font-size:0.9rem; color:#444; line-height:1.7; margin:0;">
-      No. The TechTools Image Resizer works entirely in your browser. 
-      Your image is never uploaded to any server and is never stored or shared. 
-      All processing happens locally on your device, which means your photos and 
-      files stay completely private and secure.
-    </p>
-  </div>
-
-  <!-- Q3 -->
-  <div style="background:#fff; border-radius:10px; padding:18px 20px; margin-bottom:12px; box-shadow:0 1px 4px rgba(0,0,0,0.08);">
-    <h3 style="font-size:1rem; font-weight:600; margin-bottom:8px;">
-      What is the best image size for Instagram, YouTube, and Facebook?
-    </h3>
-    <p style="font-size:0.9rem; color:#444; line-height:1.7; margin:0;">
-      Each platform has recommended image dimensions for best results:
-    </p>
-    <ul style="font-size:0.9rem; color:#444; line-height:1.9; margin:8px 0 0 18px;">
-      <li><strong>Instagram Post:</strong> 1080 × 1080 px (square) or 1080 × 1350 px (portrait)</li>
-      <li><strong>Instagram Story / Reels:</strong> 1080 × 1920 px</li>
-      <li><strong>YouTube Thumbnail:</strong> 1280 × 720 px</li>
-      <li><strong>Facebook Cover Photo:</strong> 820 × 312 px</li>
-      <li><strong>Twitter / X Header:</strong> 1500 × 500 px</li>
-      <li><strong>General Web Use:</strong> 1200 × 630 px</li>
-    </ul>
-  </div>
-
-  <!-- Q4 -->
-  <div style="background:#fff; border-radius:10px; padding:18px 20px; margin-bottom:12px; box-shadow:0 1px 4px rgba(0,0,0,0.08);">
-    <h3 style="font-size:1rem; font-weight:600; margin-bottom:8px;">
-      Will resizing reduce my image quality?
-    </h3>
-    <p style="font-size:0.9rem; color:#444; line-height:1.7; margin:0;">
-      Resizing to a smaller size generally preserves quality well, especially when 
-      you keep the quality slider at 85–100%. Making an image larger than its 
-      original size (upscaling) can cause it to look blurry or pixelated, 
-      because the tool has to create new pixels that didn't exist in the original. 
-      For best results, always resize <em>down</em> rather than up.
-    </p>
-  </div>
-
-  <!-- Q5 -->
-  <div style="background:#fff; border-radius:10px; padding:18px 20px; margin-bottom:12px; box-shadow:0 1px 4px rgba(0,0,0,0.08);">
-    <h3 style="font-size:1rem; font-weight:600; margin-bottom:8px;">
-      What does the "Lock Aspect Ratio" option do?
-    </h3>
-    <p style="font-size:0.9rem; color:#444; line-height:1.7; margin:0;">
-      The lock aspect ratio option (🔒) keeps the width and height proportional. 
-      When enabled, if you change the width, the height automatically adjusts 
-      to maintain the original shape of the image. This prevents your image 
-      from looking stretched or squashed. It is recommended to keep this 
-      enabled unless you specifically need a fixed custom size.
-    </p>
-  </div>
-
-  <!-- Q6 -->
-  <div style="background:#fff; border-radius:10px; padding:18px 20px; margin-bottom:12px; box-shadow:0 1px 4px rgba(0,0,0,0.08);">
-    <h3 style="font-size:1rem; font-weight:600; margin-bottom:8px;">
-      Can I resize images on my phone or tablet?
-    </h3>
-    <p style="font-size:0.9rem; color:#444; line-height:1.7; margin:0;">
-      Yes. The TechTools Image Resizer is fully mobile-friendly and works on 
-      all devices including Android phones, iPhones, iPads, and tablets. 
-      You can upload an image directly from your phone's gallery, resize it, 
-      and download the result — all without installing any app.
-    </p>
-  </div>
-
-  <!-- Q7 -->
-  <div style="background:#fff; border-radius:10px; padding:18px 20px; margin-bottom:12px; box-shadow:0 1px 4px rgba(0,0,0,0.08);">
-    <h3 style="font-size:1rem; font-weight:600; margin-bottom:8px;">
-      Is the Image Resizer free to use?
-    </h3>
-    <p style="font-size:0.9rem; color:#444; line-height:1.7; margin:0;">
-      Yes, the TechTools Image Resizer is 100% free with no limits. 
-      You do not need to create an account, sign up, or pay anything. 
-      You can resize as many images as you need without any restrictions.
-    </p>
-  </div>
+  <p>The <strong>TechTools Image Resizer</strong> lets you adjust dimensions, control quality, and choose format — directly in your browser. No software to install. No files uploaded to servers. For most users, <strong>1900×1100 px, JPG, 90% quality</strong> is the ideal web-ready setting.</p>
+  <p>Whether resizing for a website, social media, or email, TechTools helps you get the right size instantly — free and private.</p>
 
 </section>
 
-</section>
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer class="site-footer">
+  <div class="footer-in">
+    <div class="footer-top">
 
+      <div>
+        <div class="ft-logo">
+          <div class="ft-logo-box">
+            <img src="img/logo.png" alt="TechTools" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+            <span class="lf">T</span>
+          </div>
+          TechTools
+        </div>
+        <p class="ft-desc">Free online tools for YouTube creators, students, and developers. Built by Prahlad Yadav from India. No signup, no cost, always free.</p>
+        <div class="ft-chips">
+          <span class="ft-chip">🔒 No File Storage</span>
+          <span class="ft-chip">✅ No Login</span>
+          <span class="ft-chip">⚡ 100% Free</span>
+        </div>
+      </div>
 
+      <div class="ft-col">
+        <h4>Tools</h4>
+        <ul>
+          <li><a href="youtube-tags.html">🎯 YouTube Tags</a></li>
+          <li><a href="youtube-thumbnail-download.html">🖼️ Thumbnail Downloader</a></li>
+          <li><a href="qr-generator.html">📱 QR Code Generator</a></li>
+          <li><a href="hastag-generator.html">#️⃣ Hashtag Generator</a></li>
+          <li><a href="payslip.html">💼 Payslip Generator</a></li>
+          <li><a href="image-resizer.html">🖼 Image Resizer</a></li>
+        </ul>
+      </div>
 
+      <div class="ft-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">👤 About Us</a></li>
+          <li><a href="contact.html">✉️ Contact</a></li>
+          <li><a href="disclaimer.html">📄 Disclaimer</a></li>
+        </ul>
+      </div>
 
+      <div class="ft-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="privacy.html">🔒 Privacy Policy</a></li>
+          <li><a href="terms.html">📋 Terms of Service</a></li>
+          <li><a href="disclaimer.html">⚠️ Disclaimer</a></li>
+        </ul>
+      </div>
 
+    </div>
 
-<!-- FOOTER -->
-<footer>
-
-<p>© 2026 TechTools. All Rights Reserved.</p>
-
-<p>
-<a href="privacy.html">Privacy Policy</a> |
-<a href="terms.html">Terms of Service</a> |
-<a href="contact.html">Contact Us</a>
-</p>
-
-<p class="mt-2">
-TechTools is committed to providing reliable and secure online utilities for daily use.
-</p>
-
+    <div class="footer-bottom">
+      <span>© 2026 TechTools by <a href="about.html">Prahlad Yadav</a>. All Rights Reserved.</span>
+      <div class="fbl">
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+        <a href="contact.html">Contact</a>
+        <a href="about.html">About</a>
+      </div>
+    </div>
+    <p class="ads-note">This site may display ads via Google AdSense. See our <a href="privacy.html">Privacy Policy</a> for details.</p>
+  </div>
 </footer>
 
+<!-- ADSENSE -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3666396936157058" crossorigin="anonymous"></script>
 
-<!-- JS -->
- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3666396936157058"
-     crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" defer></script>
-
-<script src="js/image-resizer.js"></script>
+<!-- SHARED NAV SCRIPT -->
 <script>
-    /* LOADER */
-window.addEventListener("load", ()=>{
-document.getElementById("loader").style.display="none";
+var hbg    = document.getElementById('hbg');
+var mobNav = document.getElementById('mobNav');
+hbg.addEventListener('click', function() {
+  var open = mobNav.classList.toggle('show');
+  hbg.classList.toggle('open', open);
+  hbg.setAttribute('aria-expanded', String(open));
+});
+window.addEventListener('load', function() {
+  var l = document.getElementById('loader');
+  l.style.opacity = '0';
+  setTimeout(function() { l.remove(); }, 450);
 });
 </script>
 
+<!-- IMAGE RESIZER LOGIC -->
+<script>
+var locked     = true;
+var origW      = 0;
+var origH      = 0;
+var origImg    = null;
+var aspectRatio = 1;
+
+// ── UPLOAD HANDLING ──
+var dropZone    = document.getElementById('dropZone');
+var uploadInput = document.getElementById('upload');
+
+dropZone.addEventListener('click', function() { uploadInput.click(); });
+dropZone.addEventListener('dragover', function(e) { e.preventDefault(); dropZone.classList.add('drag-over'); });
+dropZone.addEventListener('dragleave', function() { dropZone.classList.remove('drag-over'); });
+dropZone.addEventListener('drop', function(e) {
+  e.preventDefault(); dropZone.classList.remove('drag-over');
+  if (e.dataTransfer.files[0]) loadImage(e.dataTransfer.files[0]);
+});
+uploadInput.addEventListener('change', function() {
+  if (this.files[0]) loadImage(this.files[0]);
+});
+
+function loadImage(file) {
+  if (!file.type.startsWith('image/')) { alert('Please upload a valid image file.'); return; }
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    var img = new Image();
+    img.onload = function() {
+      origImg     = img;
+      origW       = img.naturalWidth;
+      origH       = img.naturalHeight;
+      aspectRatio = origW / origH;
+      document.getElementById('width').value  = origW;
+      document.getElementById('height').value = origH;
+      var preview = document.getElementById('uploadPreview');
+      preview.src = e.target.result;
+      preview.style.display = 'block';
+      document.getElementById('uploadPlaceholder').style.display = 'none';
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+// ── LOCK BUTTON ──
+var lockBtn = document.getElementById('lockBtn');
+lockBtn.addEventListener('click', function() {
+  locked = !locked;
+  lockBtn.textContent = locked ? '🔒' : '🔓';
+  lockBtn.classList.toggle('locked', locked);
+});
+
+// Width change → update height if locked
+document.getElementById('width').addEventListener('input', function() {
+  if (locked && origH) {
+    document.getElementById('height').value = Math.round(+this.value / aspectRatio);
+  }
+});
+// Height change → update width if locked
+document.getElementById('height').addEventListener('input', function() {
+  if (locked && origW) {
+    document.getElementById('width').value = Math.round(+this.value * aspectRatio);
+  }
+});
+
+// ── RESIZE ──
+function resizeImage() {
+  if (!origImg) { alert('Please upload an image first.'); return; }
+
+  var unit    = document.getElementById('unit').value;
+  var w       = parseFloat(document.getElementById('width').value);
+  var h       = parseFloat(document.getElementById('height').value);
+  var quality = parseFloat(document.getElementById('quality').value) / 100;
+  var format  = document.getElementById('format').value;
+
+  // Convert units to pixels
+  var dpi = parseFloat(document.getElementById('dpi').value) || 96;
+  if (unit === 'percent') { w = origW * (w / 100); h = origH * (h / 100); }
+  if (unit === 'cm')      { w = Math.round(w * dpi / 2.54); h = Math.round(h * dpi / 2.54); }
+  if (unit === 'in')      { w = Math.round(w * dpi); h = Math.round(h * dpi); }
+
+  w = Math.max(1, Math.round(w));
+  h = Math.max(1, Math.round(h));
+
+  var canvas = document.createElement('canvas');
+  canvas.width  = w;
+  canvas.height = h;
+  var ctx = canvas.getContext('2d');
+  ctx.drawImage(origImg, 0, 0, w, h);
+
+  var dataURL = canvas.toDataURL(format, quality);
+
+  // Show modal
+  document.getElementById('preview').src = dataURL;
+  var ext = format === 'image/jpeg' ? 'jpg' : format === 'image/png' ? 'png' : 'webp';
+  document.getElementById('download').href     = dataURL;
+  document.getElementById('download').download = 'techtools-resized.' + ext;
+  document.getElementById('previewModal').classList.add('open');
+
+  // Result pills
+  var approxKB = Math.round(dataURL.length * 0.75 / 1024);
+  document.getElementById('rSize').textContent = approxKB + ' KB (approx)';
+  document.getElementById('rDims').textContent = w + ' × ' + h + ' px';
+  document.getElementById('rFmt').textContent  = ext.toUpperCase();
+  document.getElementById('resultStrip').style.display = 'flex';
+}
+
+// ── MODAL CLOSE ──
+function closeModal() {
+  document.getElementById('previewModal').classList.remove('open');
+}
+document.getElementById('previewModal').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeModal();
+});
+</script>
 
 </body>
 </html>
-

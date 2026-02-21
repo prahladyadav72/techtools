@@ -1,195 +1,230 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
-<title>About US | TechTools</title>
-
-<meta name="description"
-content="Free online tools for PDF, images, calculators and developers. Secure, fast and easy to use tools for everyday needs.">
-
-<meta name="keywords" content="online tools, pdf tools, image tools, calculator, developer tools, free tools">
-
-<meta name="author" content="TechTools">
+<title>About Us | TechTools</title>
+<meta name="description" content="Learn about TechTools — your trusted platform for simple, fast, and reliable online tools for students, professionals and developers.">
+<meta name="keywords" content="about techtools, online tools, free tools, techtools team">
+<meta name="author" content="Prahlad Yadav">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://techtools.best/about.html">
 <link rel="icon" href="img/logo.png" type="image/png">
-<link rel="preconnect" href="https://cdn.jsdelivr.net">
-<link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- ✅ FIXED: was style1.css (file doesn't exist) → now correct style.css -->
+<link rel="stylesheet" href="css/style1.css">
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
 <!-- LOADER -->
-<div id="loader">
-<div class="spinner"></div>
-</div>
+<div id="loader"><div class="ring"></div></div>
 
+<!-- ═══════════════ NAVBAR ═══════════════ -->
+<nav class="navbar" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo" aria-label="TechTools Home">
+      <div class="logo-box">
+        <img src="img/logo.png" alt="TechTools"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+        <span class="lf">T</span>
+      </div>
+      <div class="logo-text">Tech<b>Tools</b></div>
+    </a>
 
-<!-- NAVBAR -->
-<nav class="navbar navbar-dark bg-primary fixed-top">
-<div class="container">
+    <ul class="nav-menu" role="list">
+      <li><a href="/">Home</a></li>
+      <li class="has-drop">
+        <a href="#" onclick="return false" aria-haspopup="true">Tools <span class="arrow">▼</span></a>
+        <div class="drop-menu">
+          <a href="youtube-tags.html"><div class="drop-icon" style="background:#fef2f2">🎯</div>YouTube Tag Generator</a>
+          <a href="youtube-thumbnail-download.html"><div class="drop-icon" style="background:#fffbeb">🖼️</div>Thumbnail Downloader</a>
+          <a href="qr-generator.html"><div class="drop-icon" style="background:#f0fdf4">📱</div>QR Code Generator</a>
+          <a href="hastag-generator.html"><div class="drop-icon" style="background:#eff6ff">#️⃣</div>Hashtag Generator</a>
+          <a href="payslip.html"><div class="drop-icon" style="background:#fdf4ff">💼</div>Payslip Generator</a>
+          <a href="image-resizer.html"><div class="drop-icon" style="background:#f0fdfa">🖼</div>Image Resizer</a>
+        </div>
+      </li>
+      <li><a href="about.html" class="curr">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="privacy.html">Privacy</a></li>
+      <li><a href="terms.html">Terms</a></li>
+      <li><a href="contact.html" class="nav-cta">Get Help →</a></li>
+    </ul>
 
-<a class="navbar-brand fw-bold" href="/"><img src="img/logo.png" alt="" style="width: 30px;"> TechTools</a>
-
-<button class="navbar-toggler" type="button" 
-data-bs-toggle="offcanvas" 
-data-bs-target="#mobileMenu">
-
-<span class="navbar-toggler-icon"></span>
-</button>
-
-</div>
+    <button class="hbg" id="hbg" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </nav>
 
+<!-- Mobile nav -->
+<nav class="mob-nav" id="mobNav">
+  <a href="/">🏠 Home</a>
+  <hr class="mob-divider">
+  <a href="youtube-tags.html">🎯 YouTube Tag Generator</a>
+  <a href="youtube-thumbnail-download.html">🖼️ Thumbnail Downloader</a>
+  <a href="qr-generator.html">📱 QR Code Generator</a>
+  <a href="hastag-generator.html">#️⃣ Hashtag Generator</a>
+  <a href="payslip.html">💼 Payslip Generator</a>
+  <a href="image-resizer.html">🖼 Image Resizer</a>
+  <hr class="mob-divider">
+  <a href="about.html" style="color:#60a5fa">👤 About</a>
+  <a href="contact.html">✉️ Contact</a>
+  <a href="privacy.html">🔒 Privacy Policy</a>
+  <a href="terms.html">📋 Terms of Service</a>
+</nav>
 
-<!-- DRAWER -->
-<div class="offcanvas offcanvas-end" id="mobileMenu">
+<!-- ═══════════════ HERO ═══════════════ -->
+<section class="hero" style="padding:48px 24px 40px">
+  <div class="hero-pill">👤 About · Built in India · 100% Free</div>
+  <h1 style="font-size:clamp(1.6rem,3vw,2.4rem)">About <em>TechTools</em></h1>
+  <p class="hero-sub" style="margin-bottom:0">Your trusted platform for simple, fast, and reliable online tools — built for students, professionals, and developers worldwide.</p>
+</section>
 
-<div class="offcanvas-header bg-primary text-white">
+<!-- ═══════════════ CONTENT ═══════════════ -->
+<div class="about-wrap">
 
-<h5 class="offcanvas-title">Menu</h5>
+  <!-- Breadcrumb -->
+  <div class="breadcrumb">
+    <a href="/">Home</a><span>›</span><span>About</span>
+  </div>
 
-<button type="button" class="btn-close btn-close-white"
-data-bs-dismiss="offcanvas"></button>
+  <!-- Stats -->
+  <div class="about-stats">
+    <div class="about-stat-card">
+      <span class="about-stat-num">6+</span>
+      <span class="about-stat-lbl">Free Tools</span>
+    </div>
+    <div class="about-stat-card">
+      <span class="about-stat-num">0</span>
+      <span class="about-stat-lbl">Files Stored</span>
+    </div>
+    <div class="about-stat-card">
+      <span class="about-stat-num">100%</span>
+      <span class="about-stat-lbl">Free Always</span>
+    </div>
+    <div class="about-stat-card">
+      <span class="about-stat-num">🌍</span>
+      <span class="about-stat-lbl">Global Users</span>
+    </div>
+  </div>
 
-</div>
+  <!-- About card -->
+  <div class="about-card">
+    <p>Welcome to <strong>TechTools</strong> — your trusted platform for simple, fast, and reliable online tools. Our mission is to help users complete everyday digital tasks easily without installing any software.</p>
+    <p>At TechTools, we focus on creating useful tools for students, professionals, developers, and general users. From YouTube SEO tools and image utilities to QR code generators and productivity features, our goal is to make your work easier and faster.</p>
+    <p>We believe that technology should be accessible to everyone. That's why all our tools are designed to be user-friendly, mobile-friendly, and completely free to use. Your privacy and data security are very important to us — we do not store personal files on our servers.</p>
+    <p>TechTools is built with a passion for learning, innovation, and helping people solve real-world problems using technology. We are proud to serve users from different countries and backgrounds.</p>
 
-<div class="offcanvas-body">
+    <h2>Our Vision</h2>
+    <p>To become a reliable and trusted online platform that provides high-quality digital tools for everyone — free, forever.</p>
 
-<ul class="navbar-nav">
+    <h2>Meet the Creator</h2>
+    <p>TechTools is built and maintained by <strong>Prahlad Yadav</strong> from India. Every tool is personally tested and designed with real users in mind — no bloat, no paywalls, no nonsense.</p>
+  </div>
 
-<li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-<li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-<li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-<li class="nav-item"><a class="nav-link" href="disclaimer.html">Disclaimer</a></li>
-<li class="nav-item"><a class="nav-link" href="privacy.html">Privacy</a></li>
-<li class="nav-item"><a class="nav-link" href="terms.html">Terms</a></li>
+  <!-- Commitment -->
+  <p class="sec-mini-label">Our Commitment</p>
+  <div class="commit-grid">
+    <div class="commit-item"><span class="ci">✅</span> Easy-to-use tools for everyone</div>
+    <div class="commit-item"><span class="ci">⚡</span> Fast and secure performance</div>
+    <div class="commit-item"><span class="ci">🔒</span> Full respect for user privacy</div>
+    <div class="commit-item"><span class="ci">🔄</span> Continuous improvement</div>
+    <div class="commit-item"><span class="ci">🤝</span> Honest and transparent service</div>
+    <div class="commit-item"><span class="ci">💸</span> Always 100% free, no hidden costs</div>
+  </div>
 
-</ul>
-
-</div>
-
-</div>
-
-<div class="page-box mt-5 ">
-
-<h3 class="text-center">About Us</h3>
-
-<hr>
-<div class="container mt-4">
-
-<!-- PERSONAL INTRO - ADD THIS -->
-<div style="background:#eff6ff; border-left:4px solid #3b82f6; border-radius:8px; padding:16px 20px; margin-bottom:24px;">
-  <h5 style="color:#1e3a8a; margin-bottom:8px;">👋 Hi, I'm Prahlad Yadav</h5>
-  <p style="margin:0; color:#374151; line-height:1.7;">
-    I'm a developer from India who built TechTools in 2026 to help YouTube creators, students, 
-    and small businesses access useful digital tools completely for free — without complicated 
-    software or paid subscriptions. I noticed that most online tools were either too slow, 
-    full of ads, or required sign-ups just for basic tasks. TechTools was my answer to that problem.
-    I hope these tools save you time every day!
-  </p>
-</div>
-<!-- END PERSONAL INTRO -->
-
-<p>
-Welcome to <strong>TechTools</strong> — your trusted platform for simple, fast, and reliable online tools.
-Our mission is to help users complete everyday digital tasks easily without installing any software.
-</p>
-
-<p>
-At TechTools, we focus on creating useful tools for students, professionals, developers, and general users.
-From PDF utilities and image tools to calculators and productivity features, our goal is to make your work easier and faster.
-</p>
-
-<p>
-We believe that technology should be accessible to everyone.
-That’s why all our tools are designed to be user-friendly, mobile-friendly, and completely free to use.
-Your privacy and data security are very important to us, and we do not store personal files on our servers.
-</p>
-
-<p>
-Our team is continuously working to improve existing tools and add new features based on user feedback.
-We aim to provide accurate, high-quality, and up-to-date solutions for modern digital needs.
-</p>
-
-<p>
-TechTools is built with a passion for learning, innovation, and helping people solve real-world problems using technology.
-We are proud to serve users from different countries and backgrounds.
-</p>
-
-<h4>Our Vision</h4>
-
-<p>
-To become a reliable and trusted online platform that provides high-quality digital tools for everyone.
-</p>
-
-<h4>Our Commitment</h4>
-
-<ul>
-<li>✔ Easy-to-use tools</li>
-<li>✔ Fast and secure performance</li>
-<li>✔ Respect for user privacy</li>
-<li>✔ Continuous improvement</li>
-<li>✔ Honest and transparent service</li>
-</ul>
-
-<h4>Contact Information</h4>
-
-<p>
-<strong>Website:</strong> <a href="https://techtools.best" target="_blank">https://techtools.best</a>
-</p>
-
-<p>
-<strong>Email:</strong> 
-<a href="mailto:prahladyadavcktd100@gmail.com">
-prahladyadavcktd100@gmail.com
-</a>
-</p>
-
-<p>
-If you have any suggestions, feedback, or questions, feel free to contact us anytime.
-We are always happy to hear from our users.
-</p>
-
-<p class="fw-bold mt-3">
-Thank you for choosing TechTools and trusting our platform.
-</p>
+  <!-- Contact strip -->
+  <div class="about-contact-strip">
+    <div>
+      <p><strong>Thank you for choosing TechTools and trusting our platform. 🙏</strong></p>
+      <p>If you have any suggestions, feedback, or questions, feel free to reach out — we're always happy to hear from our users.</p>
+      <p>🌐 <a href="https://techtools.best">techtools.best</a> &nbsp;·&nbsp; ✉️ <a href="mailto:prahladyadavcktd100@gmail.com">prahladyadavcktd100@gmail.com</a></p>
+    </div>
+    <a href="contact.html" class="tt-btn tt-btn-" style="flex-shrink:0">✉️ Contact Us</a>
+  </div>
 
 </div>
 
-
-</div>
-
-</div>
-<!-- FOOTER -->
-<footer>
-
-<p>© 2026 TechTools. All Rights Reserved.</p>
-
-<p>
-<a href="privacy.html">Privacy Policy</a> |
-<a href="terms.html">Terms of Service</a> |
-<a href="contact.html">Contact Us</a>
-</p>
-
-<p class="mt-2">
-TechTools is committed to providing reliable and secure online utilities for daily use.
-</p>
-
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer class="site-footer">
+  <div class="footer-in">
+    <div class="footer-top">
+      <div>
+        <div class="ft-logo">
+          <div class="ft-logo-box">
+            <img src="img/logo.png" alt="TechTools" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+            <span class="lf">T</span>
+          </div>
+          TechTools
+        </div>
+        <p class="ft-desc">Free online tools for YouTube creators, students, and developers. Built by Prahlad Yadav from India. No signup, no cost, always free.</p>
+        <div class="ft-chips">
+          <span class="ft-chip">🔒 No File Storage</span>
+          <span class="ft-chip">✅ No Login</span>
+          <span class="ft-chip">⚡ 100% Free</span>
+        </div>
+      </div>
+      <div class="ft-col">
+        <h4>Tools</h4>
+        <ul>
+          <li><a href="youtube-tags.html">🎯 YouTube Tags</a></li>
+          <li><a href="youtube-thumbnail-download.html">🖼️ Thumbnail Downloader</a></li>
+          <li><a href="qr-generator.html">📱 QR Code Generator</a></li>
+          <li><a href="hastag-generator.html">#️⃣ Hashtag Generator</a></li>
+          <li><a href="payslip.html">💼 Payslip Generator</a></li>
+          <li><a href="image-resizer.html">🖼 Image Resizer</a></li>
+        </ul>
+      </div>
+      <div class="ft-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">👤 About Us</a></li>
+          <li><a href="contact.html">✉️ Contact</a></li>
+          <li><a href="disclaimer.html">📄 Disclaimer</a></li>
+        </ul>
+      </div>
+      <div class="ft-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="privacy.html">🔒 Privacy Policy</a></li>
+          <li><a href="terms.html">📋 Terms of Service</a></li>
+          <li><a href="disclaimer.html">⚠️ Disclaimer</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 TechTools by <a href="about.html">Prahlad Yadav</a>. All Rights Reserved.</span>
+      <div class="fbl">
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+        <a href="contact.html">Contact</a>
+        <a href="about.html">About</a>
+      </div>
+    </div>
+    <!-- <p class="ads-note">This site may display ads via Google AdSense. See our <a href="privacy.html">Privacy Policy</a> for details.</p> -->
+  </div>
 </footer>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" defer></script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3666396936157058" crossorigin="anonymous"></script>
 <script>
-    /* LOADER */
-window.addEventListener("load", ()=>{
-document.getElementById("loader").style.display="none";
+var hbg = document.getElementById('hbg');
+var mobNav = document.getElementById('mobNav');
+hbg.addEventListener('click', function() {
+  var open = mobNav.classList.toggle('show');
+  hbg.classList.toggle('open', open);
+  hbg.setAttribute('aria-expanded', String(open));
+});
+window.addEventListener('load', function() {
+  var l = document.getElementById('loader');
+  if (l) { l.style.opacity = '0'; setTimeout(function(){ l.remove(); }, 450); }
 });
 </script>
+
 </body>
 </html>

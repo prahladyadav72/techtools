@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Tag Extractor - Professional Tool</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --dark-bg: #0f0f23;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --text-primary: #ffffff;
+            --text-secondary: #b8b8d1;
+            --success-color: #10b981;
+            --error-color: #ef4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            padding-top: 80px;
+        }
+
+        /* Animated background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(102, 126, 234, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(245, 87, 108, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(79, 172, 254, 0.1) 0%, transparent 50%);
+            z-index: -1;
+            animation: bgShift 15s ease infinite;
+        }
+
+        /* Navbar */
+        .navbar-custom {
+            background: rgba(15, 15, 35, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--text-primary) !important;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .navbar-brand .brand-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary-gradient);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .navbar-nav .nav-link {
+            color: var(--text-secondary) !important;
+            font-weight: 500;
+            padding: 0.5rem 1rem !important;
+            margin: 0 0.25rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: var(--text-primary) !important;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .navbar-nav .nav-link.active {
+            color: #667eea !important;
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .navbar-toggler {
+            border: none;
+            padding: 0.5rem;
+        }
+
+        .navbar-toggler:focus {
+            box-shadow: none;
+        }
+
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 0.8)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        }
+
+        .cta-button {
+            background: var(--primary-gradient);
+            color: white !important;
+            padding: 0.6rem 1.5rem !important;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        @keyframes bgShift {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.1); }
+        }
+
+        .container-custom {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .logo-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-gradient);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.4);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #667eea 0%, #f5576c 50%, #4facfe 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            font-weight: 300;
+        }
+
+        /* Main Card */
+        .main-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 0.8s ease;
+            animation-delay: 0.2s;
+            animation-fill-mode: backwards;
+        }
+
+        /* API Key Section */
+        .api-section {
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+        }
+
+        .api-section h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .api-section p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .api-section a {
+            color: #4facfe;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .api-section a:hover {
+            text-decoration: underline;
+        }
+
+        /* Form Elements */
+        .form-label {
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+        }
+
+        .form-control {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-primary);
+            border-radius: 12px;
+            padding: 0.85rem 1.2rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: #667eea;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.2);
+            color: var(--text-primary);
+        }
+
+        .form-control::placeholder {
+            color: rgba(184, 184, 209, 0.5);
+        }
+
+        /* Button */
+        .btn-extract {
+            background: var(--primary-gradient);
+            border: none;
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1.05rem;
+            width: 100%;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-extract::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn-extract:hover::before {
+            left: 100%;
+        }
+
+        .btn-extract:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(102, 126, 234, 0.5);
+        }
+
+        .btn-extract:active {
+            transform: translateY(0);
+        }
+
+        .btn-extract:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        /* Loading Spinner */
+        .spinner-border {
+            width: 1.2rem;
+            height: 1.2rem;
+            border-width: 2px;
+        }
+
+        /* Alert Messages */
+        .alert-custom {
+            border-radius: 12px;
+            border: none;
+            padding: 1rem 1.5rem;
+            margin-top: 1.5rem;
+            animation: slideIn 0.3s ease;
+        }
+
+        .alert-danger {
+            background: rgba(239, 68, 68, 0.15);
+            color: #fca5a5;
+            border-left: 4px solid var(--error-color);
+        }
+
+        .alert-success {
+            background: rgba(16, 185, 129, 0.15);
+            color: #6ee7b7;
+            border-left: 4px solid var(--success-color);
+        }
+
+        /* Results Section */
+        .results-section {
+            animation: fadeInUp 0.5s ease;
+        }
+
+        .video-info {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .video-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .video-stats {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .stat-item i {
+            color: #667eea;
+        }
+
+        /* Tags Display */
+        .tags-container {
+            margin-top: 1.5rem;
+        }
+
+        .tags-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .tags-header h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .tag-count {
+            background: var(--accent-gradient);
+            padding: 0.35rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: white;
+        }
+
+        .tags-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .tag-item {
+            background: rgba(79, 172, 254, 0.15);
+            border: 1px solid rgba(79, 172, 254, 0.3);
+            padding: 0.6rem 1.2rem;
+            border-radius: 24px;
+            font-size: 0.9rem;
+            color: #4facfe;
+            font-family: 'JetBrains Mono', monospace;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .tag-item:hover {
+            background: rgba(79, 172, 254, 0.25);
+            border-color: rgba(79, 172, 254, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .copy-all-btn {
+            background: rgba(245, 87, 108, 0.2);
+            border: 1px solid rgba(245, 87, 108, 0.4);
+            color: #f5576c;
+            padding: 0.6rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .copy-all-btn:hover {
+            background: rgba(245, 87, 108, 0.3);
+            border-color: rgba(245, 87, 108, 0.6);
+        }
+
+        .no-tags {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: var(--text-secondary);
+        }
+
+        .no-tags i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(15, 15, 35, 0.95);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 3rem 0 1.5rem;
+            margin-top: 5rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .footer-section {
+            margin-bottom: 2rem;
+        }
+
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-brand .brand-icon {
+            width: 45px;
+            height: 45px;
+            background: var(--primary-gradient);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+        }
+
+        .footer-brand h4 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin: 0;
+        }
+
+        .footer-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-links a:hover {
+            color: #667eea;
+            transform: translateX(5px);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-link:hover {
+            background: var(--primary-gradient);
+            border-color: transparent;
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 1.5rem;
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .footer-bottom p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        .footer-bottom a {
+            color: #667eea;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-bottom a:hover {
+            color: #4facfe;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(102, 126, 234, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--accent-gradient);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .main-card {
+                padding: 1.5rem;
+            }
+            
+            .video-stats {
+                gap: 1rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-section {
+                text-align: center;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+
+            body {
+                padding-top: 70px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .navbar-nav {
+                background: rgba(255, 255, 255, 0.05);
+                border-radius: 12px;
+                padding: 1rem;
+                margin-top: 1rem;
+            }
+
+            .navbar-nav .nav-link {
+                margin: 0.25rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <div class="brand-icon">
+                    <i class="bi bi-tags-fill"></i>
+                </div>
+                <span>TagExtractor</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#home">
+                            <i class="bi bi-house-fill me-1"></i> Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">
+                            <i class="bi bi-lightning-fill me-1"></i> Features
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#how-it-works">
+                            <i class="bi bi-gear-fill me-1"></i> How It Works
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#extractor">
+                            <i class="bi bi-tools me-1"></i> Tool
+                        </a>
+                    </li>
+                    <li class="nav-item ms-lg-2">
+                        <a class="nav-link cta-button" href="https://console.cloud.google.com/apis/credentials" target="_blank">
+                            <i class="bi bi-key-fill me-1"></i> Get API Key
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-custom">
+        <!-- Header -->
+        <div class="header" id="home">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="bi bi-tags-fill"></i>
+                </div>
+            </div>
+            <h1>YouTube Tag Extractor</h1>
+            <p class="subtitle">Extract video tags instantly from any YouTube video</p>
+        </div>
+
+        <!-- Features Section -->
+        <div id="features">
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="bi bi-lightning-charge-fill"></i>
+                    </div>
+                    <div class="feature-title">Instant Extraction</div>
+                    <div class="feature-description">Get all video tags in seconds with our lightning-fast extraction powered by YouTube Data API v3.</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="bi bi-clipboard-check-fill"></i>
+                    </div>
+                    <div class="feature-title">One-Click Copy</div>
+                    <div class="feature-description">Copy individual tags or all tags at once with a single click. Super convenient for content creators.</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="bi bi-bar-chart-fill"></i>
+                    </div>
+                    <div class="feature-title">Video Analytics</div>
+                    <div class="feature-description">View video statistics including title, channel, views, and likes alongside the extracted tags.</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="bi bi-shield-check"></i>
+                    </div>
+                    <div class="feature-title">Secure & Private</div>
+                    <div class="feature-description">Your API key is stored locally in your browser. We never see or store your credentials.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- How It Works Section -->
+        <div id="how-it-works" class="main-card" style="margin-bottom: 3rem;">
+            <h2 class="text-center mb-4" style="font-weight: 700; font-size: 2rem;">
+                <i class="bi bi-gear-fill me-2" style="color: #667eea;"></i>How It Works
+            </h2>
+            <div class="row g-4">
+                <div class="col-md-3">
+                    <div class="text-center">
+                        <div class="feature-icon mx-auto mb-3" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                            <span style="font-weight: 700; color: white;">1</span>
+                        </div>
+                        <h5 style="font-weight: 600; color: var(--text-primary);">Get API Key</h5>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem;">Create a free YouTube Data API key from Google Cloud Console</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="text-center">
+                        <div class="feature-icon mx-auto mb-3" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                            <span style="font-weight: 700; color: white;">2</span>
+                        </div>
+                        <h5 style="font-weight: 600; color: var(--text-primary);">Enter API Key</h5>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem;">Paste your API key in the tool below - it's saved securely in your browser</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="text-center">
+                        <div class="feature-icon mx-auto mb-3" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                            <span style="font-weight: 700; color: white;">3</span>
+                        </div>
+                        <h5 style="font-weight: 600; color: var(--text-primary);">Paste URL</h5>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem;">Enter any YouTube video link you want to extract tags from</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="text-center">
+                        <div class="feature-icon mx-auto mb-3" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">
+                            <span style="font-weight: 700; color: white;">4</span>
+                        </div>
+                        <h5 style="font-weight: 600; color: var(--text-primary);">Get Tags</h5>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem;">Click extract and instantly view all tags with one-click copy functionality</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Card - Extractor Tool -->
+        <div class="main-card" id="extractor">
+            <!-- API Key Setup -->
+            <div class="api-section">
+                <h3><i class="bi bi-key-fill"></i> API Key Required</h3>
+                <p>To use this tool, you need a YouTube Data API v3 key. Get your free API key from the <a href="https://console.cloud.google.com/apis/credentials" target="_blank">Google Cloud Console</a>.</p>
+                
+                <div class="mb-3">
+                    <label class="form-label">YouTube API Key</label>
+                    <input type="text" class="form-control" id="apiKey" placeholder="Enter your YouTube Data API v3 key">
+                </div>
+            </div>
+
+            <!-- URL Input -->
+            <div class="mb-4">
+                <label class="form-label">YouTube Video URL</label>
+                <input type="text" class="form-control" id="videoUrl" placeholder="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
+            </div>
+
+            <!-- Extract Button -->
+            <button class="btn btn-extract" id="extractBtn">
+                <span id="btnText">
+                    <i class="bi bi-search"></i> Extract Tags
+                </span>
+                <span id="btnLoading" class="d-none">
+                    <span class="spinner-border spinner-border-sm me-2"></span>
+                    Extracting...
+                </span>
+            </button>
+
+            <!-- Alert Messages -->
+            <div id="alertContainer"></div>
+
+            <!-- Results -->
+            <div id="resultsContainer"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="row">
+                <!-- Brand Column -->
+                <div class="col-lg-4 col-md-6 footer-section">
+                    <div class="footer-brand">
+                        <div class="brand-icon">
+                            <i class="bi bi-tags-fill"></i>
+                        </div>
+                        <h4>TagExtractor</h4>
+                    </div>
+                    <p class="footer-description">
+                        A powerful and free tool to extract tags from any YouTube video instantly. Perfect for content creators, marketers, and SEO professionals.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-link" title="Facebook">
+                            <i class="bi bi-facebook"></i>
+                        </a>
+                        <a href="#" class="social-link" title="Twitter">
+                            <i class="bi bi-twitter-x"></i>
+                        </a>
+                        <a href="#" class="social-link" title="Instagram">
+                            <i class="bi bi-instagram"></i>
+                        </a>
+                        <a href="#" class="social-link" title="GitHub">
+                            <i class="bi bi-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links Column -->
+                <div class="col-lg-2 col-md-6 footer-section">
+                    <h5 class="footer-title">Quick Links</h5>
+                    <ul class="footer-links">
+                        <li><a href="#home"><i class="bi bi-chevron-right"></i> Home</a></li>
+                        <li><a href="#features"><i class="bi bi-chevron-right"></i> Features</a></li>
+                        <li><a href="#how-it-works"><i class="bi bi-chevron-right"></i> How It Works</a></li>
+                        <li><a href="#extractor"><i class="bi bi-chevron-right"></i> Extract Tags</a></li>
+                    </ul>
+                </div>
+
+                <!-- Resources Column -->
+                <div class="col-lg-3 col-md-6 footer-section">
+                    <h5 class="footer-title">Resources</h5>
+                    <ul class="footer-links">
+                        <li><a href="https://console.cloud.google.com/apis/credentials" target="_blank"><i class="bi bi-chevron-right"></i> Get API Key</a></li>
+                        <li><a href="https://developers.google.com/youtube/v3" target="_blank"><i class="bi bi-chevron-right"></i> YouTube API Docs</a></li>
+                        <li><a href="#"><i class="bi bi-chevron-right"></i> FAQ</a></li>
+                        <li><a href="#"><i class="bi bi-chevron-right"></i> Support</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Column -->
+                <div class="col-lg-3 col-md-6 footer-section">
+                    <h5 class="footer-title">Contact</h5>
+                    <ul class="footer-links">
+                        <li><a href="mailto:info@tagextractor.com"><i class="bi bi-envelope-fill"></i> info@tagextractor.com</a></li>
+                        <li><a href="#"><i class="bi bi-chat-dots-fill"></i> Live Chat</a></li>
+                        <li><a href="#"><i class="bi bi-question-circle-fill"></i> Help Center</a></li>
+                        <li><a href="#"><i class="bi bi-bug-fill"></i> Report Issue</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <p>
+                    &copy; 2024 <strong>TagExtractor</strong>. All rights reserved. 
+                    | <a href="#">Privacy Policy</a> 
+                    | <a href="#">Terms of Service</a>
+                    | Made with <i class="bi bi-heart-fill" style="color: #f5576c;"></i> for creators
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const apiKeyInput = document.getElementById('apiKey');
+        const videoUrlInput = document.getElementById('videoUrl');
+        const extractBtn = document.getElementById('extractBtn');
+        const btnText = document.getElementById('btnText');
+        const btnLoading = document.getElementById('btnLoading');
+        const alertContainer = document.getElementById('alertContainer');
+        const resultsContainer = document.getElementById('resultsContainer');
+
+        // Load saved API key
+        if (localStorage.getItem('ytApiKey')) {
+            apiKeyInput.value = localStorage.getItem('ytApiKey');
+        }
+
+        // Save API key on change
+        apiKeyInput.addEventListener('change', () => {
+            localStorage.setItem('ytApiKey', apiKeyInput.value);
+        });
+
+        extractBtn.addEventListener('click', extractTags);
+
+        // Allow Enter key to trigger extraction
+        videoUrlInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                extractTags();
+            }
+        });
+
+        function showAlert(message, type = 'danger') {
+            alertContainer.innerHTML = `
+                <div class="alert alert-${type} alert-custom">
+                    <i class="bi bi-${type === 'danger' ? 'exclamation-triangle-fill' : 'check-circle-fill'} me-2"></i>
+                    ${message}
+                </div>
+            `;
+        }
+
+        function extractVideoId(url) {
+            const patterns = [
+                /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&\n?#]+)/,
+                /^([a-zA-Z0-9_-]{11})$/
+            ];
+
+            for (const pattern of patterns) {
+                const match = url.match(pattern);
+                if (match) return match[1];
+            }
+            return null;
+        }
+
+        async function extractTags() {
+            const apiKey = apiKeyInput.value.trim();
+            const videoUrl = videoUrlInput.value.trim();
+
+            // Validation
+            if (!apiKey) {
+                showAlert('Please enter your YouTube API key.');
+                return;
+            }
+
+            if (!videoUrl) {
+                showAlert('Please enter a YouTube video URL.');
+                return;
+            }
+
+            const videoId = extractVideoId(videoUrl);
+            if (!videoId) {
+                showAlert('Invalid YouTube URL. Please enter a valid YouTube video link.');
+                return;
+            }
+
+            // Show loading state
+            extractBtn.disabled = true;
+            btnText.classList.add('d-none');
+            btnLoading.classList.remove('d-none');
+            alertContainer.innerHTML = '';
+            resultsContainer.innerHTML = '';
+
+            try {
+                const response = await fetch(
+                    `https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&id=${videoId}&key=${apiKey}`
+                );
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.error?.message || 'Failed to fetch video data');
+                }
+
+                const data = await response.json();
+
+                if (!data.items || data.items.length === 0) {
+                    showAlert('Video not found. Please check the URL and try again.');
+                    return;
+                }
+
+                const video = data.items[0];
+                const tags = video.snippet.tags || [];
+                const title = video.snippet.title;
+                const channelTitle = video.snippet.channelTitle;
+                const viewCount = parseInt(video.statistics.viewCount).toLocaleString();
+                const likeCount = parseInt(video.statistics.likeCount || 0).toLocaleString();
+
+                displayResults(title, channelTitle, viewCount, likeCount, tags);
+                showAlert(`Successfully extracted ${tags.length} tags!`, 'success');
+
+            } catch (error) {
+                console.error('Error:', error);
+                showAlert(`Error: ${error.message}`);
+            } finally {
+                extractBtn.disabled = false;
+                btnText.classList.remove('d-none');
+                btnLoading.classList.add('d-none');
+            }
+        }
+
+        function displayResults(title, channel, views, likes, tags) {
+            let html = `
+                <div class="results-section">
+                    <div class="video-info">
+                        <div class="video-title">${escapeHtml(title)}</div>
+                        <div class="video-stats">
+                            <div class="stat-item">
+                                <i class="bi bi-person-circle"></i>
+                                <span>${escapeHtml(channel)}</span>
+                            </div>
+                            <div class="stat-item">
+                                <i class="bi bi-eye-fill"></i>
+                                <span>${views} views</span>
+                            </div>
+                            <div class="stat-item">
+                                <i class="bi bi-hand-thumbs-up-fill"></i>
+                                <span>${likes} likes</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tags-container">
+                        <div class="tags-header">
+                            <h3><i class="bi bi-tags-fill me-2"></i>Video Tags</h3>
+                            <span class="tag-count">${tags.length} tags</span>
+                        </div>
+            `;
+
+            if (tags.length > 0) {
+                html += `
+                    <button class="btn copy-all-btn mb-3" onclick="copyAllTags()">
+                        <i class="bi bi-clipboard me-2"></i>Copy All Tags
+                    </button>
+                    <div class="tags-list">
+                `;
+
+                tags.forEach(tag => {
+                    html += `<span class="tag-item" onclick="copyTag(this)">${escapeHtml(tag)}</span>`;
+                });
+
+                html += `</div>`;
+            } else {
+                html += `
+                    <div class="no-tags">
+                        <i class="bi bi-exclamation-circle"></i>
+                        <p>This video has no tags.</p>
+                    </div>
+                `;
+            }
+
+            html += `</div></div>`;
+            resultsContainer.innerHTML = html;
+        }
+
+        function copyTag(element) {
+            const tag = element.textContent;
+            navigator.clipboard.writeText(tag).then(() => {
+                const originalText = element.innerHTML;
+                element.innerHTML = '<i class="bi bi-check-lg"></i> Copied!';
+                setTimeout(() => {
+                    element.innerHTML = originalText;
+                }, 1500);
+            });
+        }
+
+        function copyAllTags() {
+            const tags = Array.from(document.querySelectorAll('.tag-item')).map(el => el.textContent);
+            const tagsText = tags.join(', ');
+            
+            navigator.clipboard.writeText(tagsText).then(() => {
+                showAlert(`Copied ${tags.length} tags to clipboard!`, 'success');
+            });
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const navbarHeight = 80;
+                    const targetPosition = target.offsetTop - navbarHeight;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+
+                    // Close mobile menu if open
+                    const navbarCollapse = document.querySelector('.navbar-collapse');
+                    if (navbarCollapse.classList.contains('show')) {
+                        const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
+                            toggle: true
+                        });
+                    }
+                }
+            });
+        });
+
+        // Update active nav link on scroll
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section, [id]');
+            const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+            
+            let current = '';
+            const scrollPosition = window.pageYOffset + 100;
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (scrollPosition >= sectionTop - 200 && scrollPosition < sectionTop + sectionHeight) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
